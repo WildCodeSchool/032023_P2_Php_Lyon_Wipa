@@ -73,6 +73,9 @@ class ItemController extends AbstractController
             if (!filter_var($item['picture'], FILTER_VALIDATE_URL)) {
                 $errors[] = 'Wrong URL format';
             }
+            if (!isset($item['prompt']) || empty($item['prompt'])) {
+                $errors[] = 'You must write your prompt';
+            }
             // if validation is ok, insert and redirection
             if (empty($errors)) {
                 $itemManager = new ItemManager();
