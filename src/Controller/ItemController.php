@@ -63,20 +63,12 @@ class ItemController extends AbstractController
     {
         $errors = [];
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // clean $_POST data
             $item = array_map('trim', $_POST);
 
-            // TODO validations (length, format...)
-            if (!isset($item['picture']) || empty($item['picture'])) {
-                $errors[] = 'You must enter an URL';
-            }
-            if (!filter_var($item['picture'], FILTER_VALIDATE_URL)) {
-                $errors[] = 'Wrong URL format';
-            }
-            if (!isset($item['prompt']) || empty($item['prompt'])) {
-                $errors[] = 'You must write your prompt';
-            }
-            // if validation is ok, insert and redirection
+            $this->validateURL($item, $errors);
+            $this->validatePrompt($item, $errors);
+            $this->validateComment($item, $errors);
+            
             if (empty($errors)) {
                 $itemManager = new ItemManager();
                 $id = $itemManager->insert($item);
@@ -87,6 +79,30 @@ class ItemController extends AbstractController
         }
 
         return $this->twig->render('Item/add.html.twig', ['errors' => $errors]);
+    }
+
+    public function validateURL(array $item, array $errors): void
+    {
+        if (!isset($item['picture']) || empty($item['picture'])) {
+            $errors[] = 'You must enter an URL';
+            return;
+        }
+        if (!filter_var($item['picture'], FILTER_VALIDATE_URL)) {
+            $errors[] = 'Wrong URL format';
+        }
+    }
+
+    public function validatePrompt(array $items, array $errors): void 
+    {
+        if (!isset($item['prompt']) || empty($item['prompt'])) {
+            $errors[] = 'You must write a prompt';
+        }
+    }
+    public function validateComment(array $items, array $errors): void 
+    {
+        if (!isset($item['description']) || empty($item['description'])) {
+            $errors[] = 'You must write a comment';
+        }
     }
 
     /**
