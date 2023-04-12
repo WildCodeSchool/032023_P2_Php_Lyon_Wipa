@@ -13,7 +13,9 @@ class ItemManager extends AbstractManager
      */
     public function insert(array $item): int
     {
-        $statement = $this->pdo->prepare("INSERT INTO " . self::TABLE . " (`photo_title`,`photo_link`, `photo_prompt`, `photo_description`) VALUES (:photo_title, :photo_link, :photo_prompt, :photo_description)");
+        $dbFields = '(`photo_title`,`photo_link`, `photo_prompt`, `photo_description`)';
+        $placeholderFields = '(:photo_title, :photo_link, :photo_prompt, :photo_description)';
+        $statement = $this->pdo->prepare("INSERT INTO " . self::TABLE . " $dbFields VALUES $placeholderFields");
         $statement->bindValue('photo_title', $item['photo_title'], PDO::PARAM_STR);
         $statement->bindValue('photo_link', $item['photo_link'], PDO::PARAM_STR);
         $statement->bindValue('photo_prompt', $item['photo_prompt'], PDO::PARAM_STR);
