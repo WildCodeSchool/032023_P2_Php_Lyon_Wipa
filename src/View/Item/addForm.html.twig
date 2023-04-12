@@ -1,9 +1,13 @@
 {# TODO : manage errors display #}
 
-<form>
+<form method="POST">
 	<div class="mb-3">
 	  <label for="picture" class="form-label">Picture://URL</label>
-	  <input type="text" class="form-control" id="picture" aria-describedby="picture" name="picture" placeholder="picture://URL">
+	  <input type="text" class="form-control" id="picture" aria-describedby="picture" name="picture" placeholder="Picture://URL">
 	</div>
+	<div class="mb-3">
+		<label for="prompt" class="form-label">Your prompt</label>
+		<input type="text" class="form-control" id="prompt" name="prompt" placeholder="Your prompt">
+	  </div>
 	<button type="submit" class="btn btn-primary">Add pic</button>
   </form>
