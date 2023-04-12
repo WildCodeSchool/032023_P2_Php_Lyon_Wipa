@@ -63,20 +63,17 @@ class ItemController extends AbstractController
     {
         $errors = [];
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // clean $_POST data
             $item = array_map('trim', $_POST);
 
-            // TODO validations (length, format...)
             if (!isset($item['picture']) || empty($item['picture'])) {
                 $errors[] = 'You must enter an URL';
             }
             if (!filter_var($item['picture'], FILTER_VALIDATE_URL)) {
                 $errors[] = 'Wrong URL format';
             }
-            if (!isset($item['prompt']) || empty($item['prompt'])) {
-                $errors[] = 'You must write your prompt';
+            if (!isset($item['prompt']) || empty($item['prompt']) || !isset($item['description']) || empty($item['description'])) {
+                $errors[] = 'You must write a prompt and a comment';
             }
-            // if validation is ok, insert and redirection
             if (empty($errors)) {
                 $itemManager = new ItemManager();
                 $id = $itemManager->insert($item);
