@@ -61,21 +61,29 @@ class ItemController extends AbstractController
      */
     public function add(): ?string
     {
+        $errors = [];
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // clean $_POST data
             $item = array_map('trim', $_POST);
 
             // TODO validations (length, format...)
-
+            if (!isset($item['picture']) || empty($item['picture'])) {
+                $errors[] = 'You must enter an URL';
+            }
+            if (!filter_var($item['picture'], FILTER_VALIDATE_URL)) {
+                $errors[] = 'Wrong URL format';
+            }
             // if validation is ok, insert and redirection
-            $itemManager = new ItemManager();
-            $id = $itemManager->insert($item);
+            if (empty($errors)) {
+                $itemManager = new ItemManager();
+                $id = $itemManager->insert($item);
 
-            header('Location:/items/show?id=' . $id);
-            return null;
+                header('Location:/items/show?id=' . $id);
+                return null;
+            }
         }
 
-        return $this->twig->render('Item/add.html.twig');
+        return $this->twig->render('Item/add.html.twig', ['errors' => $errors]);
     }
 
     /**
