@@ -9,4 +9,8 @@
 return [
     '' => ['ItemController', 'index',],
     'add' => ['ItemController', 'add',],
+    'items' => ['ItemController', 'index',],
+    'items/edit' => ['ItemController', 'edit', ['id']],
+    'items/show' => ['ItemController', 'show', ['id']],
+    'items/delete' => ['ItemController', 'delete',],
 ];
