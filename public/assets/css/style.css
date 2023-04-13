@@ -5,9 +5,34 @@
     --accent-color: #138feb;
 }
 
+/* Nav Bar */
+
+.nav-bg-color {
+    background-color: var(--light-color);
+}
+
+.navbar-brand {
+    font-style: italic;
+    font-weight: 500;
+}
+
+.nav-link {
+    font-weight: 500;
+}
+
+.nav-link:hover {
+    color: var(--accent-color);
+}
+
 /* Footer */
 
 .logo-footer-size {
     width: 24px;
     height: 24px;
+}
+
+/* Font */
+
+body {
+    font-family: "Raleway", sans-serif;
 }

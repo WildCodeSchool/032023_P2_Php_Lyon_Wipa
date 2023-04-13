@@ -13,6 +13,9 @@
 </head>
 
 <body>
+    {% block header %}
+       {% include 'Bodypart/navbar.html.twig'%}
+    {% endblock %}
     {% block content %}{% endblock %}
     {% block footer %}    
       {% include 'Bodypart/footer.html.twig'%}
