@@ -1,19 +1,25 @@
 :root {
     /* Couleurs de base */
-    --light-color: #f5f5f5;
+    --light-color: #F5F5F5;
     --dark-color: #353738;
-    --accent-color: #138feb;
+    --accent-color: #138FEB;
 }
 
 /* Footer */
-
 .logo-footer-size {
     width: 24px;
     height: 24px;
 }
 
 /* Content */
+.img-fit {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+}
 
-div>a>img {
-    width: 100%;
+.img-fit:hover {
+    transform: scale(1.1);
+    transition: transform 0.5s ease;
+    border: white solid 3px;
 }

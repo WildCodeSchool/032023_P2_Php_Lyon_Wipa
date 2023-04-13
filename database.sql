@@ -97,13 +97,6 @@ VALUES (
     'Luke Skywalker ordering a burger'
   ),
   (
-    11,
-    '',
-    'https://image.lexica.art/full_jpg/aaa9134b-d417-490f-bce8-e84e68839f1d',
-    'A detailed portrait of pikachu giving thumbs up illustrator, by justin gerard and greg rutkowski, digital art, realistic painting, dnd, character design, trending on artstation',
-    'pikachu giving thumbs up'
-  ),
-  (
     12,
     '',
     'https://image.lexica.art/full_jpg/e4b2754f-fcea-49c2-bcc6-51cfd9fd6885',
@@ -124,4 +117,4 @@ VALUES (
     'a little cow with hat and icecream realistic',
     'a little cow'
   );
--- 2023-04-12 10:28:28
+-- 2023-04-13 13:46:36
