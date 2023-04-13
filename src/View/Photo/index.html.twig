@@ -1,0 +1,23 @@
+{% extends 'layout.html.twig' %}
+{% block content %}
+	{% if photos is defined %}
+		<div class="container text-center mt-3">
+			<div class="col-md-12">
+				<div class="row row-cols-lg-5 row-cols-md-3 row-cols-2 g-1">
+					{% for photo in photos %}
+						<div class="col">
+							<a href="/photos/show?id={{photo.photo_id}}"><img src="{{photo.photo_link }}" alt="" class="img-fluid img-fit"></a>
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+
+	{% else %}
+		<li>Nothing to display</li>
+	{% endif %}
+{% endblock %}
+
+{% block javascript %}
+	<script src="assets/js/jsindex.js"></script>
+{% endblock %}
