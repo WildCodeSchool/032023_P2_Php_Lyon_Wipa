@@ -1,40 +1,37 @@
 {% extends 'layout.html.twig' %}
 
 {% block content %}
-	<h1>section title</h1>
 	{% set increm = 0%}
 	{% if items is defined %}
-
-
 		<div class="container text-center">
 
 			<div
 				class="row row-cols-1">
 				<!-- debut de la premiere ligne -->
-				<div class="col-md-7 border">
+				<div class="col-md-7">
 					<div class="row row-cols-1 gx-0">
 						{% for i in 0..5 %}
-							<div class="col-6 col-md-4 border">
+							<div class="col-6 col-md-4">
 								<a href="/items/show?id={{ items[increm].photo_id}}"><img src="{{ items[increm].photo_link }}" alt=""></a>
 							</div>
 							{% set increm = increm + 1%}
 						{% endfor %}
 					</div>
 				</div>
-				<div class="col-6 col-md-5 border">
+				<div class="col-6 col-md-5">
 					<a href="/items/show?id={{ items[increm].photo_id}}"><img src="{{ items[increm].photo_link }}" alt=""></a>
 				</div>
 				{% set increm = increm + 1%}
 				<!-- fin de la premiere ligne -->
 				<!-- debut de la deuxième ligne -->
-					<div class="col-6 col-md-5 border"> <a href="/items/show?id={{ items[increm].photo_id}}"><img src="{{ items[increm].photo_link }}" alt=""></a>
+					<div class="col-6 col-md-5"> <a href="/items/show?id={{ items[increm].photo_id}}"><img src="{{ items[increm].photo_link }}" alt=""></a>
 				</div>
 
-				<div class="col-md-7 border">
+				<div class="col-md-7">
 					<div class="row row-cols-1 gx-0">
 						{% set increm = increm + 1%}
 						{% for i in 0..5 %}
-							<div class="col-6 col-md-4 border">
+							<div class="col-6 col-md-4">
 								<a href="/items/show?id={{ items[increm].photo_id}}"><img src="{{ items[increm].photo_link }}" alt=""></a>
 							</div>
 							{% set increm = increm + 1%}
@@ -48,5 +45,5 @@
 	{% else %}
 		<li>Nothing to display</li>
 	{% endif %}
-	<a href="/items/add">Ajouter</a>
+
 {% endblock %}
