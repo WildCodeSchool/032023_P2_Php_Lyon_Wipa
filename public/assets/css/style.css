@@ -5,6 +5,25 @@
     --accent-color: #138FEB;
 }
 
+/* Nav Bar */
+
+.nav-bg-color {
+    background-color: var(--light-color);
+}
+
+.navbar-brand {
+    font-style: italic;
+    font-weight: 500;
+}
+
+.nav-link {
+    font-weight: 500;
+}
+
+.nav-link:hover {
+    color: var(--accent-color);
+}
+
 /* Footer */
 .logo-footer-size {
     width: 24px;
@@ -22,4 +41,16 @@
     transform: scale(1.1);
     transition: transform 0.5s ease;
     border: white solid 3px;
+}
+
+/* Font */
+
+body {
+    font-family: "Raleway", sans-serif;
+}
+
+/* Page add */
+
+.title-add {
+    margin-top: 15px;
 }
