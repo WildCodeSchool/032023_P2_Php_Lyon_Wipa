@@ -85,7 +85,7 @@ class ItemController extends AbstractController
         return $this->twig->render('Item/add.html.twig', ['errors' => $errors]);
     }
 
-    public function validateURL(array $item, array $errors): void
+    public function validateURL(array $item, array &$errors): void
     {
         if (!isset($item['picture']) || empty($item['picture'])) {
             $errors[] = 'You must enter an URL';
