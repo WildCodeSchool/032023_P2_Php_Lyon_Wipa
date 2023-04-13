@@ -66,9 +66,13 @@ class ItemController extends AbstractController
             $item = array_map('trim', $_POST);
 
             $this->validateURL($item, $errors);
-            $this->validatePrompt($item, $errors);
-            $this->validateComment($item, $errors);
-            
+
+            if (!isset($item['prompt']) || empty($item['prompt'])) {
+                $errors[] = 'You must write a prompt';
+            }
+            if (!isset($item['description']) || empty($item['description'])) {
+                $errors[] = 'You must write a comment';
+            }
             if (empty($errors)) {
                 $itemManager = new ItemManager();
                 $id = $itemManager->insert($item);
@@ -85,23 +89,9 @@ class ItemController extends AbstractController
     {
         if (!isset($item['picture']) || empty($item['picture'])) {
             $errors[] = 'You must enter an URL';
-            return;
         }
         if (!filter_var($item['picture'], FILTER_VALIDATE_URL)) {
             $errors[] = 'Wrong URL format';
-        }
-    }
-
-    public function validatePrompt(array $items, array $errors): void 
-    {
-        if (!isset($item['prompt']) || empty($item['prompt'])) {
-            $errors[] = 'You must write a prompt';
-        }
-    }
-    public function validateComment(array $items, array $errors): void 
-    {
-        if (!isset($item['description']) || empty($item['description'])) {
-            $errors[] = 'You must write a comment';
         }
     }
 
