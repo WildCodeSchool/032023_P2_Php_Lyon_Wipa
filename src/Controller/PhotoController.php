@@ -7,96 +7,96 @@ use App\Model\PhotoManager;
 class PhotoController extends AbstractController
 {
     /**
-     * List items
+     * List photos
      */
     public function index(): string
     {
         $photoManager = new PhotoManager();
-        $items = $photoManager->selectAll('photo_title', 'ASC');
+        $photos = $photoManager->selectAll('photo_title', 'ASC');
 
-        return $this->twig->render('Item/index.html.twig', ['items' => $items]);
+        return $this->twig->render('Photo/index.html.twig', ['photos' => $photos]);
     }
 
     /**
-     * Show informations for a specific item
+     * Show informations for a specific photo
      */
     public function show(int $id): string
     {
         $photoManager = new PhotoManager();
-        $item = $photoManager->selectOneById($id);
+        $photo = $photoManager->selectOneById($id);
 
-        return $this->twig->render('Item/show.html.twig', ['item' => $item]);
+        return $this->twig->render('Photo/show.html.twig', ['photo' => $photo]);
     }
 
     /**
-     * Edit a specific item
+     * Edit a specific photo
      */
     public function edit(int $id): ?string
     {
         $photoManager = new PhotoManager();
-        $item = $photoManager->selectOneById($id);
+        $photo = $photoManager->selectOneById($id);
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // clean $_POST data
-            $item = array_map('trim', $_POST);
+            $photo = array_map('trim', $_POST);
 
             // TODO validations (length, format...)
 
             // if validation is ok, update and redirection
-            $photoManager->update($item);
+            $photoManager->update($photo);
 
-            header('Location: /items/show?id=' . $id);
+            header('Location: /photos/show?id=' . $id);
 
             // we are redirecting so we don't want any content rendered
             return null;
         }
 
-        return $this->twig->render('Item/edit.html.twig', [
-            'item' => $item,
+        return $this->twig->render('Photo/edit.html.twig', [
+            'photo' => $photo,
         ]);
     }
 
     /**
-     * Add a new item
+     * Add a new photo
      */
     public function add(): ?string
     {
         $errors = [];
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $item = array_map('trim', $_POST);
+            $photo = array_map('trim', $_POST);
 
-            $this->validateURL($item, $errors);
+            $this->validateURL($photo, $errors);
 
-            if (!isset($item['prompt']) || empty($item['prompt'])) {
+            if (!isset($photo['prompt']) || empty($photo['prompt'])) {
                 $errors[] = 'You must write a prompt';
             }
-            if (!isset($item['description']) || empty($item['description'])) {
+            if (!isset($photo['description']) || empty($photo['description'])) {
                 $errors[] = 'You must write a comment';
             }
             if (empty($errors)) {
                 $photoManager = new PhotoManager();
-                $id = $photoManager->insert($item);
+                $id = $photoManager->insert($photo);
 
-                header('Location:/items/show?id=' . $id);
+                header('Location:/photos/show?id=' . $id);
                 return null;
             }
         }
 
-        return $this->twig->render('Item/add.html.twig', ['errors' => $errors]);
+        return $this->twig->render('Photo/add.html.twig', ['errors' => $errors]);
     }
 
-    public function validateURL(array $item, array &$errors): void
+    public function validateURL(array $photo, array &$errors): void
     {
-        if (!isset($item['picture']) || empty($item['picture'])) {
+        if (!isset($photo['picture']) || empty($photo['picture'])) {
             $errors[] = 'You must enter an URL';
         }
-        if (!filter_var($item['picture'], FILTER_VALIDATE_URL)) {
+        if (!filter_var($photo['picture'], FILTER_VALIDATE_URL)) {
             $errors[] = 'Wrong URL format';
         }
     }
 
     /**
-     * Delete a specific item
+     * Delete a specific photo
      */
     public function delete(): void
     {
@@ -105,7 +105,7 @@ class PhotoController extends AbstractController
             $photoManager = new PhotoManager();
             $photoManager->delete((int)$id);
 
-            header('Location:/items');
+            header('Location:/photos');
         }
     }
 }

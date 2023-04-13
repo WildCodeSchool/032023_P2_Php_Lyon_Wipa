@@ -42,8 +42,8 @@ abstract class AbstractManager
     public function selectOneById(int $id): array|false
     {
         // prepared request
-        $statement = $this->pdo->prepare("SELECT * FROM " . static::TABLE . " WHERE id=:id");
-        $statement->bindValue('id', $id, \PDO::PARAM_INT);
+        $statement = $this->pdo->prepare("SELECT * FROM " . static::TABLE . " WHERE photo_id=:photo_id");
+        $statement->bindValue('photo_id', $id, \PDO::PARAM_INT);
         $statement->execute();
 
         return $statement->fetch();
