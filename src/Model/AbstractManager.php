@@ -23,11 +23,14 @@ abstract class AbstractManager
     /**
      * Get all row from database.
      */
-    public function selectAll(string $orderBy = '', string $direction = 'ASC'): array
+    public function selectAll(string $orderBy = '', string $direction = 'ASC', string $limit = 'NONE'): array
     {
         $query = 'SELECT * FROM ' . static::TABLE;
         if ($orderBy) {
             $query .= ' ORDER BY ' . $orderBy . ' ' . $direction;
+        }
+        if ($limit !== 'NONE') {
+            $query .= ' LIMIT ' . $limit;
         }
 
         return $this->pdo->query($query)->fetchAll();
@@ -39,8 +42,8 @@ abstract class AbstractManager
     public function selectOneById(int $id): array|false
     {
         // prepared request
-        $statement = $this->pdo->prepare("SELECT * FROM " . static::TABLE . " WHERE id=:id");
-        $statement->bindValue('id', $id, \PDO::PARAM_INT);
+        $statement = $this->pdo->prepare("SELECT * FROM " . static::TABLE . " WHERE photo_id=:photo_id");
+        $statement->bindValue('photo_id', $id, \PDO::PARAM_INT);
         $statement->execute();
 
         return $statement->fetch();
