@@ -8,9 +8,9 @@
 // e.g route '/item/edit?id=1' will execute $PhotoController->edit(1)
 return [
     '' => ['PhotoController', 'index',],
-    'add' => ['PhotoController', 'add',],
-    'items' => ['PhotoController', 'index',],
-    'items/edit' => ['PhotoController', 'edit', ['id']],
-    'items/show' => ['PhotoController', 'show', ['id']],
-    'items/delete' => ['PhotoController', 'delete',],
+    'photos/add' => ['PhotoController', 'add',],
+    'photos' => ['PhotoController', 'index',],
+    'photos/edit' => ['PhotoController', 'edit', ['id']],
+    'photos/show' => ['PhotoController', 'show', ['id']],
+    'photos/delete' => ['PhotoController', 'delete',],
 ];
