@@ -2,17 +2,17 @@
 
 namespace App\Controller;
 
-use App\Model\ItemManager;
+use App\Model\PhotoManager;
 
-class ItemController extends AbstractController
+class PhotoController extends AbstractController
 {
     /**
      * List items
      */
     public function index(): string
     {
-        $itemManager = new ItemManager();
-        $items = $itemManager->selectAll('photo_title', 'ASC');
+        $photoManager = new PhotoManager();
+        $items = $photoManager->selectAll('photo_title', 'ASC');
 
         return $this->twig->render('Item/index.html.twig', ['items' => $items]);
     }
@@ -22,8 +22,8 @@ class ItemController extends AbstractController
      */
     public function show(int $id): string
     {
-        $itemManager = new ItemManager();
-        $item = $itemManager->selectOneById($id);
+        $photoManager = new PhotoManager();
+        $item = $photoManager->selectOneById($id);
 
         return $this->twig->render('Item/show.html.twig', ['item' => $item]);
     }
@@ -33,8 +33,8 @@ class ItemController extends AbstractController
      */
     public function edit(int $id): ?string
     {
-        $itemManager = new ItemManager();
-        $item = $itemManager->selectOneById($id);
+        $photoManager = new PhotoManager();
+        $item = $photoManager->selectOneById($id);
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // clean $_POST data
@@ -43,7 +43,7 @@ class ItemController extends AbstractController
             // TODO validations (length, format...)
 
             // if validation is ok, update and redirection
-            $itemManager->update($item);
+            $photoManager->update($item);
 
             header('Location: /items/show?id=' . $id);
 
@@ -74,8 +74,8 @@ class ItemController extends AbstractController
                 $errors[] = 'You must write a comment';
             }
             if (empty($errors)) {
-                $itemManager = new ItemManager();
-                $id = $itemManager->insert($item);
+                $photoManager = new PhotoManager();
+                $id = $photoManager->insert($item);
 
                 header('Location:/items/show?id=' . $id);
                 return null;
@@ -102,8 +102,8 @@ class ItemController extends AbstractController
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $id = trim($_POST['id']);
-            $itemManager = new ItemManager();
-            $itemManager->delete((int)$id);
+            $photoManager = new PhotoManager();
+            $photoManager->delete((int)$id);
 
             header('Location:/items');
         }

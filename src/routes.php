@@ -5,12 +5,12 @@
 // values : 1. controller name
 //          2. method name
 //          3. (optional) array of query string keys to send as parameter to the method
-// e.g route '/item/edit?id=1' will execute $itemController->edit(1)
+// e.g route '/item/edit?id=1' will execute $PhotoController->edit(1)
 return [
-    '' => ['ItemController', 'index',],
-    'add' => ['ItemController', 'add',],
-    'items' => ['ItemController', 'index',],
-    'items/edit' => ['ItemController', 'edit', ['id']],
-    'items/show' => ['ItemController', 'show', ['id']],
-    'items/delete' => ['ItemController', 'delete',],
+    '' => ['PhotoController', 'index',],
+    'add' => ['PhotoController', 'add',],
+    'items' => ['PhotoController', 'index',],
+    'items/edit' => ['PhotoController', 'edit', ['id']],
+    'items/show' => ['PhotoController', 'show', ['id']],
+    'items/delete' => ['PhotoController', 'delete',],
 ];
