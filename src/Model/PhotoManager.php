@@ -4,7 +4,7 @@ namespace App\Model;
 
 use PDO;
 
-class ItemManager extends AbstractManager
+class PhotoManager extends AbstractManager
 {
     public const TABLE = 'photo';
 
