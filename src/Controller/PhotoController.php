@@ -12,8 +12,9 @@ class PhotoController extends AbstractController
     public function index(): string
     {
         $photoManager = new PhotoManager();
-        $photos = $photoManager->selectAll('photo_title', 'ASC');
-
+        $photos = $photoManager->selectAll('photo_title');
+        // A perfect and beautiful function that manage to put all the photos in the best index page ever.
+        shuffle($photos);
         return $this->twig->render('Photo/index.html.twig', ['photos' => $photos]);
     }
 
