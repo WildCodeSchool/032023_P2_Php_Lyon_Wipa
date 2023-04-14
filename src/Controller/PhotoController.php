@@ -13,7 +13,7 @@ class PhotoController extends AbstractController
     {
         $photoManager = new PhotoManager();
         $photos = $photoManager->selectAll('photo_title');
-        // random des images
+        // A perfect and beautiful function that manage to put all the photos in the best index page ever.
         shuffle($photos);
         return $this->twig->render('Photo/index.html.twig', ['photos' => $photos]);
     }
