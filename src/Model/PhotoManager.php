@@ -13,13 +13,12 @@ class PhotoManager extends AbstractManager
      */
     public function insert(array $item): int
     {
-        $dbFields = '(`photo_title`,`photo_link`, `photo_prompt`, `photo_description`)';
-        $placeholderFields = '(:photo_title, :photo_link, :photo_prompt, :photo_description)';
+        $dbFields = '(`photo_link`, `photo_prompt`, `photo_description`)';
+        $placeholderFields = '(:photo_link, :photo_prompt, :photo_description)';
         $statement = $this->pdo->prepare("INSERT INTO " . self::TABLE . " $dbFields VALUES $placeholderFields");
-        $statement->bindValue('photo_title', $item['photo_title'], PDO::PARAM_STR);
-        $statement->bindValue('photo_link', $item['photo_link'], PDO::PARAM_STR);
-        $statement->bindValue('photo_prompt', $item['photo_prompt'], PDO::PARAM_STR);
-        $statement->bindValue('photo_description', $item['photo_description'], PDO::PARAM_STR);
+        $statement->bindValue('photo_link', $item['picture'], PDO::PARAM_STR);
+        $statement->bindValue('photo_prompt', $item['prompt'], PDO::PARAM_STR);
+        $statement->bindValue('photo_description', $item['description'], PDO::PARAM_STR);
 
         $statement->execute();
         return (int)$this->pdo->lastInsertId();
