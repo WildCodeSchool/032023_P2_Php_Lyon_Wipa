@@ -6,8 +6,6 @@ use App\Model\PhotoManager;
 
 class PhotoController extends AbstractController
 {
-
-    
     /**
      * List photos
      */
