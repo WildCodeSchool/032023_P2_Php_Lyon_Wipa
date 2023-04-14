@@ -6,14 +6,17 @@ use App\Model\PhotoManager;
 
 class PhotoController extends AbstractController
 {
+
+    
     /**
      * List photos
      */
     public function index(): string
     {
         $photoManager = new PhotoManager();
-        $photos = $photoManager->selectAll('photo_title', 'ASC');
-
+        $photos = $photoManager->selectAll('photo_title');
+        // random des images
+        shuffle($photos);
         return $this->twig->render('Photo/index.html.twig', ['photos' => $photos]);
     }
 
