@@ -67,19 +67,21 @@ class PhotoController extends AbstractController
             $photo = array_map('trim', $_POST);
 
             $this->validateURL($photo, $errors);
-
+            // is there a prompt text ?
             if (!isset($photo['prompt']) || empty($photo['prompt'])) {
                 $errors[] = 'You must write a prompt';
             }
+            // is there a description text ?
             if (!isset($photo['description']) || empty($photo['description'])) {
                 $errors[] = 'You must write a comment';
             }
+            // if validated, photo is stored in database
             if (empty($errors)) {
                 $photoManager = new PhotoManager();
-                $id = $photoManager->insert($photo);
+                $photoManager->insert($photo);
 
-                header('Location:/photos/show?id=' . $id);
-                return null;
+                header('Location: /');
+                die();
             }
         }
 
@@ -88,9 +90,11 @@ class PhotoController extends AbstractController
 
     public function validateURL(array $photo, array &$errors): void
     {
+        // is there a photo ?
         if (!isset($photo['picture']) || empty($photo['picture'])) {
             $errors[] = 'You must enter an URL';
         }
+        // is the URL well formated ?
         if (!filter_var($photo['picture'], FILTER_VALIDATE_URL)) {
             $errors[] = 'Wrong URL format';
         }
