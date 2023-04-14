@@ -95,6 +95,13 @@ class PhotoController extends AbstractController
         }
     }
 
+    public function validateTitle(array $photo, array &$errors): void
+    {
+        if (!isset($photo['title']) || empty($photo['title'])) {
+            $errors[] = 'You must write a title';
+        }
+    }
+
     /**
      * Delete a specific photo
      */
