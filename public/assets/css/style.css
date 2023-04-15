@@ -1,8 +1,13 @@
 :root {
-    /* Couleurs de base */
+    /* Base Color */
     --light-color: #F5F5F5;
+    --dark2-color: #747576;
     --dark-color: #353738;
     --accent-color: #138FEB;
+
+    /* Var Title */
+    --main-font: "Raleway", sans-serif;
+    --content-font: 'Nunito', sans-serif;
 }
 
 /* Nav Bar */
@@ -31,22 +36,49 @@
 }
 
 /* Content */
+.img-container {
+    position: relative;
+    float: left;
+    margin-right: 3px;
+    margin-bottom: 3px;
+  }
+
+.img-title {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 10px;
+  background-color: var(--light-color);
+  color: var(--dark-color);
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  font-family: var(--content-font);
+  opacity: 0;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: opacity 0.2s ease-in-out;
+  
+}
+
+.img-container:hover .img-title {
+  opacity: 0.8;
+}
+
 .img-fit {
     max-width: 100%;
     max-height: 100%;
     object-fit: cover;
 }
 
-.img-fit:hover {
-    transform: scale(1.1);
-    transition: transform 0.5s ease;
-    border: white solid 3px;
-}
 
 /* Font */
 
 body {
-    font-family: "Raleway", sans-serif;
+    font-family: var(--main-font);
 }
 
 /* Page add */
