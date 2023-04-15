@@ -8,7 +8,8 @@
 					{% for photo in photos %}
 						<div class="col">
 							<div class="img-container">
-								<a href="/photos/show?id={{photo.photo_id}}"><img src="{{photo.photo_link}}" alt="" class="img-fluid img-fit"></a>
+								<a href="#" data-photo-id="{{photo.photo_id}}" data-photo-url="{{photo.photo_link}}" data-photo-prompt="{{photo.photo_prompt}}" data-photo-title="{{photo.photo_title}}" data-photo-description="{{photo.photo_description}}"><img src="{{photo.photo_link }}" alt="" class="img-fluid img-fit pop-up-image popup-arrow"></a>
+
 								<div class="img-title">{{photo.photo_title}}</div>
 							</div>
 						</div>
@@ -16,7 +17,20 @@
 				</div>
 			</div>
 		</div>
-
+		<div id="popup-container">
+			<div id="popup-content">
+				<img id="popup-image" src="" alt="">
+				<div id="popup-info">
+				<ul>
+					<li class="poptitle"><h3>Title :</h3><p id="popup-title"></p></li>
+					<li>Prompt :<li>
+					<li><p id="popup-prompt"></p><li>
+					<li>Description :<li>
+					<li><p id="popup-description"></p><li>
+					</ul>
+				</div>
+			</div>
+		</div>
 	{% else %}
 		<li>Nothing to display</li>
 	{% endif %}
