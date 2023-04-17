@@ -112,7 +112,7 @@
     color: var(--light-color);
     font-size: 1em;
     list-style-type: none;
-    background-color: rgba(175, 176, 176, 0.6);
+    background-color: rgba(175, 176, 176, 0.9);
   }
   ul {
     list-style-type: none;
