@@ -12,8 +12,9 @@ class PhotoController extends AbstractController
     public function index(): string
     {
         $photoManager = new PhotoManager();
-        $photos = $photoManager->selectAll('photo_title', 'ASC');
-
+        $photos = $photoManager->selectAll('photo_title');
+        // A perfect and beautiful function that manage to put all the photos in the best index page ever.
+        shuffle($photos);
         return $this->twig->render('Photo/index.html.twig', ['photos' => $photos]);
     }
 
@@ -68,18 +69,21 @@ class PhotoController extends AbstractController
             $this->validateURL($photo, $errors);
             $this->validateTitle($photo, $errors);
 
+            // is there a prompt text ?
             if (!isset($photo['prompt']) || empty($photo['prompt'])) {
                 $errors[] = 'You must write a prompt';
             }
+            // is there a description text ?
             if (!isset($photo['description']) || empty($photo['description'])) {
                 $errors[] = 'You must write a comment';
             }
+            // if validated, photo is stored in database
             if (empty($errors)) {
                 $photoManager = new PhotoManager();
-                $id = $photoManager->insert($photo);
+                $photoManager->insert($photo);
 
-                header('Location:/photos/show?id=' . $id);
-                return null;
+                header('Location: /');
+                die();
             }
         }
 
@@ -88,9 +92,11 @@ class PhotoController extends AbstractController
 
     public function validateURL(array $photo, array &$errors): void
     {
+        // is there a photo ?
         if (!isset($photo['picture']) || empty($photo['picture'])) {
             $errors[] = 'You must enter an URL';
         }
+        // is the URL well formated ?
         if (!filter_var($photo['picture'], FILTER_VALIDATE_URL)) {
             $errors[] = 'Wrong URL format';
         }
