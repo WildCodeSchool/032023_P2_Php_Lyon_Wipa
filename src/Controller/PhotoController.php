@@ -67,6 +67,8 @@ class PhotoController extends AbstractController
             $photo = array_map('trim', $_POST);
 
             $this->validateURL($photo, $errors);
+            $this->validateTitle($photo, $errors);
+
             // is there a prompt text ?
             if (!isset($photo['prompt']) || empty($photo['prompt'])) {
                 $errors[] = 'You must write a prompt';
