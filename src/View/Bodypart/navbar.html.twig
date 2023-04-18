@@ -1,41 +1,36 @@
 <header>
-	<nav class="navbar navbar-expand-md nav-bg-color shadow-sm navbar-bottom">
+	<nav class="navbar navbar-expand nav-bg-color shadow-sm navbar-bottom">
 		<div
 			class="container-fluid">
 			{# left side of navbar #}
 			<a class="navbar-brand" href="/">Wipa</a>
-			<div
-				class="justify-content-end">
-				{# burger menu #}
-				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#my_navbar" aria-controls="my_navbar" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-				{# right side of navbar (hidden in burger when md) #}
+			{# right side of navbar (hidden in burger when md) #}
+			<div class="justify-content-end">
+				<ul
+					class="navbar-nav me-auto mb-2 mb-lg-0">
 
-				<div class="collapse navbar-collapse" id="my_navbar">
-					<ul
-						class="navbar-nav me-auto mb-2 mb-lg-0">
-						{# favorite #}
-						<li class="nav-item">
-							<a class="nav-link" href="#">
-								<img class="icon" src="../assets/images/icon_favorite.svg" alt="Go to fav">
-							</a>
-						</li>
-						{# add pic #}
-						<li class="nav-item">
-							<a class="nav-link" href="/photos/add">
-								<img class="icon" src="../assets/images/icon_addPhoto.svg" alt="Add a pic">
-							</a>
-						</li>
-						{# logon #}
-						<li class="nav-item">
-							<a class="nav-link" href="#">
-								<img class="icon" src="../assets/images/icon_logon.svg" alt="Go to logon">
-							</a>
-						</li>
-					</ul>
-				</div>
+					{# add pic #}
+					<li class="nav-item">
+						<a class="nav-link" href="/photos/add">
+							<span class="d-none d-md-inline">Add Pic</span>
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-image" viewbox="0 0 16 16">
+								<path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+								<path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z"/>
+							</svg>
+						</a>
+					</li>
+					{# logon #}
+					<li class="nav-item">
+						<a class="nav-link" href="/login">
+							<span class="d-none d-md-inline">Log In</span>
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-box-arrow-in-left" viewbox="0 0 16 16">
+								<path fill-rule="evenodd" d="M10 3.5a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 1 1 0v2A1.5 1.5 0 0 1 9.5 14h-8A1.5 1.5 0 0 1 0 12.5v-9A1.5 1.5 0 0 1 1.5 2h8A1.5 1.5 0 0 1 11 3.5v2a.5.5 0 0 1-1 0v-2z"/>
+								<path fill-rule="evenodd" d="M4.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H14.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z"/>
+							</svg>
+						</a>
+					</li>
+				</ul>
 			</div>
 		</div>
-	</nav>
-</header>
+	</div>
+</nav></header>
