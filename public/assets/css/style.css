@@ -11,9 +11,8 @@
 }
 
 /* Nav Bar */
-
-img.icon {
-  height: 1.5em;
+a.nav-link {
+  font-family: var(--content-font);
 }
 
 ul.navbar-nav {
@@ -121,7 +120,7 @@ ul.navbar-nav {
   color: var(--light-color);
   font-size: 1em;
   list-style-type: none;
-  background-color: rgba(175, 176, 176, 0.6);
+  background-color: rgba(175, 176, 176, 0.9);
 }
 
 .poptitle {
