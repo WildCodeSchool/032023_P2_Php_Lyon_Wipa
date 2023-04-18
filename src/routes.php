@@ -13,4 +13,5 @@ return [
     'photos/edit' => ['PhotoController', 'edit', ['id']],
     'photos/show' => ['PhotoController', 'show', ['id']],
     'photos/delete' => ['PhotoController', 'delete',],
+    'login'  => ['LogController', 'log',],
 ];
