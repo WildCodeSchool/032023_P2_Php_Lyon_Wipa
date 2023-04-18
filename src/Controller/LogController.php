@@ -22,8 +22,8 @@ class LogController extends AbstractController
                 $errorMessages = ["Please fill in password field."];
             } else {
               // Check if informations are corrects
-                if ($login == "wipa" && $password == "admin") {
-                    $_SESSION["user"] = "wipa";
+                if ($login == LOGIN && $password == PASSWORD) {
+                    $_SESSION["user"] = LOGIN;
                     header("Location: /");
                     die();
                 } else {
