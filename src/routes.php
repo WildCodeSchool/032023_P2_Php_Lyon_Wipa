@@ -14,4 +14,5 @@ return [
     'photos/show' => ['PhotoController', 'show', ['id']],
     'photos/delete' => ['PhotoController', 'delete',],
     'login'  => ['LogController', 'log',],
+    'fav/add' => ['FavController', 'addFav'],
 ];
