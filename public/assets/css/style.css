@@ -71,6 +71,23 @@ ul {
   transition: opacity 0.2s ease-in-out;
 }
 
+.button-fav {
+  position: absolute;
+  top :0;
+  right: 0;
+  padding: 10px;
+  color: var(--light-color);
+  opacity: 0;
+  max-width: 100%;
+  border: none;
+  background: none;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.img-container:hover .button-fav {
+  opacity: 0.8;
+}
+
 .img-container:hover .img-title {
   opacity: 0.8;
 }
@@ -133,12 +150,6 @@ ul {
 
 body {
   font-family: var(--main-font);
-}
-
-/* Page add */
-
-.title-add, .title-connection {
-  margin-top: 15px;
 }
 
 /* Button */
