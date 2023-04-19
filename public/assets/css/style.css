@@ -152,12 +152,6 @@ body {
   font-family: var(--main-font);
 }
 
-/* Page add */
-
-.title-add, .title-connection {
-  margin-top: 15px;
-}
-
 /* Button */
 
 .btn-primary {
