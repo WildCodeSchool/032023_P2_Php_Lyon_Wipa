@@ -15,7 +15,7 @@ a.nav-link {
   font-family: var(--content-font);
 }
 
-ul.navbar-nav {
+ul {
   list-style-type: none;
   padding: 0;
 }
@@ -137,7 +137,7 @@ body {
 
 /* Page add */
 
-.title-add {
+.title-add, .title-connection {
   margin-top: 15px;
 }
 

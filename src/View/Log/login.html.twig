@@ -1,4 +1,5 @@
 {% extends 'layout.html.twig' %}
+{% block title %}Wipa - Login{% endblock %}
 {% block content %}
 	{% if errorMessages is defined %}
 		{% for errorMessage in errorMessages %}
@@ -9,7 +10,7 @@
 	{% endif %}
 	<div class="container d-flex justify-content-center">
 		<div class="col-12 col-md-6">
-			<h1>Connection</h1>
+			<h1 class="mt-4">Connection</h1>
 			<form method="post">
 				<div class="mb-3">
 					<label for="login" class="form-label d-none d-md-block">Login</label>

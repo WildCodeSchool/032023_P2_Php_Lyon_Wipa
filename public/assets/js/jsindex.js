@@ -35,11 +35,13 @@ var photoUrl = this.parentNode.dataset.photoUrl;
 var photoTitle = this.parentNode.dataset.photoTitle;
 var photoPrompt = this.parentNode.dataset.photoPrompt;
 var photoDescription = this.parentNode.dataset.photoDescription;
+var photoDate = this.parentNode.dataset.photoDate;
 
 document.getElementById('popup-image').setAttribute('src', photoUrl);
 document.getElementById('popup-title').textContent = photoTitle;
 document.getElementById('popup-prompt').textContent = photoPrompt;
 document.getElementById('popup-description').textContent = photoDescription;
+document.getElementById('popup-date').textContent = photoDate;
 
 document.getElementById('popup-container').style.display = 'block';
 });
