@@ -1,11 +1,14 @@
-function readURL(input) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-
-        reader.onload = function (e) {
-            $('#picture').attr('src', e.target.result);
-        }
-
-        reader.readAsDataURL(input.files[0]);
-    }
+function previewImage() {
+	var url = document.getElementById("picture").value;
+	console.log(url);
+	var img = document.createElement("img");
+	img.style.width = "100px";
+	img.style.height = "100px";
+	var div = document.getElementById("photo");
+	div.innerHTML = "";
+	var match = /\.(jpeg|jpg|gif|png)(\?.*)?$/i;
+	if (match.test(url)){
+		img.src = url ;
+		div.appendChild(img)
+	}
 }
