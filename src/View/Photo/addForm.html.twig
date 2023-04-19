@@ -6,8 +6,8 @@
 		<input type="text" class="form-control" id="title" name="title" placeholder="Title">
 	</div>
 	<div class="mb-3">
-	  <label for="picture" class="form-label d-none d-md-block">Picture://URL</label>
-	  <input type="text" class="form-control" id="picture" aria-describedby="picture" name="picture" placeholder="Picture://URL">
+		<label for="picture" class="form-label d-none d-md-block">Picture://URL</label>
+		<input type="text" class="form-control" id="picture" aria-describedby="picture" name="picture" placeholder="Picture://URL" oninput="previewImage()">
 	</div>
 	<div class="mb-3">
 		<label for="prompt" class="form-label d-none d-md-block">Prompt</label>
@@ -17,5 +17,15 @@
 		<label for="description" class="form-label d-none d-md-block">Comment</label>
 		<input type="text" class="form-control" id="description" name="description" placeholder="Comment">
 	</div>
-	<button type="submit" class="btn btn-primary">Add pic</button>
-  </form>
+	<div class="d-flex flex-row mb-3 justify-content-between">
+		<div class="p-2">
+			<button type="submit" class="btn btn-primary">Add pic</button>
+		</div>
+		<div class="p-2">
+			<div id="photo"></div>
+		</div>
+		<div class="p-2">
+			<div>  </div>
+		</div>
+	</div>
+</form>
