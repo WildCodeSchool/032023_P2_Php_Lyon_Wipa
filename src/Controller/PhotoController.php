@@ -11,6 +11,7 @@ class PhotoController extends AbstractController
      */
     public function index(): string
     {
+        session_start();
         $photoManager = new PhotoManager();
         $photos = $photoManager->selectAll('photo_title');
         // A perfect and beautiful function that manage to put all the photos in the best index page ever.
