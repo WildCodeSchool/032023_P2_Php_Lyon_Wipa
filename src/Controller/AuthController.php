@@ -2,9 +2,9 @@
 
 namespace App\Controller;
 
-use App\Model\LogManager;
+use App\Model\AuthManager;
 
-class LogController extends AbstractController
+class AuthController extends AbstractController
 {
     public function log()
     {
@@ -20,7 +20,7 @@ class LogController extends AbstractController
             } elseif (!isset($_POST["password"]) || empty($_POST["password"])) {
                 $errorMessages = ["Please fill in password field."];
             } else {
-                $userManager = new LogManager();
+                $userManager = new AuthManager();
                 $user = $userManager->selectUserByName($login);
                 // Check if user exists and password is correct
                 if ($user && $user['user_password'] === $password) {
