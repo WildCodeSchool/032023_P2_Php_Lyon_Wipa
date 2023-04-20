@@ -62,7 +62,7 @@ abstract class AbstractManager
 
     public function selectUserByName(string $username): array|false
     {
-        $statement = $this->pdo->prepare("SELECT * FROM user WHERE user_name = :username");
+        $statement = $this->pdo->prepare("SELECT user_name, user_password FROM user WHERE user_name = :username");
         $statement->bindValue(':username', $username, \PDO::PARAM_STR);
         $statement->execute();
 
