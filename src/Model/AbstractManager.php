@@ -59,4 +59,13 @@ abstract class AbstractManager
         $statement->bindValue('id', $id, \PDO::PARAM_INT);
         $statement->execute();
     }
+
+    public function selectUserByName(string $username): array|false
+    {
+        $statement = $this->pdo->prepare("SELECT * FROM user WHERE user_name = :username");
+        $statement->bindValue(':username', $username, \PDO::PARAM_STR);
+        $statement->execute();
+
+        return $statement->fetch();
+    }
 }

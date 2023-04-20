@@ -2,28 +2,29 @@
 
 namespace App\Controller;
 
+use App\Model\LogManager;
+
 class LogController extends AbstractController
 {
     public function log()
     {
-        define('LOGIN', 'wipa');
-        define('PASSWORD', 'admin');
         $errorMessages = [];
 
-        session_start();
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $login = $_POST["login"];
             $password = $_POST["password"];
 
-          // Check if form is filled
+            // Check if form is filled
             if (!isset($_POST["login"]) || empty($_POST["login"])) {
                 $errorMessages = ["Please fill in login fields."];
             } elseif (!isset($_POST["password"]) || empty($_POST["password"])) {
                 $errorMessages = ["Please fill in password field."];
             } else {
-              // Check if informations are corrects
-                if ($login == LOGIN && $password == PASSWORD) {
-                    $_SESSION["user"] = LOGIN;
+                $userManager = new LogManager();
+                $user = $userManager->selectUserByName($login);
+                // Check if user exists and password is correct
+                if ($user && $user['user_password'] === $password) {
+                    $_SESSION["user"] = $login;
                     header("Location: /");
                     die();
                 } else {
@@ -31,6 +32,7 @@ class LogController extends AbstractController
                 }
             }
         }
+
         return $this->twig->render('Log/login.html.twig', ['errorMessages' => $errorMessages]);
     }
 }
