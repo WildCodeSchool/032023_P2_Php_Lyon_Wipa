@@ -1,6 +1,5 @@
 function previewImage() {
 	var url = document.getElementById("url").value;
-	console.log(url);
 	var img = document.createElement("img");
 	img.style.width = "100px";
 	img.style.height = "100px";
