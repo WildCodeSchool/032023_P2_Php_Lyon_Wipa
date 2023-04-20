@@ -2,7 +2,7 @@
 
 namespace App\Model;
 
-class LogManager extends AbstractManager
+class AuthManager extends AbstractManager
 {
     public const TABLE = 'user';
 }
