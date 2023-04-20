@@ -1,5 +1,5 @@
 function previewImage() {
-	var url = document.getElementById("picture").value;
+	var url = document.getElementById("url").value;
 	console.log(url);
 	var img = document.createElement("img");
 	img.style.width = "100px";
@@ -12,3 +12,6 @@ function previewImage() {
 		div.appendChild(img)
 	}
 }
+
+var input = document.getElementById("url");
+input.addEventListener("input", previewImage);
