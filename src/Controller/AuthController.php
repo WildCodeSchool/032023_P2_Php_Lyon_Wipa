@@ -9,6 +9,7 @@ class AuthController extends AbstractController
     public function log()
     {
         $errorMessages = [];
+        $successMessages = [];
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $login = $_POST["login"];
@@ -25,14 +26,13 @@ class AuthController extends AbstractController
                 // Check if user exists and password is correct
                 if ($user && $user['user_password'] === $password) {
                     $_SESSION["user"] = $login;
-                    header("Location: /");
-                    die();
+                    $successMessages = ["You have been successfully logged in."];
                 } else {
                     $errorMessages = ["Invalid username or password."];
                 }
             }
         }
-
-        return $this->twig->render('Log/login.html.twig', ['errorMessages' => $errorMessages]);
+        $exeMessages = ['errorMessages' => $errorMessages, 'successMessages' => $successMessages,];
+        return $this->twig->render('Log/login.html.twig', $exeMessages);
     }
 }
