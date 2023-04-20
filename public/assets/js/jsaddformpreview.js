@@ -5,11 +5,9 @@ function previewImage() {
 	img.style.height = "100px";
 	var div = document.getElementById("photo");
 	div.innerHTML = "";
-	var match = /\.(jpeg|jpg|gif|png)(\?.*)?$/i;
-	if (match.test(url)){
-		img.src = url ;
-		div.appendChild(img)
-	}
+	img.src = url;
+	div.appendChild(img)
+
 }
 
 var input = document.getElementById("url");
