@@ -15,17 +15,17 @@ class FavManager extends AbstractManager
         $whereFields = " WHERE fav_photo_id=:fav_photo_id AND fav_user_id=:fav_user_id";
 
         // request to test if a photo is already a fav
-        $stm = $this->pdo->prepare("SELECT * FROM " . static::TABLE . $whereFields);
-        $stm->bindValue('fav_photo_id', $idfav, PDO::PARAM_INT);
-        $stm->bindValue('fav_user_id', 1, PDO::PARAM_INT);
-        $stm->execute();
-        $test = $stm->fetch();
+        $statement = $this->pdo->prepare("SELECT * FROM " . static::TABLE . $whereFields);
+        $statement->bindValue('fav_photo_id', $idfav, PDO::PARAM_INT);
+        $statement->bindValue('fav_user_id', 1, PDO::PARAM_INT);
+        $statement->execute();
+        $isFav = $statement->fetch();
         // if photo is not already a favorite => add it as favorite
-        if (!$test) {
-            $stm = $this->pdo->prepare("INSERT INTO " . self::TABLE . " $dbFields VALUES $placeholderFields");
-            $stm->bindValue('fav_photo_id', $idfav, PDO::PARAM_INT);
-            $stm->bindValue('fav_user_id', 1, PDO::PARAM_INT);
-            $stm->execute();
+        if (!$isFav) {
+            $statement = $this->pdo->prepare("INSERT INTO " . self::TABLE . " $dbFields VALUES $placeholderFields");
+            $statement->bindValue('fav_photo_id', $idfav, PDO::PARAM_INT);
+            $statement->bindValue('fav_user_id', 1, PDO::PARAM_INT);
+            $statement->execute();
         }
     }
 }
