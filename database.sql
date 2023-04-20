@@ -23,6 +23,11 @@ CREATE TABLE `fav_photo` (
   CONSTRAINT `fav_photo_ibfk_2` FOREIGN KEY (`fav_photo_id`) REFERENCES `photo` (`photo_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+INSERT INTO `fav_photo` (`fav_id`, `fav_user_id`, `fav_photo_id`) VALUES
+(1,	1,	3),
+(12,	1,	8),
+(14,	1,	6),
+(15,	1,	10);
 
 DROP TABLE IF EXISTS `photo`;
 CREATE TABLE `photo` (
@@ -66,5 +71,7 @@ CREATE TABLE `user` (
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+INSERT INTO `user` (`user_id`, `user_name`, `user_password`, `user_role`) VALUES
+(1,	'user',	'password',	'user');
 
--- 2023-04-19 08:02:19
+-- 2023-04-20 08:23:08
