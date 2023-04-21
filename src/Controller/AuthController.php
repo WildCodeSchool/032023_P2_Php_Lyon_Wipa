@@ -8,6 +8,7 @@ class AuthController extends AbstractController
 {
     public function log()
     {
+        session_start();
         $errorMessages = [];
         $successMessages = [];
 
@@ -26,6 +27,7 @@ class AuthController extends AbstractController
                 // Check if user exists and password is correct
                 if ($user && $user['user_password'] === $password) {
                     $_SESSION["user"] = $login;
+                    $_SESSION["user_id"] = $user['user_id'];
                     $successMessages = ["You have been successfully logged in."];
                 } else {
                     $errorMessages = ["Invalid username or password."];
