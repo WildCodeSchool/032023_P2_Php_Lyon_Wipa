@@ -23,19 +23,19 @@ window.onload = function () {
 
 // Get a pop-up on click on the image with all informations
 
-var thumbnailImages = document.querySelectorAll('.pop-up-image');
+let thumbnailImages = document.querySelectorAll('.pop-up-image');
 
-for (var i = 0; i < thumbnailImages.length; i++) {
-var thumbnailImage = thumbnailImages[i];
+for (let i = 0; i < thumbnailImages.length; i++) {
+let thumbnailImage = thumbnailImages[i];
 
 thumbnailImage.addEventListener('click', function (event) {
 event.preventDefault();
 
-var photoUrl = this.parentNode.dataset.photoUrl;
-var photoTitle = this.parentNode.dataset.photoTitle;
-var photoPrompt = this.parentNode.dataset.photoPrompt;
-var photoDescription = this.parentNode.dataset.photoDescription;
-var photoDate = this.parentNode.dataset.photoDate;
+let photoUrl = this.parentNode.dataset.photoUrl;
+let photoTitle = this.parentNode.dataset.photoTitle;
+let photoPrompt = this.parentNode.dataset.photoPrompt;
+let photoDescription = this.parentNode.dataset.photoDescription;
+let photoDate = this.parentNode.dataset.photoDate;
 
 document.getElementById('popup-image').setAttribute('src', photoUrl);
 document.getElementById('popup-title').textContent = photoTitle;
