@@ -14,8 +14,12 @@
 			<div class="alert alert-success" role="alert">
 				{{ message }}
 			</div>
+				<div class="container d-flex justify-content-center">
+			<a class="btn btn-primary mb-3 mt-3" href="/login">Go to Login Page</a>
+	</div>
 		{% endfor %}
 	{% endif %}
+	{% if success is empty %}
 	<div class="container d-flex justify-content-center">
 		<div class="col-12 col-md-6">
 			<h1 class="mt-4">Register</h1>
@@ -38,6 +42,7 @@
 			</form>
 		</div>
 	</div>
+	{% endif %}
 {% endblock %}
 {% block javascript %}
 	<script src="../assets/js/jsregisterform.js"></script>
