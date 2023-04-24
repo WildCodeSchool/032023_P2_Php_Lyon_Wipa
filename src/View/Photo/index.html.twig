@@ -1,5 +1,6 @@
 {% extends 'layout.html.twig' %}
-{% block title %}Wipa - Home{% endblock %}
+{% block title %}Wipa - Home
+{% endblock %}
 {% block content %}
 
 	{% if photos is defined %}
@@ -9,14 +10,20 @@
 					{% for photo in photos %}
 						<div class="col">
 							<div class="img-container">
-								<a href="#" data-photo-id="{{photo.photo_id}}" data-photo-url="{{photo.photo_link}}" data-photo-prompt="{{photo.photo_prompt}}" data-photo-title="{{photo.photo_title}}" data-photo-description="{{photo.photo_description}}" data-photo-date="{{photo.photo_date}}"><img src="{{photo.photo_link }}" alt="" class="img-fluid img-fit pop-up-image"></a>
-					<form action="fav/add" method="POST">
-					<input name="addfav" type="hidden" value="{{photo.photo_id}}">
-					<button type="submit" class="button-fav"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
-  <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
-</svg></button>
-					</form>
-								<div class="img-title">{{photo.photo_title}}</div>
+								<a href="#" data-photo-id="{{photo.id}}" data-photo-url="{{photo.link}}" data-photo-prompt="{{photo.prompt}}" data-photo-title="{{photo.title}}" data-photo-description="{{photo.description}}" data-photo-date="{{photo.date}}"><img src="{{photo.link }}" alt="" class="img-fluid img-fit pop-up-image"></a>
+								{# to be displayed only if user is logged #}
+								{% if user %}
+									<form action="fav/add" method="POST">
+										<input name="addfav" type="hidden" value="{{photo.id}}">
+										<button type="submit" class="button-fav">
+											<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-heart" viewbox="0 0 16 16">
+												<path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+											</svg>
+										</button>
+									</form>
+								{% endif %}
+								{# END OF to be displayed only if user is logged #}
+								<div class="img-title">{{photo.title}}</div>
 							</div>
 						</div>
 					{% endfor %}
@@ -25,16 +32,29 @@
 		</div>
 		<div id="popup-container">
 			<div id="popup-content" class="d-flex flex-column flex-lg-row">
-				 <img id="popup-image" src="" alt="" class="ms-md-5 ms-0">
+				<img id="popup-image" src="" alt="" class="ms-md-5 ms-0">
 				<div id="popup-info">
-				<ul>
-					<li class="poptitle">Title :<p id="popup-title"></p></li>
-					<li>Prompt :<li>
-					<li><p id="popup-prompt"></p><li>
-					<li>Description :<li>
-					<li><p id="popup-description"></p><li>
-					<li>Added date :<li>
-					<li><p id="popup-date"></p><li>
+					<ul>
+						<li class="poptitle">Title :<p id="popup-title"></p>
+						</li>
+						<li>Prompt :</li>
+						<li></li>
+						<li>
+							<p id="popup-prompt"></p>
+						</li>
+						<li></li>
+						<li>Description :</li>
+						<li></li>
+						<li>
+							<p id="popup-description"></p>
+						</li>
+						<li></li>
+						<li>Added date :</li>
+						<li></li>
+						<li>
+							<p id="popup-date"></p>
+						</li>
+						<li></li>
 					</ul>
 				</div>
 			</div>

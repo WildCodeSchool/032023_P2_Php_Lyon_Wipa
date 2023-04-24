@@ -73,7 +73,7 @@ ul {
 
 .button-fav {
   position: absolute;
-  top :0;
+  top: 0;
   right: 0;
   padding: 10px;
   color: var(--light-color);
@@ -118,13 +118,11 @@ ul {
   margin-top: 5%;
 }
 
-
 #popup-image {
   max-width: 60%;
   max-height: 60%;
   border-radius: 20px;
 }
-
 
 #popup-info {
   display: flex;
