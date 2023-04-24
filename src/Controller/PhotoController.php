@@ -11,9 +11,8 @@ class PhotoController extends AbstractController
      */
     public function index(): string
     {
-        session_start();
         $photoManager = new PhotoManager();
-        $photos = $photoManager->selectAll('photo_title');
+        $photos = $photoManager->selectAll('title');
         // A perfect and beautiful function that manage to put all the photos in the best index page ever.
         shuffle($photos);
         return $this->twig->render('Photo/index.html.twig', ['photos' => $photos]);
@@ -81,7 +80,7 @@ class PhotoController extends AbstractController
             // if validated, photo is stored in database
             if (empty($errors)) {
                 $photoManager = new PhotoManager();
-                $photoManager->insert($photo);
+                $photoManager->insert($photo, $this->user['id']);
 
                 header('Location: /');
                 die();
