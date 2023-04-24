@@ -68,6 +68,8 @@ abstract class AbstractManager
         return $statement->fetch();
     }
 
+     /** Select all Favorite photo from one user */
+
     public function selectAllFav(int $id): array
     {
         $query = "SELECT *

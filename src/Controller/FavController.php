@@ -17,6 +17,6 @@ class FavController extends AbstractController
                 $favManager->insertfav($idfav, $userId);
             }
         }
-        header('Location: /');
+        header("Location: " . $_SERVER['HTTP_REFERER']);
     }
 }
