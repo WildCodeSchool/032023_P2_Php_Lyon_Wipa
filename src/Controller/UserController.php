@@ -48,7 +48,7 @@ class UserController extends AbstractController
 
     public function profil()
     {
-        $photoFavUser = new Usermanager();
+        $photoFavUser = new UserManager();
         $photos = $photoFavUser->selectAllFav($this->user['id']);
 
         if (!$this->user) {
