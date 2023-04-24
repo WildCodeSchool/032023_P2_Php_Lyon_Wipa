@@ -67,4 +67,15 @@ abstract class AbstractManager
 
         return $statement->fetch();
     }
+
+    public function selectAllFav(int $id): array
+    {
+        $query = "SELECT *
+                  FROM fav_photo 
+                  INNER JOIN photo 
+                  ON fav_photo.photo_id = photo.id 
+                  WHERE fav_photo.user_id = $id";
+
+        return $this->pdo->query($query)->fetchAll();
+    }
 }
