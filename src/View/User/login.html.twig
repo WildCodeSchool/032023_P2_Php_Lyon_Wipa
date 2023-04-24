@@ -1,0 +1,28 @@
+{% extends 'layout.html.twig' %}
+{% block title %}Wipa - Login
+{% endblock %}
+{% block content %}
+	{% if messages is defined %}
+		{% for message in messages %}
+			<div class="alert alert-danger" role="alert">
+				{{ message|join(', ') }}
+			</div>
+		{% endfor %}
+	{% endif %}
+	<div class="container d-flex justify-content-center">
+		<div class="col-12 col-md-6">
+			<h1 class="mt-4">Connection</h1>
+			<form method="post">
+				<div class="mb-3">
+					<label for="login" class="form-label d-none d-md-block">Login</label>
+					<input type="text" class="form-control" id="login" name="login" placeholder="Insert your username" required>
+				</div>
+				<div class="mb-3">
+					<label for="password" class="form-label d-none d-md-block">Password</label>
+					<input type="password" class="form-control" id="password" name="password" placeholder="Insert your password" required>
+				</div>
+				<button type="submit" class="btn btn-primary" id="submit" value="LOGIN">Login</button>
+			</form>
+		</div>
+	</div>
+{% endblock %}

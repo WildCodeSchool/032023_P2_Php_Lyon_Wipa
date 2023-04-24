@@ -12,7 +12,7 @@ class PhotoManager extends AbstractManager
     /**
      * Insert new photo in database
      */
-    public function insert(array $item): void
+    public function insert(array $item, int $id): void
     {
         // get current time
         $atz = 'Europe/Paris';
@@ -21,14 +21,15 @@ class PhotoManager extends AbstractManager
         $adt->setTimestamp($timestamp); //adjust the object to correct timestamp
         $formatedDate = $adt->format('Y-m-d H:i:s');
         // PDO statements
-        $dbFields = '(`photo_title`, `photo_link`, `photo_prompt`, `photo_description`, `photo_date`)';
-        $placeholderFields = '(:photo_title, :photo_link, :photo_prompt, :photo_description, :photo_date)';
+        $dbFields = '(`title`, `link`, `prompt`, `description`, `date`, `user_id`)';
+        $placeholderFields = '(:title, :link, :prompt, :description, :date, :user_id)';
         $statement = $this->pdo->prepare("INSERT INTO " . self::TABLE . " $dbFields VALUES $placeholderFields");
-        $statement->bindValue('photo_title', $item['title'], PDO::PARAM_STR);
-        $statement->bindValue('photo_link', $item['picture'], PDO::PARAM_STR);
-        $statement->bindValue('photo_prompt', $item['prompt'], PDO::PARAM_STR);
-        $statement->bindValue('photo_description', $item['description'], PDO::PARAM_STR);
-        $statement->bindValue('photo_date', $formatedDate, PDO::PARAM_STR);
+        $statement->bindValue('title', $item['title'], PDO::PARAM_STR);
+        $statement->bindValue('link', $item['picture'], PDO::PARAM_STR);
+        $statement->bindValue('prompt', $item['prompt'], PDO::PARAM_STR);
+        $statement->bindValue('description', $item['description'], PDO::PARAM_STR);
+        $statement->bindValue('date', $formatedDate, PDO::PARAM_STR);
+        $statement->bindValue('user_id', $id, PDO::PARAM_INT);
         $statement->execute();
     }
     /**
