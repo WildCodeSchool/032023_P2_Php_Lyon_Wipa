@@ -5,9 +5,15 @@
 		<label for="title" class="form-label d-none d-md-block">Title</label>
 		<input type="text" class="form-control" id="title" name="title" placeholder="Title">
 	</div>
-	<div class="mb-3">
-		<label for="picture" class="form-label d-none d-md-block">Picture://URL</label>
-		<input type="url" class="form-control" id="url" aria-describedby="url" name="picture" placeholder="Picture://URL" >
+	<div class="container p-0">
+		<div class="row">
+		  <div class="col-md-6 mb-3">
+			<label for="picture" class="form-label d-none d-md-block">Picture://URL</label>
+			<input type="url" class="form-control" id="url" aria-describedby="url" name="picture" placeholder="Picture://URL" >
+		  </div>
+		  <div id="photo" class="col-md-6">
+		  </div>
+		</div>
 	</div>
 	<div class="mb-3">
 		<label for="prompt" class="form-label d-none d-md-block">Prompt</label>
@@ -21,6 +27,5 @@
 		<div class="mt-1">
 			<button type="submit" class="btn btn-primary">Add pic</button>
 		</div>
-		 <div id="photo"></div>
 	</div>
 </form>
