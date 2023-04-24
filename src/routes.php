@@ -13,6 +13,9 @@ return [
     'photos/edit' => ['PhotoController', 'edit', ['id']],
     'photos/show' => ['PhotoController', 'show', ['id']],
     'photos/delete' => ['PhotoController', 'delete',],
-    'login'  => ['AuthController', 'log',],
+    'register' => ['RegisterController', 'register',],
+    'login'  => ['UserController', 'login',],
+    'logout'  => ['UserController', 'logout',],
+    'user'  => ['UserController', 'profil',],
     'fav/add' => ['FavController', 'addFav'],
 ];

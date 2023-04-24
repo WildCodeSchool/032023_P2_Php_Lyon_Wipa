@@ -1,0 +1,44 @@
+{% extends 'layout.html.twig' %}
+{% block title %}Wipa - Register
+{% endblock %}
+{% block content %}
+	{% if errors is defined %}
+		{% for error in errors %}
+			<div class="alert alert-danger" role="alert">
+				{{ error }}
+			</div>
+		{% endfor %}
+	{% endif %}
+	{% if success is defined %}
+		{% for message in success %}
+			<div class="alert alert-success" role="alert">
+				{{ message }}
+			</div>
+		{% endfor %}
+	{% endif %}
+	<div class="container d-flex justify-content-center">
+		<div class="col-12 col-md-6">
+			<h1 class="mt-4">Register</h1>
+			<form method="post">
+				<div class="mb-3">
+					<label for="username" class="form-label d-none d-md-block">Choose a username</label>
+					<input type="text" class="form-control" id="username" name="username" placeholder="Username" required>
+				</div>
+				<div class="mb-3">
+					<label for="password1" class="form-label d-none d-md-block">Enter a password</label>
+					<input type="password" class="form-control" id="password1" name="password1" placeholder="Enter a password" required>
+				</div>
+				<div class="mb-3">
+					<label for="password2" class="form-label d-none d-md-block">Retype your password</label>
+					<input type="password" class="form-control" id="password2" name="password2" placeholder="Retype your password" required>
+				</div>
+
+				<button type="submit" class="btn btn-primary" id="submit" value="register">Register</button>
+
+			</form>
+		</div>
+	</div>
+{% endblock %}
+{% block javascript %}
+	<script src="../assets/js/jsregisterform.js"></script>
+{% endblock %}
