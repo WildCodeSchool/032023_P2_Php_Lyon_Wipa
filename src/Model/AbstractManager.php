@@ -36,6 +36,7 @@ abstract class AbstractManager
         return $this->pdo->query($query)->fetchAll();
     }
 
+
     /**
      * Get one row from database by ID.
      */
@@ -66,5 +67,16 @@ abstract class AbstractManager
         $statement->execute();
 
         return $statement->fetch();
+    }
+
+    public function selectAllFavs(int $userId): array
+    {
+        $query = "SELECT *
+                  FROM fav_photo 
+                  INNER JOIN photo 
+                  ON fav_photo.photo_id = photo.id 
+                  WHERE fav_photo.user_id = $userId";
+
+        return $this->pdo->query($query)->fetchAll();
     }
 }

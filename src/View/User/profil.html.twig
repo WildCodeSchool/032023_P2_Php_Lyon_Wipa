@@ -3,14 +3,79 @@
 {% endblock %}
 {% block content %}
 	<div class="container d-flex justify-content-center">
-		<div class="col-12 col-md-6">
-			<a class="btn btn-primary mb-3 mt-3" href="/">Back to the index</a>
-		</div>
-		<div class="col-12 col-md-6">
+		<div class="col-12 col-md-6 mt-4">
 			{% if user %}
 				Hello
 				{{ user.username }}, you are logged in.
 			{% endif %}
 		</div>
+			<a class="btn btn-primary mb-3 mt-3" href="/">Back to the index</a>
 	</div>
+	{% if photos is defined %}
+		<div class="container d-flex">
+		<div class="col-12 col-md-6">
+			<h1 class="mt-4">Your Favorite Image</h1>
+		</div>
+	</div>
+		<div class="container text-center mt-3">
+			<div class="col-md-12">
+				<div class="row row-cols-lg-5 row-cols-md-3 row-cols-2 g-0 mh-25 mw-25">
+					{% for photo in photos %}
+						<div class="col">
+							<div class="img-container">
+								<a href="#" data-photo-id="{{photo.id}}" data-photo-url="{{photo.link}}" data-photo-prompt="{{photo.prompt}}" data-photo-title="{{photo.title}}" data-photo-description="{{photo.description}}" data-photo-date="{{photo.date}}"><img src="{{photo.link }}" alt="" class="img-fluid img-fit pop-up-image"></a>
+								{# to be displayed only if user is logged #}
+								{% if user %}
+									<form action="fav/add" method="POST">
+										<input name="addfav" type="hidden" value="{{photo.id}}">
+										<button type="submit" class="button-fav">
+												<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-heart-fill" viewbox="0 0 16 16">
+													<path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+												</svg>
+										</button>
+									</form>
+								{% endif %}
+								{# END OF to be displayed only if user is logged #}
+								<div class="img-title">{{photo.title}}</div>
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+		<div id="popup-container">
+			<div id="popup-content" class="d-flex flex-column flex-lg-row">
+				<img id="popup-image" src="" alt="" class="ms-md-5 ms-0">
+				<div id="popup-info">
+					<ul>
+						<li class="poptitle">Title :<p id="popup-title"></p>
+						</li>
+						<li>Prompt :</li>
+						<li></li>
+						<li>
+							<p id="popup-prompt"></p>
+						</li>
+						<li></li>
+						<li>Description :</li>
+						<li></li>
+						<li>
+							<p id="popup-description"></p>
+						</li>
+						<li></li>
+						<li>Added date :</li>
+						<li></li>
+						<li>
+							<p id="popup-date"></p>
+						</li>
+						<li></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	{% else %}
+		<li>Nothing to display</li>
+	{% endif %}
+{% endblock %}
+{% block javascript %}
+	<script src="assets/js/jsindex.js"></script>
 {% endblock %}
