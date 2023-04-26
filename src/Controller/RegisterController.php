@@ -35,8 +35,8 @@ class RegisterController extends AbstractController
                 $username = $data['username'];
                 $password = $data['password1'];
 
-                $addUser = new RegisterManager();
-                $addUser->insert($username, $password);
+                $registerManager = new RegisterManager();
+                $registerManager->insert($username, $password);
                 $success[] = 'Registration successfull. Please login.';
             }
             return $this->twig->render('Register/register.html.twig', ['errors' => $errors, 'success' => $success]);
