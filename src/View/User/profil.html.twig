@@ -9,7 +9,7 @@
 		{% endif %}
 	</div>
 </div>
-{% if photosUser is defined  %}
+{% if userPhotos is defined  %}
 	<div class="container d-flex">
 		<div class="col-12 col-md-6">
 			<h2 class="mt-4">Your pictures</h2>
@@ -18,19 +18,19 @@
 		<div class="container text-center mt-3">
 			<div class="col-md-12">
 				<div class="row row-cols-lg-5 row-cols-md-3 row-cols-2 g-0 mh-25 mw-25">
-					{% for photoUser in photosUser %}
+					{% for userPhoto in userPhotos %}
 						<div class="col">
 							<div class="img-container">
-								<a href="#" data-photo-id="{{photoUser.id}}" data-photo-url="{{photoUser.link}}" data-photo-prompt="{{photoUser.prompt}}" data-photo-title="{{photoUser.title}}" data-photo-description="{{photoUser.description}}" data-photo-date="{{photoUser.date}}"><img src="{{photoUser.link }}" alt="" class="img-fluid img-fit pop-up-image"></a>
+								<a href="#" data-photo-id="{{userPhoto.id}}" data-photo-url="{{userPhoto.link}}" data-photo-prompt="{{userPhoto.prompt}}" data-photo-title="{{userPhoto.title}}" data-photo-description="{{userPhoto.description}}" data-photo-date="{{userPhoto.date}}"><img src="{{userPhoto.link }}" alt="" class="img-fluid img-fit pop-up-image"></a>
 									{# to be displayed only if user have photos #}
                                     {% set isFav = 0 %}
                                     {% for favId in favIds %}
-                                        {% if photoUser.id == favId.id %}
+                                        {% if userPhoto.id == favId.id %}
                                             {% set isFav = 1 %}
                                         {% endif %}
                                     {% endfor %}
                                     <form action="fav/add" method="POST">
-                                        <input name="addfav" type="hidden" value="{{photoUser.id}}">
+                                        <input name="addfav" type="hidden" value="{{userPhoto.id}}">
                                         <button type="submit" class="button-fav">
                                             {% if isFav == 1%}
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-heart-fill" viewbox="0 0 16 16">
@@ -44,7 +44,7 @@
                                         </button>
                                     </form>
 								{# END OF to be displayed only if user have photos  #}
-								<div class="img-title">{{photoUser.title}}</div>
+								<div class="img-title">{{userPhoto.title}}</div>
 							</div>
 						</div>
 					{% endfor %}
