@@ -36,6 +36,7 @@ abstract class AbstractManager
         return $this->pdo->query($query)->fetchAll();
     }
 
+
     /**
      * Get one row from database by ID.
      */
@@ -67,8 +68,6 @@ abstract class AbstractManager
 
         return $statement->fetch();
     }
-
-     /** Select all Favorite photo from one user */
 
     public function selectAllFav(int $id): array
     {
