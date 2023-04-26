@@ -35,4 +35,19 @@ class FavManager extends AbstractManager
             $statement->execute();
         }
     }
+    public function selectUserFavs(int $userId): array
+    {
+        $query = "SELECT fav_photo.photo_id AS id
+        FROM fav_photo
+        WHERE user_id = " . $userId;
+
+        return $this->pdo->query($query)->fetchAll();
+    }
+
+    public function selectAllUserFavs(): array
+    {
+        $query = "SELECT photo_id FROM fav_photo GROUP BY photo_id ORDER BY COUNT(*) DESC";
+
+        return $this->pdo->query($query)->fetchAll();
+    }
 }
