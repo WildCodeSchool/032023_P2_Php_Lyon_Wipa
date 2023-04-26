@@ -54,6 +54,10 @@ class UserController extends AbstractController
             exit();
         }
 
-        return $this->twig->render('User/profil.html.twig');
+        $photoUser = new UserManager();
+        $photosUser = $photoUser->selectUserPicture($this->user['id']);
+
+        return $this->twig->render('User/profil.html.twig' , ['photosUser' => $photosUser]);
     }
+
 }
