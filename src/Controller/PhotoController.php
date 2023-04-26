@@ -17,8 +17,8 @@ class PhotoController extends AbstractController
         // A perfect and beautiful function that manage to put all the photos in the best index page ever.
         if ($this->user) {
             $photoFavUser = new FavManager();
-            $favId = $photoFavUser->selectUserFav($this->user['id']);
-            return $this->twig->render('Photo/index.html.twig', ['photos' => $photos, 'favIds' => $favId]);
+            $favIds = $photoFavUser->selectUserFav($this->user['id']);
+            return $this->twig->render('Photo/index.html.twig', ['photos' => $photos, 'favIds' => $favIds]);
         } else {
             shuffle($photos);
         }
