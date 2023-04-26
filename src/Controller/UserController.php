@@ -62,12 +62,12 @@ class UserController extends AbstractController
         $photoFavUser = new UserManager();
         $photos = $photoFavUser->selectAllFavs($this->user['id']);
 
-        $photoUser = new UserManager();
-        $photosUser = $photoUser->selectUserPicture($this->user['id']);
+        $userPhotos = new UserManager();
+        $userPhoto = $userPhotos->selectUserPictures($this->user['id']);
 
         return $this->twig->render('User/profil.html.twig', [
             'photos' => $photos,
-            'photosUser' => $photosUser,
+            'userPhotos' => $userPhoto,
             'favIds' => $favIds
         ]);
     }
