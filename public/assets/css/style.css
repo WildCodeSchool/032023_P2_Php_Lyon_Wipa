@@ -145,6 +145,9 @@ ul {
   gap: 10px;
 }
 
+h1 {
+  font-style: italic;
+}
 /* Font */
 
 body {

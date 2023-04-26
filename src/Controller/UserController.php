@@ -48,12 +48,15 @@ class UserController extends AbstractController
 
     public function profil()
     {
+        $photoFavUser = new UserManager();
+        $photos = $photoFavUser->selectAllFavs($this->user['id']);
+
         if (!$this->user) {
             echo 'Unauthorized access';
             header('HTTP/1.1 401 Unauthorized');
             exit();
         }
 
-        return $this->twig->render('User/profil.html.twig');
+        return $this->twig->render('User/profil.html.twig', ['photos' => $photos]);
     }
 }
