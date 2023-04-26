@@ -49,7 +49,7 @@ class UserController extends AbstractController
     public function profil()
     {
         $photoFavUser = new UserManager();
-        $photos = $photoFavUser->selectAllFav($this->user['id']);
+        $photos = $photoFavUser->selectAllFavs($this->user['id']);
 
         if (!$this->user) {
             echo 'Unauthorized access';
