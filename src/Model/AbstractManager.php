@@ -58,5 +58,4 @@ abstract class AbstractManager
         $statement->bindValue('id', $id, \PDO::PARAM_INT);
         $statement->execute();
     }
-
 }

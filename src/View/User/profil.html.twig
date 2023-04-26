@@ -2,6 +2,15 @@
 {% block title %}Wipa - Profil
 {% endblock %}
 {% block content %}
+<div class="container d-flex justify-content-start">
+	<div class="col-12 col-md-6 mt-3">
+		{% if user %}
+		<div class="fs-1 fw-bold">
+			Hello {{ user.username }} !
+		</div>
+		{% endif %}
+	</div>
+</div>
 {% if photosUser is defined  %}
 		<div class="container text-center mt-3">
 			<div class="col-md-12">
@@ -30,19 +39,17 @@
 			</div>
 		</div>
 	{% else %}
-		<li>Nothing to display</li>
-	{% endif %}
-	<div class="container d-flex justify-content-center">
-		<div class="col-12 col-md-6">
-			<a class="btn btn-primary mb-3 mt-3" href="/">Back to the index</a>
-		</div>
-		<div class="col-12 col-md-6">
-			{% if user %}
-				Hello
-				{{ user.username }}, you are logged in.
-			{% endif %}
-		</div>
+<div class="container d-flex justify-content-start">
+	<div class="fs-1 fw-bold">
+		No photo to display !
 	</div>
+</div>
+	{% endif %}
+<div class="container d-flex justify-content-start">
+	<div class="col-12 col-md-6">
+		<a class="btn btn-primary mb-3 mt-4 btn-sm" href="/">Index</a>
+	</div>
+</div>
 {% endblock %}
 {% block javascript %}
 	<script src="assets/js/jsindex.js"></script>
