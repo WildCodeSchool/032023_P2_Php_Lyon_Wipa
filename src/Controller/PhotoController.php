@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Model\PhotoManager;
+use App\Model\FavManager;
 
 class PhotoController extends AbstractController
 {
@@ -13,32 +14,16 @@ class PhotoController extends AbstractController
     {
         $photoManager = new PhotoManager();
         $photos = $photoManager->selectAll('title');
-        if ($this->user) {
         // A perfect and beautiful function that manage to put all the photos in the best index page ever.
-            return $this->twig->render('Photo/index.html.twig', ['photos' => $photos]);
+        if ($this->user) {
+            $photoFavUser = new FavManager();
+            $favId = $photoFavUser->selectUserFav($this->user['id']);
+            return $this->twig->render('Photo/index.html.twig', ['photos' => $photos, 'favIds' => $favId]);
         } else {
             shuffle($photos);
         }
         return $this->twig->render('Photo/index.html.twig', ['photos' => $photos]);
     }
-
-    public function index1(): string
-    {
-        $photoManager = new PhotoManager();
-        $photos = $photoManager->selectAll('title');
-        $favManager = new PhotoManager();
-        $isFavUser = [];
-
-        if ($this->user) {
-            $favUsers = $favManager->selectFavPhoto($this->user['id']);
-            foreach ($favUsers as $favUser) {
-                $isFavUser[$favUser['photo_id']] = $favUser['is_fav'];
-            }
-        }
-
-        return $this->twig->render('Photo/index.html.twig', ['photos' => $photos, 'isFavUser' => $isFavUser]);
-    }
-
     /**
      * Show informations for a specific photo
      */
