@@ -12,11 +12,11 @@ class FavController extends AbstractController
             $data = array_map('trim', $_POST);
             if (isset($data['addfav']) && !empty($data['addfav'])) {
                 $idfav = (int)$data['addfav'];
-                $userId = $_SESSION['id'];
+                $userId = $this->user['id'];
                 $favManager = new FavManager();
                 $favManager->insertfav($idfav, $userId);
             }
         }
-        header('Location: /');
+        header("Location: " . $_SERVER['HTTP_REFERER']);
     }
 }

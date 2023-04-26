@@ -36,6 +36,7 @@ abstract class AbstractManager
         return $this->pdo->query($query)->fetchAll();
     }
 
+
     /**
      * Get one row from database by ID.
      */
