@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Model\UserManager;
+use App\Model\FavManager;
 
 class UserController extends AbstractController
 {
@@ -48,8 +49,6 @@ class UserController extends AbstractController
 
     public function profil()
     {
-        $photoFavUser = new UserManager();
-        $photos = $photoFavUser->selectAllFavs($this->user['id']);
 
         if (!$this->user) {
             echo 'Unauthorized access';
@@ -57,6 +56,17 @@ class UserController extends AbstractController
             exit();
         }
 
-        return $this->twig->render('User/profil.html.twig', ['photos' => $photos]);
+        $favManager = new FavManager();
+        $favIds = $favManager->selectUserFavs($this->user['id']);
+
+        $userManager = new UserManager();
+        $photos = $userManager->selectAllFavs($this->user['id']);
+        $userPhotos = $userManager->selectUserPictures($this->user['id']);
+
+        return $this->twig->render('User/profil.html.twig', [
+            'photos' => $photos,
+            'userPhotos' => $userPhotos,
+            'favIds' => $favIds
+        ]);
     }
 }
