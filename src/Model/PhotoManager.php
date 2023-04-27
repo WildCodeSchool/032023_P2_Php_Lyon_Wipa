@@ -12,14 +12,14 @@ class PhotoManager extends AbstractManager
     /**
      * Insert new photo in database
      */
-    public function insert(array $item, int $id): void
+    public function insert(array $item, int $photoId): void
     {
         // get current time
-        $atz = 'Europe/Paris';
+        $actualTimeZone = 'Europe/Paris';
         $timestamp = time();
-        $adt = new DateTime("now", new DateTimeZone($atz)); //first argument "must" be a string
-        $adt->setTimestamp($timestamp); //adjust the object to correct timestamp
-        $formatedDate = $adt->format('Y-m-d H:i:s');
+        $actualDateTime = new DateTime("now", new DateTimeZone($actualTimeZone)); //first argument "must" be a string
+        $actualDateTime->setTimestamp($timestamp); //adjust the object to correct timestamp
+        $formatedDate = $actualDateTime->format('Y-m-d H:i:s');
         // PDO statements
         $dbFields = '(`title`, `link`, `prompt`, `description`, `date`, `user_id`)';
         $placeholderFields = '(:title, :link, :prompt, :description, :date, :user_id)';
@@ -29,7 +29,7 @@ class PhotoManager extends AbstractManager
         $statement->bindValue('prompt', $item['prompt'], PDO::PARAM_STR);
         $statement->bindValue('description', $item['description'], PDO::PARAM_STR);
         $statement->bindValue('date', $formatedDate, PDO::PARAM_STR);
-        $statement->bindValue('user_id', $id, PDO::PARAM_INT);
+        $statement->bindValue('user_id', $photoId, PDO::PARAM_INT);
         $statement->execute();
     }
     /**
@@ -49,8 +49,8 @@ class PhotoManager extends AbstractManager
                   FROM photo p
                   LEFT JOIN fav_photo f ON p.id = f.photo_id AND f.user_id = :id
                   GROUP BY p.id';
-        $stmt = $this->pdo->prepare($query);
-        $stmt->execute(['id' => $userId]);
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $statement = $this->pdo->prepare($query);
+        $statement->execute(['id' => $userId]);
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 }
