@@ -145,7 +145,7 @@ ul {
   gap: 10px;
 }
 
-h1 {
+h1, h2 {
   font-style: italic;
 }
 /* Font */

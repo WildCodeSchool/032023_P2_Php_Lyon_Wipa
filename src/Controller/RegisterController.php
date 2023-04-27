@@ -35,8 +35,8 @@ class RegisterController extends AbstractController
                 $username = $data['username'];
                 $password = $data['password1'];
 
-                $addUser = new RegisterManager();
-                $addUser->insert($username, $password);
+                $registerManager = new RegisterManager();
+                $registerManager->insert($username, $password);
                 $success[] = 'Registration successfull. Please login.';
             }
             return $this->twig->render('Register/register.html.twig', ['errors' => $errors, 'success' => $success]);
@@ -46,7 +46,7 @@ class RegisterController extends AbstractController
 
     public function validatePassword(string $password1 = null, string $password2 = null, array &$errors): void
     {
-        // is there a photo ?
+        // Compare password1 and password2
         if (!isset($password1) || empty($password1)) {
             $errors[] = 'Please fill in password field.';
         }
