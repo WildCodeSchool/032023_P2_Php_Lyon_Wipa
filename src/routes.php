@@ -10,12 +10,14 @@ return [
     '' => ['PhotoController', 'index',],
     'photos/add' => ['PhotoController', 'add',],
     'photos' => ['PhotoController', 'index',],
-    'photos/edit' => ['PhotoController', 'edit', ['id']],
+    'photo/edit' => ['PhotoController', 'edit', ['id']],
+    'photo/delete' => ['PhotoController', 'delete',],
+
     'photos/show' => ['PhotoController', 'show', ['id']],
-    'photos/delete' => ['PhotoController', 'delete',],
+
     'register' => ['RegisterController', 'register',],
     'login'  => ['UserController', 'login',],
     'logout'  => ['UserController', 'logout',],
     'user'  => ['UserController', 'profil',],
-    'fav/add' => ['FavController', 'addFav', ],
+    'fav/add' => ['FavController', 'addFav',],
 ];
