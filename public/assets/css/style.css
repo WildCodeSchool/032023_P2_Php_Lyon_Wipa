@@ -98,7 +98,7 @@ ul {
 }
 
 .button-delete {
-  color: black;
+  color: var(--light-color);
   max-width: 100%;
   border: none;
   background: none;
