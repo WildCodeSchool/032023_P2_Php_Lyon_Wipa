@@ -73,6 +73,6 @@ document.getElementById('popup-date-edit').textContent = photoDate;
 
 document.getElementById('popup-container-edit').style.display = 'block';
 });
-document.getElementById('popup-container-edit').addEventListener('click', function () { 
-this.style.display = 'none';
+document.getElementById('popup-close-btn').addEventListener('click', function() {
+    document.getElementById('popup-container-edit').style.display = 'none';
 })};

@@ -168,6 +168,15 @@ ul {
   gap: 10px;
 }
 
+#popup-close-btn {
+  font-family: var(--content-font);
+  font-size: 18px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--light-color);
+}
+
 h1, h2 {
   font-style: italic;
 }
