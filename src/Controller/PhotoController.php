@@ -38,14 +38,14 @@ class PhotoController extends AbstractController
     /**
      * Edit a specific photo
      */
-    public function edit(int $photoId): ?string
+    public function edit(): ?string
     {
-        $photoManager = new PhotoManager();
-        $photo = $photoManager->selectOneById($photoId);
+        // allowed only for users
+        if (!$this->user) {
+            header('Location: /');
+            exit();
+        }
 
-
-        // a verifier //
-        //            //
         $errors = [];
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $photo = array_map('trim', $_POST);
@@ -59,6 +59,11 @@ class PhotoController extends AbstractController
             if (!isset($photo['description']) || empty($photo['description'])) {
                 $errors[] = 'You must write a comment';
             }
+
+            // if (!isset($photo['id']) || empty($photo['id'])) {
+            //     header('Location: /user');
+            //     exit();
+            // }
             // if validated, photo is stored in database
             if (empty($errors)) {
                 $photoManager = new PhotoManager();
@@ -77,6 +82,12 @@ class PhotoController extends AbstractController
      */
     public function add(): ?string
     {
+        // allowed only for users
+        if (!$this->user) {
+            header('Location: /');
+            exit();
+        }
+
         $errors = [];
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $photo = array_map('trim', $_POST);
@@ -129,6 +140,12 @@ class PhotoController extends AbstractController
      */
     public function delete(): void
     {
+        // allowed only for users
+        if (!$this->user) {
+            header('Location: /');
+            exit();
+        }
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $photoId = trim($_POST['id']);
             $photoManager = new PhotoManager();

@@ -126,28 +126,32 @@
 				</div>
 			</div>
 		</div>
-		{# display popup for edit #}
+		{# display popup for edit or delete#}
 		<div id="popup-container-edit">
 			<div id="popup-content" class="d-flex flex-column flex-lg-row">
 				<img id="popup-image-edit" src="" alt="" class="ms-md-5 ms-0">
 				<div id="popup-info">
 					<ul>
-						<li class="poptitle">Title :<p id="popup-title-edit"></p>
-						</li>
-						<li>Prompt :</li>
-						<li>
-							<p id="popup-prompt-edit"></p>
-						</li>
-						<li>Description :</li>
-						<li>
-							<p id="popup-description-edit"></p>
-						</li>
-						<li>Added date :</li>
-						<li class="d-flex justify-content-between">
-							<p id="popup-date-edit"></p>
-							{# save button #}
-							<div class="d-flex justify-content-end">
-								<form method="post" action="photo/edit">
+						<form method="post" action="photo/edit">
+							<li class="poptitle">Title :<p>
+									<input type="text" class="form-control" id="popup-title-edit" value="" name="title"></p>
+							</li>
+							<li>Prompt :</li>
+							<li>
+								<p><input type="text" class="form-control" id="popup-prompt-edit" value="" name="prompt">
+								</p>
+							</li>
+							<li>Description :</li>
+							<li>
+								<p><input type="text" class="form-control" id="popup-description-edit" name="description">
+								</p>
+							</li>
+							<li>Added date :</li>
+							<li class="d-flex justify-content-between">
+								<p id="popup-date-edit"></p>
+								{# save button #}
+								<div class="d-flex justify-content-end">
+
 									<input type="hidden" value="" name="id" id="photoIdEdit">
 									<button type="submit" class="button-save">
 										<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-cloud-arrow-up-fill" viewbox="0 0 16 16">
@@ -165,23 +169,19 @@
 										</svg>
 									</button>
 								</form>
-							</div>
-						</li>
+							</li>
+						</div>
 					</li>
-				</ul>
-			</div>
+				</li>
+			</ul>
 		</div>
 	</div>
-{% else %}
-	<div class="container d-flex justify-content-start">
-		<h2>
-			No Favorite to display !
-		</h2>
-	</div>
-{% endif %}
+</div>{% else %}
 <div class="container d-flex justify-content-start">
-	<div class="col-12 col-md-6">
-		<a class="btn btn-primary mb-3 mt-4 btn-sm" href="/">Index</a>
-	</div>
-</div>{% endblock %}{% block javascript %}
-<script src="assets/js/jsindex.js"></script>{% endblock %}
+	<h2>
+		No Favorite to display !
+	</h2>
+</div>{% endif %}<div class="container d-flex justify-content-start">
+<div class="col-12 col-md-6">
+	<a class="btn btn-primary mb-3 mt-4 btn-sm" href="/">Index</a>
+</div></div>{% endblock %}{% block javascript %}<script src="assets/js/jsindex.js"></script>{% endblock %}
