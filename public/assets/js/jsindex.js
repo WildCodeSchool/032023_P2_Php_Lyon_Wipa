@@ -65,6 +65,7 @@ let photoPrompt = this.parentNode.dataset.photoPrompt;
 let photoDescription = this.parentNode.dataset.photoDescription;
 let photoDate = this.parentNode.dataset.photoDate;
 
+
 document.getElementById('popup-image-edit').setAttribute('src', photoUrl);
 document.getElementById('popup-title-edit').textContent = photoTitle;
 document.getElementById('popup-prompt-edit').textContent = photoPrompt;
