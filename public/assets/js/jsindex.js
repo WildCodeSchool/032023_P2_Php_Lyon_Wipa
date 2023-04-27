@@ -67,6 +67,7 @@ for (let i = 0; i < thumbnailEdits.length; i++) {
         let photoDate = this.parentNode.dataset.photoDate;
         let photoId = this.parentNode.dataset.photoId;
 
+
         document.getElementById('popup-image-edit').setAttribute('src', photoUrl);
         document.getElementById('popup-title-edit').value = photoTitle;
         document.getElementById('popup-prompt-edit').value = photoPrompt;
@@ -77,7 +78,9 @@ for (let i = 0; i < thumbnailEdits.length; i++) {
 
         document.getElementById('popup-container-edit').style.display = 'block';
     });
-    document.getElementById('popup-container-edit').addEventListener('click', function () {
-        this.style.display = 'none';
+    document.getElementById('popup-close-btn').addEventListener('click', function () {
+        document.getElementById('popup-container-edit').style.display = 'none';
     })
 };
+
+

@@ -10,6 +10,30 @@
   --content-font: "Nunito", sans-serif;
 }
 
+/* General Design */
+
+.ligne {
+  animation-duration: 5s;
+  animation-name: glissement;
+  animation-iteration-count: reverse;
+  width: 25vw;
+  height: 2px;
+  background-color: black;
+}
+
+@keyframes glissement {
+  from {
+
+    width: 0%;
+  }
+
+  to {
+
+    width: 25vw;
+  }
+}
+
+
 /* Nav Bar */
 a.nav-link {
   font-family: var(--content-font);
@@ -171,6 +195,15 @@ ul {
   display: flex;
   align-items: baseline;
   gap: 10px;
+}
+
+#popup-close-btn {
+  font-family: var(--content-font);
+  font-size: 18px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--light-color);
 }
 
 h1,
