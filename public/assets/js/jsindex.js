@@ -65,14 +65,14 @@ let photoPrompt = this.parentNode.dataset.photoPrompt;
 let photoDescription = this.parentNode.dataset.photoDescription;
 let photoDate = this.parentNode.dataset.photoDate;
 
-document.getElementById('popup-image').setAttribute('src', photoUrl);
-document.getElementById('popup-title').textContent = photoTitle;
-document.getElementById('popup-prompt').textContent = photoPrompt;
-document.getElementById('popup-description').textContent = photoDescription;
-document.getElementById('popup-date').textContent = photoDate;
+document.getElementById('popup-image-edit').setAttribute('src', photoUrl);
+document.getElementById('popup-title-edit').textContent = photoTitle;
+document.getElementById('popup-prompt-edit').textContent = photoPrompt;
+document.getElementById('popup-description-edit').textContent = photoDescription;
+document.getElementById('popup-date-edit').textContent = photoDate;
 
-document.getElementById('popup-container').style.display = 'block';
+document.getElementById('popup-container-edit').style.display = 'block';
 });
-document.getElementById('popup-container').addEventListener('click', function () { 
+document.getElementById('popup-container-edit').addEventListener('click', function () { 
 this.style.display = 'none';
 })};
