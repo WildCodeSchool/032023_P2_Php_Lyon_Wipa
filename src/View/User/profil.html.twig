@@ -13,8 +13,9 @@
 	</div>
 	{% if userPhotos %}
 		<div class="container d-flex">
-			<div class="col-12 col-md-6">
+			<div class="d-flex flex-column">
 				<h2 class="mt-4">Your pictures</h2>
+				<div class="ligne mt-1"></div>
 			</div>
 		</div>
 		<div class="container text-center mt-3">
@@ -71,8 +72,9 @@
 
 	{% if photos %}
 		<div class="container d-flex">
-			<div class="col-12 col-md-6">
-				<h2 class="mt-4">Your favorite pictures</h2>
+			<div class="d-flex flex-column">
+				<h2 class="mt-4">Your Favorites pictures</h2>
+				<div class="ligne mt-1"></div>
 			</div>
 		</div>
 		<div class="container text-center mt-3">
@@ -135,6 +137,7 @@
 						<form method="post" action="photo/edit">
 							<li class="poptitle">Title :<p>
 									<input type="text" class="form-control" id="popup-title-edit" value="" name="title"></p>
+								<button class="ms-auto" id="popup-close-btn">X</button>
 							</li>
 							<li>Prompt :</li>
 							<li>

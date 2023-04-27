@@ -35,15 +35,17 @@ class PhotoManager extends AbstractManager
     /**
      * Update a photo in database
      */
-    public function update(array $item, int $userId): bool
+    public function update(array $item): bool
     {
-        $dbFields = '(`title`, `prompt`, `description`)';
-        $placeholderFields = '(:title, :prompt, :description)';
-        $statement = $this->pdo->prepare("UPDATE " . self::TABLE . " SET " .
-            $dbFields . " = " . $placeholderFields . "  WHERE user_id = " . $userId);
+        $statement = $this->pdo->prepare("UPDATE " . self::TABLE . " SET 
+        `title`=:title,
+        `prompt`=:prompt,
+        `description`=:description
+         WHERE id=:id");
         $statement->bindValue('title', $item['title'], PDO::PARAM_STR);
         $statement->bindValue('prompt', $item['prompt'], PDO::PARAM_STR);
         $statement->bindValue('description', $item['description'], PDO::PARAM_STR);
+        $statement->bindValue('id', $item['id'], PDO::PARAM_INT);
         return $statement->execute();
     }
     /**

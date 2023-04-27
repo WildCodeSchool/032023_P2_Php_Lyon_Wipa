@@ -59,15 +59,10 @@ class PhotoController extends AbstractController
             if (!isset($photo['description']) || empty($photo['description'])) {
                 $errors[] = 'You must write a comment';
             }
-
-            // if (!isset($photo['id']) || empty($photo['id'])) {
-            //     header('Location: /user');
-            //     exit();
-            // }
             // if validated, photo is stored in database
             if (empty($errors)) {
                 $photoManager = new PhotoManager();
-                $photoManager->update($photo, $this->user['id']);
+                $photoManager->update($photo);
 
                 header('Location: /user');
                 die();
