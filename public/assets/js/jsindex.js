@@ -48,3 +48,31 @@ document.getElementById('popup-container').style.display = 'block';
 document.getElementById('popup-container').addEventListener('click', function () { 
 this.style.display = 'none';
 })};
+
+// Get a pop-up on click on the edit button with all informations
+
+let thumbnailEdits = document.querySelectorAll('.edit-button');
+
+for (let i = 0; i < thumbnailEdits.length; i++) {
+let thumbnailEdit = thumbnailEdits[i];
+
+thumbnailEdit.addEventListener('click', function (event) {
+event.preventDefault();
+
+let photoUrl = this.parentNode.dataset.photoUrl;
+let photoTitle = this.parentNode.dataset.photoTitle;
+let photoPrompt = this.parentNode.dataset.photoPrompt;
+let photoDescription = this.parentNode.dataset.photoDescription;
+let photoDate = this.parentNode.dataset.photoDate;
+
+document.getElementById('popup-image').setAttribute('src', photoUrl);
+document.getElementById('popup-title').textContent = photoTitle;
+document.getElementById('popup-prompt').textContent = photoPrompt;
+document.getElementById('popup-description').textContent = photoDescription;
+document.getElementById('popup-date').textContent = photoDate;
+
+document.getElementById('popup-container').style.display = 'block';
+});
+document.getElementById('popup-container').addEventListener('click', function () { 
+this.style.display = 'none';
+})};
