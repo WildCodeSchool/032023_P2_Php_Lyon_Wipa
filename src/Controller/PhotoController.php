@@ -121,9 +121,9 @@ class PhotoController extends AbstractController
     public function delete(): void
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $id = trim($_POST['id']);
+            $photoId = trim($_POST['id']);
             $photoManager = new PhotoManager();
-            $photoManager->delete((int)$id);
+            $photoManager->delete((int)$photoId);
 
             header('Location:/photos');
         }

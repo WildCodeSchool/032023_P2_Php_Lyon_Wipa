@@ -46,7 +46,7 @@ class RegisterController extends AbstractController
 
     public function validatePassword(string $password1 = null, string $password2 = null, array &$errors): void
     {
-        // is there a photo ?
+        // Compare password1 and password2
         if (!isset($password1) || empty($password1)) {
             $errors[] = 'Please fill in password field.';
         }
