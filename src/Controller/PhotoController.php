@@ -38,29 +38,38 @@ class PhotoController extends AbstractController
     /**
      * Edit a specific photo
      */
-    public function edit(int $id): ?string
+    public function edit(int $photoId): ?string
     {
         $photoManager = new PhotoManager();
-        $photo = $photoManager->selectOneById($id);
+        $photo = $photoManager->selectOneById($photoId);
 
+
+        // a verifier //
+        //            //
+        $errors = [];
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // clean $_POST data
             $photo = array_map('trim', $_POST);
+            // is there a title text ?
+            $this->validateTitle($photo, $errors);
+            // is there a prompt text ?
+            if (!isset($photo['prompt']) || empty($photo['prompt'])) {
+                $errors[] = 'You must write a prompt';
+            }
+            // is there a description text ?
+            if (!isset($photo['description']) || empty($photo['description'])) {
+                $errors[] = 'You must write a comment';
+            }
+            // if validated, photo is stored in database
+            if (empty($errors)) {
+                $photoManager = new PhotoManager();
+                $photoManager->update($photo, $this->user['id']);
 
-            // TODO validations (length, format...)
-
-            // if validation is ok, update and redirection
-            $photoManager->update($photo);
-
-            header('Location: /photos/show?id=' . $id);
-
-            // we are redirecting so we don't want any content rendered
-            return null;
+                header('Location: /user');
+                die();
+            }
         }
 
-        return $this->twig->render('Photo/edit.html.twig', [
-            'photo' => $photo,
-        ]);
+        return $this->twig->render('User/profil.html.twig');
     }
 
     /**
@@ -125,7 +134,7 @@ class PhotoController extends AbstractController
             $photoManager = new PhotoManager();
             $photoManager->delete((int)$photoId);
 
-            header('Location:/photos');
+            header('Location: /user');
         }
     }
 }
