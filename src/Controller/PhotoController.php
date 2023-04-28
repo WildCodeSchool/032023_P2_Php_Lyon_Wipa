@@ -38,29 +38,38 @@ class PhotoController extends AbstractController
     /**
      * Edit a specific photo
      */
-    public function edit(int $id): ?string
+    public function edit(): ?string
     {
-        $photoManager = new PhotoManager();
-        $photo = $photoManager->selectOneById($id);
-
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // clean $_POST data
-            $photo = array_map('trim', $_POST);
-
-            // TODO validations (length, format...)
-
-            // if validation is ok, update and redirection
-            $photoManager->update($photo);
-
-            header('Location: /photos/show?id=' . $id);
-
-            // we are redirecting so we don't want any content rendered
-            return null;
+        // allowed only for users
+        if (!$this->user) {
+            header('Location: /');
+            exit();
         }
 
-        return $this->twig->render('Photo/edit.html.twig', [
-            'photo' => $photo,
-        ]);
+        $errors = [];
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $photo = array_map('trim', $_POST);
+            // is there a title text ?
+            $this->validateTitle($photo, $errors);
+            // is there a prompt text ?
+            if (!isset($photo['prompt']) || empty($photo['prompt'])) {
+                $errors[] = 'You must write a prompt';
+            }
+            // is there a description text ?
+            if (!isset($photo['description']) || empty($photo['description'])) {
+                $errors[] = 'You must write a comment';
+            }
+            // if validated, photo is stored in database
+            if (empty($errors)) {
+                $photoManager = new PhotoManager();
+                $photoManager->update($photo);
+
+                header('Location: /user');
+                die();
+            }
+        }
+
+        return $this->twig->render('User/profil.html.twig');
     }
 
     /**
@@ -68,6 +77,12 @@ class PhotoController extends AbstractController
      */
     public function add(): ?string
     {
+        // allowed only for users
+        if (!$this->user) {
+            header('Location: /');
+            exit();
+        }
+
         $errors = [];
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $photo = array_map('trim', $_POST);
@@ -120,12 +135,18 @@ class PhotoController extends AbstractController
      */
     public function delete(): void
     {
+        // allowed only for users
+        if (!$this->user) {
+            header('Location: /');
+            exit();
+        }
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $photoId = trim($_POST['id']);
             $photoManager = new PhotoManager();
             $photoManager->delete((int)$photoId);
 
-            header('Location:/photos');
+            header('Location: /user');
         }
     }
 }
