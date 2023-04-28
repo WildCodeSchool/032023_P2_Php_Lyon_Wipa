@@ -12,7 +12,7 @@
 
 /* General Design */
 
-.ligne {
+.line {
   animation-duration: 5s;
   animation-name: sliding;
   animation-iteration-count: reverse;
