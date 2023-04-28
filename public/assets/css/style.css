@@ -14,14 +14,14 @@
 
 .ligne {
   animation-duration: 5s;
-  animation-name: glissement;
+  animation-name: sliding;
   animation-iteration-count: reverse;
   width: 25vw;
   height: 2px;
   background-color: black;
 }
 
-@keyframes glissement {
+@keyframes sliding {
   from {
 
     width: 0%;
