@@ -10,6 +10,30 @@
   --content-font: "Nunito", sans-serif;
 }
 
+/* General Design */
+
+.line {
+  animation-duration: 5s;
+  animation-name: sliding;
+  animation-iteration-count: reverse;
+  width: 25vw;
+  height: 2px;
+  background-color: black;
+}
+
+@keyframes sliding {
+  from {
+
+    width: 0%;
+  }
+
+  to {
+
+    width: 25vw;
+  }
+}
+
+
 /* Nav Bar */
 a.nav-link {
   font-family: var(--content-font);
@@ -84,11 +108,37 @@ ul {
   transition: opacity 0.2s ease-in-out;
 }
 
+.edit-button {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 10px;
+  color: var(--light-color);
+  opacity: 0;
+  max-width: 100%;
+  border: none;
+  background: none;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.button-delete,
+.button-save {
+  color: var(--light-color);
+  max-width: 100%;
+  border: none;
+  background: none;
+}
+
+
 .img-container:hover .button-fav {
   opacity: 0.8;
 }
 
 .img-container:hover .img-title {
+  opacity: 0.8;
+}
+
+.img-container:hover .edit-button {
   opacity: 0.8;
 }
 
@@ -99,7 +149,8 @@ ul {
 }
 
 /* Pop-Up Index */
-#popup-container {
+#popup-container,
+#popup-container-edit {
   display: none;
   position: fixed;
   top: 0;
@@ -118,7 +169,8 @@ ul {
   margin-top: 5%;
 }
 
-#popup-image {
+#popup-image,
+#popup-image-edit {
   max-width: 60%;
   max-height: 60%;
   border-radius: 20px;
@@ -145,9 +197,20 @@ ul {
   gap: 10px;
 }
 
-h1, h2 {
+#popup-close-btn {
+  font-family: var(--content-font);
+  font-size: 18px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--light-color);
+}
+
+h1,
+h2 {
   font-style: italic;
 }
+
 /* Font */
 
 body {

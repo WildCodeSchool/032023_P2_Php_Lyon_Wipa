@@ -33,16 +33,24 @@ class PhotoManager extends AbstractManager
         $statement->execute();
     }
     /**
-     * Update item in database
+     * Update a photo in database
      */
     public function update(array $item): bool
     {
-        $statement = $this->pdo->prepare("UPDATE " . self::TABLE . " SET `title` = :title WHERE id=:id");
-        $statement->bindValue('id', $item['id'], PDO::PARAM_INT);
+        $statement = $this->pdo->prepare("UPDATE " . self::TABLE . " SET 
+        `title`=:title,
+        `prompt`=:prompt,
+        `description`=:description
+         WHERE id=:id");
         $statement->bindValue('title', $item['title'], PDO::PARAM_STR);
+        $statement->bindValue('prompt', $item['prompt'], PDO::PARAM_STR);
+        $statement->bindValue('description', $item['description'], PDO::PARAM_STR);
+        $statement->bindValue('id', $item['id'], PDO::PARAM_INT);
         return $statement->execute();
     }
-
+    /**
+     * select ALL favorites from ALL users and filter by desc likes
+     */
     public function selectFavPhotos(int $userId): array
     {
         $query = 'SELECT f.photo_id, (COUNT(f.id) > 0) AS is_fav

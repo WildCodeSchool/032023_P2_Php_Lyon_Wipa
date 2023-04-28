@@ -51,8 +51,7 @@ class UserController extends AbstractController
     {
 
         if (!$this->user) {
-            echo 'Unauthorized access';
-            header('HTTP/1.1 401 Unauthorized');
+            header('Location: /');
             exit();
         }
 
