@@ -61,4 +61,15 @@ class PhotoManager extends AbstractManager
         $statement->execute(['id' => $userId]);
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function selectAllWithUsername(): array
+    {
+        $query = 'SELECT p.*, u.username
+                  FROM photo p
+                  JOIN user u ON p.user_id = u.id
+                  ORDER BY p.id DESC';
+        $statement = $this->pdo->prepare($query);
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

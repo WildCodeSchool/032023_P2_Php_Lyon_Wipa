@@ -36,12 +36,15 @@ for (let i = 0; i < thumbnailImages.length; i++) {
         let photoPrompt = this.parentNode.dataset.photoPrompt;
         let photoDescription = this.parentNode.dataset.photoDescription;
         let photoDate = this.parentNode.dataset.photoDate;
+        let username = this.parentNode.dataset.username;
 
         document.getElementById('popup-image').setAttribute('src', photoUrl);
         document.getElementById('popup-title').textContent = photoTitle;
         document.getElementById('popup-prompt').textContent = photoPrompt;
         document.getElementById('popup-description').textContent = photoDescription;
         document.getElementById('popup-date').textContent = photoDate;
+        document.getElementById('popup-username').textContent = username;
+
 
         document.getElementById('popup-container').style.display = 'block';
     });

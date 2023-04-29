@@ -9,7 +9,7 @@
 					{% for photo in photos %}
 						<div class="col">
 							<div class="img-container">
-								<a href="#" data-photo-id="{{photo.id}}" data-photo-url="{{photo.link}}" data-photo-prompt="{{photo.prompt}}" data-photo-title="{{photo.title}}" data-photo-description="{{photo.description}}" data-photo-date="{{photo.date}}"><img src="{{photo.link }}" alt="" class="img-fluid img-fit pop-up-image"></a>
+								<a href="#" data-photo-id="{{photo.id}}" data-photo-url="{{photo.link}}" data-photo-prompt="{{photo.prompt}}" data-photo-title="{{photo.title}}" data-photo-description="{{photo.description}}" data-photo-date="{{photo.date}}" data-username="{{ photo.username }}"><img src="{{photo.link }}" alt="" class="img-fluid img-fit pop-up-image"></a>
 								{# to be displayed only if user is logged #}
 								{% if user %}
 									{% set isFav = 0 %}
@@ -65,7 +65,10 @@
 						<li>
 							<p id="popup-date"></p>
 						</li>
-						<li></li>
+						<li>By :</li>
+						<li>
+						<p id="popup-username"></p>
+						</li>
 					</ul>
 				</div>
 			</div>
