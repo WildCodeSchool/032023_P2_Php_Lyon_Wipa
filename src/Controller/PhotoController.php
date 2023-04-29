@@ -13,7 +13,7 @@ class PhotoController extends AbstractController
     public function index(): string
     {
         $photoManager = new PhotoManager();
-        $photos = $photoManager->selectAll('title');
+        $photos = $photoManager->selectAllWithUsername();
         // A perfect and beautiful function that manage to put all the photos in the best index page ever.
         if ($this->user) {
             $favManager = new FavManager();
