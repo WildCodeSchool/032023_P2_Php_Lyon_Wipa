@@ -122,7 +122,8 @@ ul {
 }
 
 .button-delete,
-.button-save {
+.button-save,
+.button-follow {
   color: var(--light-color);
   max-width: 100%;
   border: none;
@@ -197,7 +198,8 @@ ul {
   gap: 10px;
 }
 
-#popup-close-btn {
+#popup-close-btn,
+#popup-close-edit-btn {
   font-family: var(--content-font);
   font-size: 18px;
   background-color: transparent;

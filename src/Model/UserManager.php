@@ -8,7 +8,7 @@ class UserManager extends AbstractManager
 
     public function selectUserByName(string $username): array|false
     {
-        $statement = $this->pdo->prepare("SELECT * FROM user WHERE username = :username");
+        $statement = $this->pdo->prepare("SELECT * FROM "  . self::TABLE . " WHERE username = :username");
         $statement->bindValue(':username', $username, \PDO::PARAM_STR);
         $statement->execute();
 

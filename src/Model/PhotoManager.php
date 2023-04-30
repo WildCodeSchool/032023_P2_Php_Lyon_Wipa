@@ -54,7 +54,7 @@ class PhotoManager extends AbstractManager
     public function selectFavPhotos(int $userId): array
     {
         $query = 'SELECT f.photo_id, (COUNT(f.id) > 0) AS is_fav
-                  FROM photo p
+                  FROM ' . self::TABLE . ' p
                   LEFT JOIN fav_photo f ON p.id = f.photo_id AND f.user_id = :id
                   GROUP BY p.id';
         $statement = $this->pdo->prepare($query);
@@ -75,7 +75,7 @@ class PhotoManager extends AbstractManager
         photo.date, 
         photo.user_id, 
         user.username as username
-        FROM photo
+        FROM ' . self::TABLE . ' 
         JOIN user ON photo.user_id = user.id';
         if ($orderBy) {
             $query .= ' ORDER BY ' . $orderBy . ' ' . $direction;
