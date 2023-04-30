@@ -19,6 +19,6 @@ return [
     'login'  => ['UserController', 'login',],
     'logout'  => ['UserController', 'logout',],
     'user'  => ['UserController', 'profil',],
-    'user/follow'  => ['UserController', 'follow',],
-    'fav/add' => ['FavController', 'addFav',],
+    'user/follow'  => ['FollowController', 'toggleFollow',],
+    'fav/add' => ['FavController', 'toggleFav',],
 ];

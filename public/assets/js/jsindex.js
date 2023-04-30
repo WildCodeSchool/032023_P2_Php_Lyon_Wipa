@@ -47,7 +47,7 @@ for (let i = 0; i < thumbnailImages.length; i++) {
         document.getElementById('popup-date').textContent = photoDate;
         if (typeof photoUser !== 'undefined') {
             document.getElementById('popup-username').textContent = photoUser;
-            document.getElementById('popup-user-id').textContent = photoUserId;
+            document.getElementById('popup-user-id').value = photoUserId;
         }
 
 
