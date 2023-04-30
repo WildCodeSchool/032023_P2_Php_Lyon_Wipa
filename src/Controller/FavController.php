@@ -14,7 +14,7 @@ class FavController extends AbstractController
                 $idfav = (int)$data['addfav'];
                 $userId = $this->user['id'];
                 $favManager = new FavManager();
-                $favManager->insertfav($idfav, $userId);
+                $favManager->insertFav($idfav, $userId);
             }
         }
         header("Location: " . $_SERVER['HTTP_REFERER']);

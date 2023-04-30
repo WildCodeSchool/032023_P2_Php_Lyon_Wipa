@@ -4,50 +4,35 @@ namespace App\Model;
 
 use PDO;
 
-class FavManager extends AbstractManager
+class FollowManager extends AbstractManager
 {
-    public const TABLE = 'fav_photo';
+    public const TABLE = 'follower_followed';
 
-    public function insertFav(int $idfav, int $userId): void
+    public function insertFollowed(int $idfav, int $userId): void
     {
         $dbFields = '(`photo_id`,`user_id`)';
         $placeholderFields = '(:photo_id, :user_id)';
         $whereFields = " WHERE photo_id=:photo_id AND user_id=:user_id";
 
-        // request to test if a photo is already a fav
+        // request to test if a user is already followed
         $statement = $this->pdo->prepare("SELECT * FROM " . self::TABLE . $whereFields);
         $statement->bindValue('photo_id', $idfav, PDO::PARAM_INT);
         $statement->bindValue('user_id', $userId, PDO::PARAM_INT);
         $statement->execute();
         $isFav = $statement->fetch();
-        // if photo is not already a favorite => add it as favorite
+        // if user is not already a followed => follow him
         if (!$isFav) {
             $statement = $this->pdo->prepare("INSERT INTO " . self::TABLE . " $dbFields VALUES $placeholderFields");
             $statement->bindValue('photo_id', $idfav, PDO::PARAM_INT);
             $statement->bindValue('user_id', $userId, PDO::PARAM_INT);
             $statement->execute();
         }
-        // if photo is a favorite => delete from favorites
+        // if user is followed => delete following
         if ($isFav) {
             $statement = $this->pdo->prepare("DELETE FROM " . self::TABLE . $whereFields);
             $statement->bindValue('photo_id', $idfav, PDO::PARAM_INT);
             $statement->bindValue('user_id', $userId, PDO::PARAM_INT);
             $statement->execute();
         }
-    }
-    public function selectUserFavs(int $userId): array
-    {
-        $query = "SELECT fav_photo.photo_id AS id
-        FROM " . self::TABLE . "
-        WHERE user_id = " . $userId;
-
-        return $this->pdo->query($query)->fetchAll();
-    }
-
-    public function selectAllUserFavs(): array
-    {
-        $query = "SELECT photo_id FROM " . self::TABLE . " GROUP BY photo_id ORDER BY COUNT(*) DESC";
-
-        return $this->pdo->query($query)->fetchAll();
     }
 }
