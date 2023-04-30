@@ -27,6 +27,7 @@ let thumbnailImages = document.querySelectorAll('.pop-up-image');
 
 for (let i = 0; i < thumbnailImages.length; i++) {
     let thumbnailImage = thumbnailImages[i];
+    console.log(thumbnailImage);
 
     thumbnailImage.addEventListener('click', function (event) {
         event.preventDefault();
@@ -36,14 +37,17 @@ for (let i = 0; i < thumbnailImages.length; i++) {
         let photoPrompt = this.parentNode.dataset.photoPrompt;
         let photoDescription = this.parentNode.dataset.photoDescription;
         let photoDate = this.parentNode.dataset.photoDate;
-        let username = this.parentNode.dataset.username;
+        let photoUser = this.parentNode.dataset.photoUser;
+        let photoUserId = this.parentNode.dataset.photoUserId;
 
         document.getElementById('popup-image').setAttribute('src', photoUrl);
         document.getElementById('popup-title').textContent = photoTitle;
         document.getElementById('popup-prompt').textContent = photoPrompt;
         document.getElementById('popup-description').textContent = photoDescription;
         document.getElementById('popup-date').textContent = photoDate;
-        document.getElementById('popup-username').textContent = username;
+        if (typeof photoUser !== 'undefined') {
+            document.getElementById('popup-username').textContent = photoUser;
+        }
 
 
         document.getElementById('popup-container').style.display = 'block';

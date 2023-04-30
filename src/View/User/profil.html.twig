@@ -24,173 +24,174 @@
 					{% for userPhoto in userPhotos %}
 						<div class="col">
 							<div class="img-container">
-								<a href="#" data-photo-id="{{userPhoto.id}}" data-photo-url="{{userPhoto.link}}" data-photo-prompt="{{userPhoto.prompt}}" data-photo-title="{{userPhoto.title}}" data-photo-description="{{userPhoto.description}}" data-photo-date="{{userPhoto.date}}"><img src="{{userPhoto.link}}" alt="" class="img-fluid img-fit"></a>
-								{# to be displayed only if user have photos #}
-								<a href="#" data-photo-id="{{userPhoto.id}}" data-photo-url="{{userPhoto.link}}" data-photo-prompt="{{userPhoto.prompt}}" data-photo-title="{{userPhoto.title}}" data-photo-description="{{userPhoto.description}}" data-photo-date="{{userPhoto.date}}">
-									<button type="submit" class="edit-button">
-										<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pencil-square" viewbox="0 0 16 16">
-											<path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-											<path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+								<img src="{{userPhoto.link}}" alt="" class="img-fluid img-fit"></a>
+							{# to be displayed only if user have photos #}
+							<a href="#" data-photo-id="{{userPhoto.id}}" data-photo-url="{{userPhoto.link}}" data-photo-prompt="{{userPhoto.prompt}}" data-photo-title="{{userPhoto.title}}" data-photo-description="{{userPhoto.description}}" data-photo-date="{{userPhoto.date}}">
+								<button type="submit" class="edit-button">
+									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pencil-square" viewbox="0 0 16 16">
+										<path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+										<path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+									</svg>
+								</button>
+							</a>
+							{% set isFav = 0 %}
+							{% for favId in favIds %}
+								{% if userPhoto.id == favId.id %}
+									{% set isFav = 1 %}
+								{% endif %}
+							{% endfor %}
+							<form action="fav/add" method="POST">
+								<input name="addfav" type="hidden" value="{{userPhoto.id}}">
+								<button type="submit" class="button-fav">
+									{% if isFav == 1%}
+										<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-heart-fill" viewbox="0 0 16 16">
+											<path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
 										</svg>
-									</button>
-								</a>
-								{% set isFav = 0 %}
-								{% for favId in favIds %}
-									{% if userPhoto.id == favId.id %}
-										{% set isFav = 1 %}
+									{% else %}
+										<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-heart" viewbox="0 0 16 16">
+											<path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+										</svg>
 									{% endif %}
-								{% endfor %}
-								<form action="fav/add" method="POST">
-									<input name="addfav" type="hidden" value="{{userPhoto.id}}">
-									<button type="submit" class="button-fav">
-										{% if isFav == 1%}
-											<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-heart-fill" viewbox="0 0 16 16">
-												<path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
-											</svg>
-										{% else %}
-											<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-heart" viewbox="0 0 16 16">
-												<path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
-											</svg>
-										{% endif %}
-									</button>
-								</form>
-								{# END OF to be displayed only if user have photos  #}
-								<div class="img-title">{{userPhoto.title}}</div>
-							</div>
+								</button>
+							</form>
+							{# END OF to be displayed only if user have photos  #}
+							<div class="img-title">{{userPhoto.title}}</div>
 						</div>
-					{% endfor %}
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+{% else %}
+	<div class="container d-flex justify-content-start">
+		<h2>
+			No photo to display !
+		</h2>
+	</div>
+{% endif %}
+
+{% if photos %}
+	<div class="container d-flex">
+		<div class="d-flex flex-column">
+			<h2 class="mt-4">Your Favorites pictures</h2>
+			<div class="line mt-1"></div>
+		</div>
+	</div>
+	<div class="container text-center mt-3">
+		<div class="col-md-12">
+
+			<div class="row row-cols-lg-5 row-cols-md-3 row-cols-2 g-0 mh-25 mw-25">
+				{% for photo in photos %}
+					<div class="col">
+						<div class="img-container">
+							<a href="#" data-photo-id="{{photo.id}}" data-photo-url="{{photo.link}}" data-photo-prompt="{{photo.prompt}}" data-photo-title="{{photo.title}}" data-photo-description="{{photo.description}}" data-photo-date="{{photo.date}}"><img src="{{photo.link }}" alt="" class="img-fluid img-fit pop-up-image"></a>
+							{# to be displayed only if user have favorites #}
+
+							<form action="fav/add" method="POST">
+								<input name="addfav" type="hidden" value="{{photo.id}}">
+								<button type="submit" class="button-fav">
+									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-heart-fill" viewbox="0 0 16 16">
+										<path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+									</svg>
+								</button>
+							</form>
+
+							{# END OF to be displayed only if user have favorites #}
+							<div class="img-title">{{photo.title}}</div>
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+	{# display popup for view only (not edit) #}
+	<div id="popup-container">
+		<div id="popup-content" class="d-flex flex-column flex-lg-row">
+			<img id="popup-image" src="" alt="" class="ms-md-5 ms-0">
+			<div id="popup-info">
+				<ul>
+					<li class="poptitle">Title :<p id="popup-title"></p>
+					</li>
+					<li>Prompt :</li>
+					<li>
+						<p id="popup-prompt"></p>
+					</li>
+					<li>Description :</li>
+					<li>
+						<p id="popup-description"></p>
+					</li>
+					<li>Added date :</li>
+					<li>
+						<p id="popup-date"></p>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	{# display popup for edit or delete#}
+	<div id="popup-container-edit">
+		<div id="popup-content" class="d-flex flex-column flex-lg-row">
+			<img id="popup-image-edit" src="" alt="" class="ms-md-5 ms-0">
+			<div id="popup-info">
+				<button class="ms-auto" id="popup-close-btn">X</button>
+				<ul>
+					<form method="post" action="photo/edit">
+						<li class="poptitle">Title :
+						</li>
+						<p>
+							<input type="text" class="form-control " id="popup-title-edit" value="" name="title"></p>
+						<li>Prompt :</li>
+						<li>
+							<p><input type="text" class="form-control" id="popup-prompt-edit" value="" name="prompt">
+							</p>
+						</li>
+						<li>Description :</li>
+						<li>
+							<p><input type="text" class="form-control" id="popup-description-edit" name="description">
+							</p>
+						</li>
+						<li>Added date :</li>
+						<li class="d-flex justify-content-between">
+							<p id="popup-date-edit"></p>
+							{# save button #}
+							<div class="d-flex align-items-center justify-content-end">
+
+								<input type="hidden" value="" name="id" id="photoIdEdit">
+								<button type="submit" class="button-save">
+									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="floppy-icon" viewbox="0 0 25 25">
+										<path d="M19,0H3A3,3,0,0,0,0,3V24H24V5ZM7,2H17V6H7ZM22,22H2V3A1,1,0,0,1,3,2H5V8H19V2.828l3,3Z"/>
+										<path d="M12,10a4,4,0,1,0,4,4A4,4,0,0,0,12,10Zm0,6a2,2,0,1,1,2-2A2,2,0,0,1,12,16Z"/>
+									</svg>
+								</button>
+							</form>
+							{# delete button #}
+							<form method="post" action="photo/delete">
+								<input type="hidden" value="" name="id" id="photoIdDelete">
+								<button type="submit" class="button-delete">
+									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-trash" viewbox="0 0 16 16">
+										<path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
+										<path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
+									</svg>
+								</button>
+							</form>
+						</li>
+					</ul>
 				</div>
 			</div>
 		</div>
 	{% else %}
 		<div class="container d-flex justify-content-start">
 			<h2>
-				No photo to display !
+				No Favorite to display !
 			</h2>
 		</div>
 	{% endif %}
-
-	{% if photos %}
-		<div class="container d-flex">
-			<div class="d-flex flex-column">
-				<h2 class="mt-4">Your Favorites pictures</h2>
-				<div class="line mt-1"></div>
-			</div>
+	<div class="container d-flex justify-content-start">
+		<div class="col-12 col-md-6">
+			<a class="btn btn-primary mb-3 mt-4 btn-sm" href="/">Index</a>
 		</div>
-		<div class="container text-center mt-3">
-			<div class="col-md-12">
-
-				<div class="row row-cols-lg-5 row-cols-md-3 row-cols-2 g-0 mh-25 mw-25">
-					{% for photo in photos %}
-						<div class="col">
-							<div class="img-container">
-								<a href="#" data-photo-id="{{photo.id}}" data-photo-url="{{photo.link}}" data-photo-prompt="{{photo.prompt}}" data-photo-title="{{photo.title}}" data-photo-description="{{photo.description}}" data-photo-date="{{photo.date}}"><img src="{{photo.link }}" alt="" class="img-fluid img-fit pop-up-image"></a>
-								{# to be displayed only if user have favorites #}
-
-								<form action="fav/add" method="POST">
-									<input name="addfav" type="hidden" value="{{photo.id}}">
-									<button type="submit" class="button-fav">
-										<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-heart-fill" viewbox="0 0 16 16">
-											<path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
-										</svg>
-									</button>
-								</form>
-
-								{# END OF to be displayed only if user have favorites #}
-								<div class="img-title">{{photo.title}}</div>
-							</div>
-						</div>
-					{% endfor %}
-				</div>
-			</div>
-		</div>
-		{# display popup for view only (not edit) #}
-		<div id="popup-container">
-			<div id="popup-content" class="d-flex flex-column flex-lg-row">
-				<img id="popup-image" src="" alt="" class="ms-md-5 ms-0">
-				<div id="popup-info">
-					<ul>
-						<li class="poptitle">Title :<p id="popup-title"></p>
-						</li>
-						<li>Prompt :</li>
-						<li>
-							<p id="popup-prompt"></p>
-						</li>
-						<li>Description :</li>
-						<li>
-							<p id="popup-description"></p>
-						</li>
-						<li>Added date :</li>
-						<li>
-							<p id="popup-date"></p>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-		{# display popup for edit or delete#}
-		<div id="popup-container-edit">
-			<div id="popup-content" class="d-flex flex-column flex-lg-row">
-				<img id="popup-image-edit" src="" alt="" class="ms-md-5 ms-0">
-				<div id="popup-info">
-					<button class="ms-auto" id="popup-close-btn">X</button>
-					<ul>
-						<form method="post" action="photo/edit">
-							<li class="poptitle">Title :
-							</li>
-							<p>
-								<input type="text" class="form-control " id="popup-title-edit" value="" name="title"></p>
-							<li>Prompt :</li>
-							<li>
-								<p><input type="text" class="form-control" id="popup-prompt-edit" value="" name="prompt">
-								</p>
-							</li>
-							<li>Description :</li>
-							<li>
-								<p><input type="text" class="form-control" id="popup-description-edit" name="description">
-								</p>
-							</li>
-							<li>Added date :</li>
-							<li class="d-flex justify-content-between">
-								<p id="popup-date-edit"></p>
-								{# save button #}
-								<div class="d-flex align-items-center justify-content-end">
-
-									<input type="hidden" value="" name="id" id="photoIdEdit">
-									<button type="submit" class="button-save">
-										<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-cloud-arrow-up-fill" viewbox="0 0 16 16">
-											<path d="M8 2a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 6.095 0 7.555 0 9.318 0 11.366 1.708 13 3.781 13h8.906C14.502 13 16 11.57 16 9.773c0-1.636-1.242-2.969-2.834-3.194C12.923 3.999 10.69 2 8 2zm2.354 5.146a.5.5 0 0 1-.708.708L8.5 6.707V10.5a.5.5 0 0 1-1 0V6.707L6.354 7.854a.5.5 0 1 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2z"/>
-										</svg>
-									</button>
-								</form>
-								{# delete button #}
-								<form method="post" action="photo/delete">
-									<input type="hidden" value="" name="id" id="photoIdDelete">
-									<button type="submit" class="button-delete">
-										<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-trash" viewbox="0 0 16 16">
-											<path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
-											<path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
-										</svg>
-									</button>
-								</form>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		{% else %}
-			<div class="container d-flex justify-content-start">
-				<h2>
-					No Favorite to display !
-				</h2>
-			</div>
-		{% endif %}
-		<div class="container d-flex justify-content-start">
-			<div class="col-12 col-md-6">
-				<a class="btn btn-primary mb-3 mt-4 btn-sm" href="/">Index</a>
-			</div>
-		</div>
-	{% endblock %}
-	{% block javascript %}
-		<script src="assets/js/jsindex.js"></script>
-	{% endblock %}
+	</div>
+{% endblock %}
+{% block javascript %}
+	<script src="assets/js/jsindex.js"></script>
+{% endblock %}
