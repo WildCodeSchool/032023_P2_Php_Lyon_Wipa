@@ -14,26 +14,26 @@ class FollowController extends AbstractController
             exit();
         }
 
-        $errors = [];
         $userId = $this->user['id'];
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $data = array_map('trim', $_POST);
             // is there a followed id ?
             if (!isset($data['followedId']) || empty($data['followedId'])) {
-                $errors[] = 'No user to be followed';
+                $this->errors[] = 'No user selected to be followed';
             }
             // user can't follow himself
             if ($data['followedId'] == $userId) {
-                $errors[] = 'You can\'t follow yourself !';
+                $this->errors[] = 'You can\'t follow yourself !';
             }
             // if validated, followed user is stored in database
-            if (empty($errors)) {
+            if (empty($this->errors)) {
                 $followedId = (int)$data['followedId'];
                 $followManager = new FollowManager();
-                $followManager->insertFollowed($userId, $followedId);
+                $success = $followManager->insertFollowed($userId, $followedId);
+                $this->successes[] = $success;
             }
         }
-        header("Location: " . $_SERVER['HTTP_REFERER']);
+        header("Location: /user");
     }
 }

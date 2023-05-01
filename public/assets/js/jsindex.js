@@ -27,7 +27,6 @@ let thumbnailImages = document.querySelectorAll('.pop-up-image');
 
 for (let i = 0; i < thumbnailImages.length; i++) {
     let thumbnailImage = thumbnailImages[i];
-    console.log(thumbnailImage);
 
     thumbnailImage.addEventListener('click', function (event) {
         event.preventDefault();

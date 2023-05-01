@@ -8,7 +8,7 @@ class FollowManager extends AbstractManager
 {
     public const TABLE = 'follower_followed';
 
-    public function insertFollowed(int $idFollower, int $idFollowed): void
+    public function insertFollowed(int $idFollower, int $idFollowed): string
     {
         // idFollower = current user
         // idFollowed = somebody user wants to follow
@@ -48,5 +48,33 @@ class FollowManager extends AbstractManager
         $statement->bindValue('follower_id', $idFollower, PDO::PARAM_INT);
         $statement->bindValue('followed_id', $idFollowed, PDO::PARAM_INT);
         $statement->execute();
+
+        // get name of followed user
+        $statement = $this->pdo->prepare(
+            '
+            SELECT username
+            FROM user
+            WHERE id=:followed_id
+            '
+        );
+        $statement->bindValue('followed_id', $idFollowed, PDO::PARAM_INT);
+        $statement->execute();
+        $followedUsername = $statement->fetch();
+
+        if (!$isFollowed) {
+            return ('You are now following ' . $followedUsername['username']);
+        }
+        return ('User ' . $followedUsername['username'] . ' already followed.');
+    }
+
+    public function selectFollowedByUser(int $userId): array
+    {
+        $query = '
+        SELECT follower_followed.user_id, user.username as username
+        FROM ' . self::TABLE . ' 
+        JOIN user ON follower_followed.user_id = user.id
+        WHERE follower_id=' . $userId;
+
+        return $this->pdo->query($query)->fetchAll();
     }
 }

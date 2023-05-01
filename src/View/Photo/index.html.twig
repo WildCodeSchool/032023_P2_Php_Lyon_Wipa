@@ -2,6 +2,20 @@
 {% block title %}Wipa - Home
 {% endblock %}
 {% block content %}
+	{% if errors %}
+		{% for error in errors %}
+			<div class="alert alert-danger" role="alert">
+				{{ error }}
+			</div>
+		{% endfor %}
+	{% endif %}
+	{% if successes %}
+		{% for success in successes %}
+			<div class="alert alert-success" role="alert">
+				{{ success }}
+			</div>
+		{% endfor %}
+	{% endif %}
 	{% if photos is defined %}
 		<div class="container text-center mt-3">
 			<div class="col-md-12">

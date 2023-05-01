@@ -14,6 +14,8 @@ abstract class AbstractController
 {
     protected Environment $twig;
     protected array|false $user;
+    public array $errors;
+    public array $successes;
 
 
     public function __construct()
@@ -31,5 +33,7 @@ abstract class AbstractController
         $userManager = new UserManager();
         $this->user = isset($_SESSION['id']) ? $userManager->selectOneById($_SESSION['id']) : false;
         $this->twig->addGlobal('user', $this->user);
+        $this->errors = [];
+        $this->successes = [];
     }
 }
