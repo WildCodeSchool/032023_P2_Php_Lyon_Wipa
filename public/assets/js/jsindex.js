@@ -37,11 +37,18 @@ for (let i = 0; i < thumbnailImages.length; i++) {
         let photoDescription = this.parentNode.dataset.photoDescription;
         let photoDate = this.parentNode.dataset.photoDate;
 
+        // Conversion of the date to english format
+        let dateEn = new Date(photoDate).toLocaleDateString('en-GB', {
+            day: '2-digit',
+            month: 'long',
+            year: 'numeric',
+        });
+
         document.getElementById('popup-image').setAttribute('src', photoUrl);
         document.getElementById('popup-title').textContent = photoTitle;
         document.getElementById('popup-prompt').textContent = photoPrompt;
         document.getElementById('popup-description').textContent = photoDescription;
-        document.getElementById('popup-date').textContent = photoDate;
+        document.getElementById('popup-date').textContent = dateEn; 
 
         document.getElementById('popup-container').style.display = 'block';
     });
@@ -50,8 +57,8 @@ for (let i = 0; i < thumbnailImages.length; i++) {
     })
 };
 
-// Get a pop-up on click on the edit button with all informations
 
+// Get a pop-up on click on the edit button with all informations
 let thumbnailEdits = document.querySelectorAll('.edit-button');
 
 for (let i = 0; i < thumbnailEdits.length; i++) {
@@ -67,12 +74,18 @@ for (let i = 0; i < thumbnailEdits.length; i++) {
         let photoDate = this.parentNode.dataset.photoDate;
         let photoId = this.parentNode.dataset.photoId;
 
+        // Conversion of the date to english format
+        let dateEn = new Date(photoDate).toLocaleDateString('en-GB', {
+            day: '2-digit',
+            month: 'long',
+            year: 'numeric',
+        });
 
         document.getElementById('popup-image-edit').setAttribute('src', photoUrl);
         document.getElementById('popup-title-edit').value = photoTitle;
         document.getElementById('popup-prompt-edit').value = photoPrompt;
         document.getElementById('popup-description-edit').value = photoDescription;
-        document.getElementById('popup-date-edit').textContent = photoDate;
+        document.getElementById('popup-date-edit').textContent = dateEn; 
         document.getElementById('photoIdEdit').setAttribute('value', photoId);
         document.getElementById('photoIdDelete').setAttribute('value', photoId);
 
@@ -82,5 +95,8 @@ for (let i = 0; i < thumbnailEdits.length; i++) {
         document.getElementById('popup-container-edit').style.display = 'none';
     })
 };
+
+
+
 
 
