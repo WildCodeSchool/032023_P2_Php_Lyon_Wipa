@@ -35,7 +35,7 @@
 									<form action="fav/add" method="POST">
 										<input name="addfav" type="hidden" value="{{photo.id}}">
 										<button type="submit" class="button-fav">
-											{% if isFav == 1%}
+											{% if isFav == 1 %}
 												{# full heart button #}
 												<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-heart-fill" viewbox="0 0 16 16">
 													<path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
@@ -48,6 +48,31 @@
 											{% endif %}
 										</button>
 									</form>
+																			{# Follow button #}
+									 {% if user.username != photo.username %}
+									 	{% set isFollowed = 0 %}
+									{% for followedUser in followedUsers %}
+										{% if followedUser.username == photo.username %}
+											{% set isFollowed = 1 %}
+										{% endif %}
+									{% endfor %}
+								<form method="post" action="user/follow">
+									<input type="hidden" value="{{photo.user_id}}" name="followedId">
+										{% if isFollowed == 1 %}	
+									<button type="submit" title="Follow this user" class="button-follow">
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-dash-square-fill" viewBox="0 0 16 16">
+  <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm2.5 7.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1z"/>
+</svg>
+									</button>
+																			{% else %}	
+									<button type="submit" title="Follow this user" class="button-follow">
+										<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus-square-fill" viewbox="0 0 16 16">
+											<path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z"/>
+										</svg>
+									</button>
+									{% endif %}
+								</form>
+								{% endif %}
 								{% endif %}
 								{# END OF to be displayed only if user is logged #}
 								<div class="img-title">{{photo.title}}</div>
@@ -95,18 +120,6 @@
 								<p id="popup-username"></p>
 							</li>
 							<li></li>
-							<div
-								class="d-flex align-items-center justify-content-end">
-								{# Follow button #}
-								<form method="post" action="user/follow">
-									<input type="hidden" value="" name="followedId" id="popup-user-id">
-									<button type="submit" title="Follow this user" class="button-follow">
-										<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-plus-square-fill" viewbox="0 0 16 16">
-											<path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z"/>
-										</svg>
-									</button>
-								</form>
-							</div>
 						{% endif %}
 					</ul>
 				</div>
