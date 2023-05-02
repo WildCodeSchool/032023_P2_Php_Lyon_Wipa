@@ -50,8 +50,8 @@ for (let i = 0; i < thumbnailImages.length; i++) {
 
         document.getElementById('popup-container').style.display = 'block';
     });
-    document.getElementById('popup-close-btn').addEventListener('click', function () {
-        document.getElementById('popup-container').style.display = 'none';
+    document.getElementById('popup-container').addEventListener('click', function () {
+        this.style.display = 'none';
     })
 };
 
