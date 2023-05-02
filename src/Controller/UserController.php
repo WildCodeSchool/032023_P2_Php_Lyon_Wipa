@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Model\UserManager;
 use App\Model\FavManager;
 use App\Model\FollowManager;
+use App\Model\PhotoManager;
 
 class UserController extends AbstractController
 {
@@ -54,7 +55,6 @@ class UserController extends AbstractController
             header('Location: /');
             exit();
         }
-
         $favManager = new FavManager();
         $favIds = $favManager->selectUserFavs($this->user['id']);
 
@@ -63,13 +63,13 @@ class UserController extends AbstractController
         $userPhotos = $userManager->selectUserPictures($this->user['id']);
 
         $followManager = new FollowManager();
-        $followedByUser = $followManager->selectFollowedByUser($this->user['id']);
+        $followByUser = $followManager->selectFollowedByUser($this->user['id']);
 
         return $this->twig->render('User/profil.html.twig', [
             'photos' => $photos,
             'userPhotos' => $userPhotos,
             'favIds' => $favIds,
-            'followedUsers' => $followedByUser,
+            'followedUsers' => $followByUser,
         ]);
     }
 }
