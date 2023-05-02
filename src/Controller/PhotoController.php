@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Model\PhotoManager;
 use App\Model\FavManager;
+use App\Model\FollowManager;
 
 class PhotoController extends AbstractController
 {
@@ -13,26 +14,27 @@ class PhotoController extends AbstractController
     public function index(): string
     {
         $photoManager = new PhotoManager();
-        $photos = $photoManager->selectAllWithUsername();
+        $photos = $photoManager->selectAllWithUsername('id');
         // A perfect and beautiful function that manage to put all the photos in the best index page ever.
         if ($this->user) {
             $favManager = new FavManager();
             $favIds = $favManager->selectUserFavs($this->user['id']);
-            return $this->twig->render('Photo/index.html.twig', ['photos' => $photos, 'favIds' => $favIds]);
+
+            $followManager = new FollowManager();
+            $followByUser = $followManager->selectFollowedByUser($this->user['id']);
+            return $this->twig->render('Photo/index.html.twig', [
+                'photos' => $photos,
+                'favIds' => $favIds,
+                'followedUsers' => $followByUser,
+                'errors' => $this->errors,
+                'successes' => $this->successes,
+            ]);
         } else {
             shuffle($photos);
         }
-        return $this->twig->render('Photo/index.html.twig', ['photos' => $photos]);
-    }
-    /**
-     * Show informations for a specific photo
-     */
-    public function show(int $id): string
-    {
-        $photoManager = new PhotoManager();
-        $photo = $photoManager->selectOneById($id);
-
-        return $this->twig->render('Photo/show.html.twig', ['photo' => $photo]);
+        return $this->twig->render('Photo/index.html.twig', [
+            'photos' => $photos
+        ]);
     }
 
     /**
@@ -46,21 +48,20 @@ class PhotoController extends AbstractController
             exit();
         }
 
-        $errors = [];
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $photo = array_map('trim', $_POST);
             // is there a title text ?
-            $this->validateTitle($photo, $errors);
+            $this->validateTitle($photo);
             // is there a prompt text ?
             if (!isset($photo['prompt']) || empty($photo['prompt'])) {
-                $errors[] = 'You must write a prompt';
+                $this->errors[] = 'You must write a prompt';
             }
             // is there a description text ?
             if (!isset($photo['description']) || empty($photo['description'])) {
-                $errors[] = 'You must write a comment';
+                $this->errors[] = 'You must write a comment';
             }
             // if validated, photo is stored in database
-            if (empty($errors)) {
+            if (empty($this->errors)) {
                 $photoManager = new PhotoManager();
                 $photoManager->update($photo);
 
@@ -69,7 +70,9 @@ class PhotoController extends AbstractController
             }
         }
 
-        return $this->twig->render('User/profil.html.twig');
+        return $this->twig->render('User/profil.html.twig', [
+            'errors' => $this->errors
+        ]);
     }
 
     /**
@@ -83,23 +86,22 @@ class PhotoController extends AbstractController
             exit();
         }
 
-        $errors = [];
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $photo = array_map('trim', $_POST);
 
-            $this->validateURL($photo, $errors);
-            $this->validateTitle($photo, $errors);
+            $this->validateURL($photo);
+            $this->validateTitle($photo);
 
             // is there a prompt text ?
             if (!isset($photo['prompt']) || empty($photo['prompt'])) {
-                $errors[] = 'You must write a prompt';
+                $this->errors[] = 'You must write a prompt';
             }
             // is there a description text ?
             if (!isset($photo['description']) || empty($photo['description'])) {
-                $errors[] = 'You must write a comment';
+                $this->errors[] = 'You must write a comment';
             }
             // if validated, photo is stored in database
-            if (empty($errors)) {
+            if (empty($this->errors)) {
                 $photoManager = new PhotoManager();
                 $photoManager->insert($photo, $this->user['id']);
 
@@ -108,25 +110,25 @@ class PhotoController extends AbstractController
             }
         }
 
-        return $this->twig->render('Photo/add.html.twig', ['errors' => $errors]);
+        return $this->twig->render('Photo/add.html.twig', ['errors' => $this->errors]);
     }
 
-    public function validateURL(array $photo, array &$errors): void
+    public function validateURL(array $photo): void
     {
         // is there a photo ?
         if (!isset($photo['picture']) || empty($photo['picture'])) {
-            $errors[] = 'You must enter an URL';
+            $this->errors[] = 'You must enter an URL';
         }
         // is the URL well formated ?
         if (!filter_var($photo['picture'], FILTER_VALIDATE_URL)) {
-            $errors[] = 'Wrong URL format';
+            $this->errors[] = 'Wrong URL format';
         }
     }
 
-    public function validateTitle(array $photo, array &$errors): void
+    public function validateTitle(array $photo): void
     {
         if (!isset($photo['title']) || empty($photo['title'])) {
-            $errors[] = 'You must write a title';
+            $this->errors[] = 'You must write a title';
         }
     }
 
