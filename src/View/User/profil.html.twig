@@ -243,7 +243,7 @@
 		{% if followedUsers %}
 			<div class="container d-flex">
 				<div class="d-flex flex-column">
-					<h2 class="mt-4">Users you follow</h2>
+					<h2 class="mt-4">Following User</h2>
 					<div class="line mt-1"></div>
 				</div>
 			</div>
@@ -252,14 +252,15 @@
 					<div class="">
 						{% for followedUser in followedUsers %}
 							{# to be linked with follower photos #}
-							<div class="d-inline ">
+							<div class="d-flex ">
 								<a href="#" class="btn btn-primary mb-3 mt-4 btn-sm">
+                                								<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-circle" viewbox="0 0 16 16">
+									<path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+									<path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+								</svg>
 									{{ followedUser.username }}
 								</a>
-							</div>
-							<div
-								class="d-inline ">
-								{# button to stop following a user #}
+                                								{# button to stop following a user #}
 								<form method="post" action="user/follow">
 									<input type="hidden" value="{{ followedUser.user_id }}" name="followedId">
 									<div class="d-flex gap-2 mb-3">
