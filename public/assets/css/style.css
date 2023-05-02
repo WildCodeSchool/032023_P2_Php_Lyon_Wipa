@@ -229,6 +229,10 @@ h2 {
   font-style: italic;
 }
 
+.form-control {
+  width: 50vw;
+}
+
 /* Font */
 
 body {
