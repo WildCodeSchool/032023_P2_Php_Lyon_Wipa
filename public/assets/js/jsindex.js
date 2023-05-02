@@ -38,6 +38,9 @@ for (let i = 0; i < thumbnailImages.length; i++) {
         let photoDate = this.parentNode.dataset.photoDate;
         let photoUser = this.parentNode.dataset.photoUser;
 
+        // Convert date to english format
+        photoDate = dateFormat(photoDate);
+
         document.getElementById('popup-image').setAttribute('src', photoUrl);
         document.getElementById('popup-title').textContent = photoTitle;
         document.getElementById('popup-prompt').textContent = photoPrompt;
@@ -72,6 +75,8 @@ for (let i = 0; i < thumbnailEdits.length; i++) {
         let photoDate = this.parentNode.dataset.photoDate;
         let photoId = this.parentNode.dataset.photoId;
 
+        // Convert date to english format
+        photoDate = dateFormat(photoDate);
 
         document.getElementById('popup-image-edit').setAttribute('src', photoUrl);
         document.getElementById('popup-title-edit').value = photoTitle;
@@ -89,6 +94,14 @@ for (let i = 0; i < thumbnailEdits.length; i++) {
     document.getElementById('popup-close-edit-btn').addEventListener('click', function () {
         document.getElementById('popup-container-edit').style.display = 'none';
     })
+};
+
+function dateFormat(photoDate) {
+    return new Date(photoDate).toLocaleDateString('en-GB', {
+        day: '2-digit',
+        month: 'long',
+        year: 'numeric',
+    });
 };
 
 
