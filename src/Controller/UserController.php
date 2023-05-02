@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Model\UserManager;
 use App\Model\FavManager;
 use App\Model\FollowManager;
-use App\Model\PhotoManager;
 
 class UserController extends AbstractController
 {

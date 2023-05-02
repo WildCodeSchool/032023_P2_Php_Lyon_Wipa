@@ -99,6 +99,7 @@ ul {
   position: absolute;
   top: 0;
   right: 0;
+  font-size:1.25rem;
   padding: 10px;
   color: var(--light-color);
   opacity: 0;
@@ -110,6 +111,7 @@ ul {
 
 .edit-button {
   position: absolute;
+  font-size:1.25rem;
   top: 0;
   left: 0;
   padding: 10px;
@@ -125,12 +127,14 @@ ul {
 .button-save{
   color: var(--light-color);
   max-width: 100%;
+  font-size:1.25rem;
   border: none;
   background: none;
 }
 
 .button-follow {
   position: absolute;
+  font-size:1.25rem;
  top: 0;
   left: 0;
   padding: 10px;
