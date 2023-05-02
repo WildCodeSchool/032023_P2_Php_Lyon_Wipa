@@ -40,8 +40,9 @@
 								<img
 								src="{{userPhoto.link}}" alt="" class="img-fluid img-fit">
 								{# to be displayed only if user have photos #}
+								{% set formatted_date = userPhoto.date|date("d F Y") %}
 								<a
-									href="#" data-photo-id="{{userPhoto.id}}" data-photo-url="{{userPhoto.link}}" data-photo-prompt="{{userPhoto.prompt}}" data-photo-title="{{userPhoto.title}}" data-photo-description="{{userPhoto.description}}" data-photo-date="{{userPhoto.date}}">
+									href="#" data-photo-id="{{userPhoto.id}}" data-photo-url="{{userPhoto.link}}" data-photo-prompt="{{userPhoto.prompt}}" data-photo-title="{{userPhoto.title}}" data-photo-description="{{userPhoto.description}}" data-photo-date="{{formatted_date}}">
 									{# edit button #}
 									<button type="submit" title="Edit photo datas" class="edit-button">
 										<i class="bi bi-pencil-square"></i>

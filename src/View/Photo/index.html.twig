@@ -23,7 +23,8 @@
 					{% for photo in photos %}
 						<div class="col">
 							<div class="img-container">
-								<a href="#" data-photo-id="{{photo.id}}" data-photo-url="{{photo.link}}" data-photo-prompt="{{photo.prompt}}" data-photo-title="{{photo.title}}" data-photo-description="{{photo.description}}" data-photo-date="{{photo.date}}" {% if user %} data-photo-user="{{photo.username}}" data-photo-user-id="{{photo.user_id}}" {% endif %}><img src="{{photo.link }}" alt="" class="img-fluid img-fit pop-up-image"></a>
+							{% set formatted_date = photo.date|date("d F Y") %}
+								<a href="#" data-photo-id="{{photo.id}}" data-photo-url="{{photo.link}}" data-photo-prompt="{{photo.prompt}}" data-photo-title="{{photo.title}}" data-photo-description="{{photo.description}}" data-photo-date="{{formatted_date}}" {% if user %} data-photo-user="{{photo.username}}" data-photo-user-id="{{photo.user_id}}" {% endif %}><img src="{{photo.link }}" alt="" class="img-fluid img-fit pop-up-image"></a>
 								{# to be displayed only if user is logged #}
 								{% if user %}
 									{% set isFav = 0 %}
@@ -99,12 +100,9 @@
 							<p id="popup-date"></p>
 						</li>
 						{% if user %}
-							<li>By :</li>
-							<li></li>
-							<li>
+							<li class="popuser">By :
 								<p id="popup-username"></p>
 							</li>
-							<li></li>
 						{% endif %}
 					</ul>
 				</div>
