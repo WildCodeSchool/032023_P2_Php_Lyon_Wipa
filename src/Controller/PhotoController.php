@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Model\PhotoManager;
 use App\Model\FavManager;
+use App\Model\FollowManager;
 
 class PhotoController extends AbstractController
 {
@@ -18,9 +19,13 @@ class PhotoController extends AbstractController
         if ($this->user) {
             $favManager = new FavManager();
             $favIds = $favManager->selectUserFavs($this->user['id']);
+
+            $followManager = new FollowManager();
+            $followByUser = $followManager->selectFollowedByUser($this->user['id']);
             return $this->twig->render('Photo/index.html.twig', [
                 'photos' => $photos,
                 'favIds' => $favIds,
+                'followedUsers' => $followByUser,
                 'errors' => $this->errors,
                 'successes' => $this->successes,
             ]);

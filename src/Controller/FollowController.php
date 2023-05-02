@@ -34,6 +34,6 @@ class FollowController extends AbstractController
                 $this->successes[] = $success;
             }
         }
-        header("Location: /user");
+        header("Location: " . $_SERVER['HTTP_REFERER']);
     }
 }
