@@ -135,7 +135,7 @@ ul {
 .button-follow {
   position: absolute;
   font-size:1.25rem;
- top: 0;
+  top: 0;
   left: 0;
   padding: 10px;
   margin-bottom: 40px;
@@ -212,7 +212,7 @@ ul {
   background-color: rgba(175, 176, 176, 0.9);
 }
 
-.poptitle {
+.poptitle, .popuser {
   display: flex;
   align-items: baseline;
   gap: 10px;

@@ -38,8 +38,6 @@ for (let i = 0; i < thumbnailImages.length; i++) {
         let photoDate = this.parentNode.dataset.photoDate;
         let photoUser = this.parentNode.dataset.photoUser;
 
-        // Convert date to english format
-        photoDate = dateFormat(photoDate);
 
         document.getElementById('popup-image').setAttribute('src', photoUrl);
         document.getElementById('popup-title').textContent = photoTitle;
@@ -47,7 +45,7 @@ for (let i = 0; i < thumbnailImages.length; i++) {
         document.getElementById('popup-description').textContent = photoDescription;
         document.getElementById('popup-date').textContent = photoDate;
         if (typeof photoUser !== 'undefined') {
-            document.getElementById('popup-username').textContent = photoUser;
+        document.getElementById('popup-username').textContent = photoUser;
         }
 
 
@@ -75,9 +73,6 @@ for (let i = 0; i < thumbnailEdits.length; i++) {
         let photoDate = this.parentNode.dataset.photoDate;
         let photoId = this.parentNode.dataset.photoId;
 
-        // Convert date to english format
-        photoDate = dateFormat(photoDate);
-
         document.getElementById('popup-image-edit').setAttribute('src', photoUrl);
         document.getElementById('popup-title-edit').value = photoTitle;
         document.getElementById('popup-prompt-edit').value = photoPrompt;
@@ -96,12 +91,5 @@ for (let i = 0; i < thumbnailEdits.length; i++) {
     })
 };
 
-function dateFormat(photoDate) {
-    return new Date(photoDate).toLocaleDateString('en-GB', {
-        day: '2-digit',
-        month: 'long',
-        year: 'numeric',
-    });
-};
 
 
