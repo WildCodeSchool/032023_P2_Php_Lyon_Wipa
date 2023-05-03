@@ -2,6 +2,20 @@
 {% block title %}Wipa - Home
 {% endblock %}
 {% block content %}
+	{% if errors %}
+		{% for error in errors %}
+			<div class="alert alert-danger" role="alert">
+				{{ error }}
+			</div>
+		{% endfor %}
+	{% endif %}
+	{% if successes %}
+		{% for success in successes %}
+			<div class="alert alert-success" role="alert">
+				{{ success }}
+			</div>
+		{% endfor %}
+	{% endif %}
 	{% if photos is defined %}
 		<div class="container text-center mt-3">
 			<div class="col-md-12">
@@ -9,7 +23,8 @@
 					{% for photo in photos %}
 						<div class="col">
 							<div class="img-container">
-								<a href="#" data-photo-id="{{photo.id}}" data-photo-url="{{photo.link}}" data-photo-prompt="{{photo.prompt}}" data-photo-title="{{photo.title}}" data-photo-description="{{photo.description}}" data-photo-date="{{photo.date}}"><img src="{{photo.link }}" alt="" class="img-fluid img-fit pop-up-image"></a>
+							{% set formatted_date = photo.date|date("d F Y") %}
+								<a href="#" data-photo-id="{{photo.id}}" data-photo-url="{{photo.link}}" data-photo-prompt="{{photo.prompt}}" data-photo-title="{{photo.title}}" data-photo-description="{{photo.description}}" data-photo-date="{{formatted_date}}" {% if user %} data-photo-user="{{photo.username}}" data-photo-user-id="{{photo.user_id}}" {% endif %}><img src="{{photo.link }}" alt="" class="img-fluid img-fit pop-up-image"></a>
 								{# to be displayed only if user is logged #}
 								{% if user %}
 									{% set isFav = 0 %}
@@ -20,19 +35,38 @@
 									{% endfor %}
 									<form action="fav/add" method="POST">
 										<input name="addfav" type="hidden" value="{{photo.id}}">
-										<button type="submit" class="button-fav">
-											{% if isFav == 1%}
-												<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-heart-fill" viewbox="0 0 16 16">
-													<path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
-												</svg>
+										<button type="submit" title="Add in favorite this pic" class="button-fav">
+											{% if isFav == 1 %}
+												{# full heart button #}
+												<i class="bi bi-heart-fill"></i>
 											{% else %}
-												<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-heart" viewbox="0 0 16 16">
-													<path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
-												</svg>
+												{# empty heart button #}
+												<i class="bi bi-heart"></i>
 											{% endif %}
 										</button>
 									</form>
-								{% endif %}			
+									{# Follow button #}
+									{% if user.username != photo.username %}
+										{% set isFollowed = 0 %}
+										{% for followedUser in followedUsers %}
+											{% if followedUser.username == photo.username %}
+												{% set isFollowed = 1 %}
+											{% endif %}
+										{% endfor %}
+										<form method="post" action="user/follow">
+											<input type="hidden" value="{{photo.user_id}}" name="followedId">
+											{% if isFollowed == 1 %}
+												<button type="submit" title="Follow this user" class="button-follow">
+													<i class="bi bi-dash-square-fill"></i>
+												</button>
+											{% else %}
+												<button type="submit" title="Follow this user" class="button-follow">
+													<i class="bi bi-plus-square-fill"></i>
+												</button>
+											{% endif %}
+										</form>
+									{% endif %}
+								{% endif %}
 								{# END OF to be displayed only if user is logged #}
 								<div class="img-title">{{photo.title}}</div>
 							</div>
@@ -65,7 +99,11 @@
 						<li>
 							<p id="popup-date"></p>
 						</li>
-						<li></li>
+						{% if user %}
+							<li class="popuser">By :
+								<p id="popup-username"></p>
+							</li>
+						{% endif %}
 					</ul>
 				</div>
 			</div>

@@ -99,6 +99,7 @@ ul {
   position: absolute;
   top: 0;
   right: 0;
+  font-size:1.25rem;
   padding: 10px;
   color: var(--light-color);
   opacity: 0;
@@ -110,6 +111,7 @@ ul {
 
 .edit-button {
   position: absolute;
+  font-size:1.25rem;
   top: 0;
   left: 0;
   padding: 10px;
@@ -122,11 +124,30 @@ ul {
 }
 
 .button-delete,
-.button-save {
+.button-save{
   color: var(--light-color);
+  max-width: 100%;
+  font-size:1.25rem;
+  border: none;
+  background: none;
+}
+
+.button-follow {
+  position: absolute;
+  font-size:1.25rem;
+  top: 0;
+  left: 0;
+  padding: 10px;
+  margin-bottom: 40px;
+  color: var(--light-color);
+  opacity: 0;
   max-width: 100%;
   border: none;
   background: none;
+  transition: opacity 0.2s ease-in-out;
+}
+.img-container:hover .button-follow {
+  opacity: 0.8;
 }
 
 
@@ -191,13 +212,14 @@ ul {
   background-color: rgba(175, 176, 176, 0.9);
 }
 
-.poptitle {
+.poptitle, .popuser {
   display: flex;
   align-items: baseline;
   gap: 10px;
 }
 
-#popup-close-btn {
+#popup-close-btn,
+#popup-close-edit-btn {
   font-family: var(--content-font);
   font-size: 18px;
   background-color: transparent;
@@ -209,6 +231,10 @@ ul {
 h1,
 h2 {
   font-style: italic;
+}
+
+.form-control {
+  width: 50vw;
 }
 
 /* Font */
