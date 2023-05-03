@@ -15,263 +15,284 @@
 		</div>
 	{% endif %}
 	<div class="container d-flex justify-content-start">
-		<div class="col-12 col-md-6 mt-3">
+		<div class="col-12 col-md-6 m-auto mt-3 mb-3">
 			{% if user %}
-				<h1>Hello
-					{{ user.username }}
-					!</h1>
+				<h1 class="text-center">
+					{{ user.username }} profil
+					</h1>
 			{% endif %}
 		</div>
 	</div>
-	{# photos posted by user #}
-	{% if userPhotos %}
-		<div class="container d-flex">
-			<div class="d-flex flex-column">
-				<h2 class="mt-4">Your pictures</h2>
-				<div class="line mt-1"></div>
-			</div>
-		</div>
-		<div class="container text-center mt-3">
-			<div class="col-md-12">
-				<div class="row row-cols-lg-5 row-cols-md-3 row-cols-2 g-0 mh-25 mw-25">
-					{% for userPhoto in userPhotos %}
-						<div class="col">
-							<div class="img-container">
-								<img
-								src="{{userPhoto.link}}" alt="" class="img-fluid img-fit">
-								{# to be displayed only if user have photos #}
-								{% set formatted_date = userPhoto.date|date("d F Y") %}
-								<a
-									href="#" data-photo-id="{{userPhoto.id}}" data-photo-url="{{userPhoto.link}}" data-photo-prompt="{{userPhoto.prompt}}" data-photo-title="{{userPhoto.title}}" data-photo-description="{{userPhoto.description}}" data-photo-date="{{formatted_date}}">
-									{# edit button #}
-									<button type="submit" title="Edit photo datas" class="edit-button">
-										<i class="bi bi-pencil-square"></i>
-									</button>
-								</a>
-								{% set isFav = 0 %}
-								{% for favId in favIds %}
-									{% if userPhoto.id == favId.id %}
-										{% set isFav = 1 %}
-									{% endif %}
-								{% endfor %}
-								<form action="fav/add" method="POST">
-									<input name="addfav" type="hidden" value="{{userPhoto.id}}">
-									<button type="submit" class="button-fav">
-										{% if isFav == 1%}
-											{# full heart button #}
-											<i title="Remove from favorite" class="bi bi-heart-fill"></i>
-										{% else %}
-											{# empty heart button #}
-											<i title="Add from favorite" class="bi bi-heart"></i>
-										{% endif %}
-									</button>
-								</form>
-								{# END OF to be displayed only if user have photos  #}
-								<div class="img-title">{{userPhoto.title}}</div>
-							</div>
-						</div>
-					{% endfor %}
-				</div>
-			</div>
-		</div>
-	{% else %}
-		<div class="container d-flex justify-content-start">
-			<h2>
-				No photo to display !
-			</h2>
-		</div>
-	{% endif %}
-	{# End of photos posted by user #}
-	{# favorite photos of user #}
-	{% if photos %}
-		<div class="container d-flex">
-			<div class="d-flex flex-column">
-				<h2 class="mt-4">Your Favorites pictures</h2>
-				<div class="line mt-1"></div>
-			</div>
-		</div>
-		<div class="container text-center mt-3">
-			<div class="col-md-12">
-				<div class="row row-cols-lg-5 row-cols-md-3 row-cols-2 g-0 mh-25 mw-25">
-					{% for photo in photos %}
-						<div class="col">
-							<div class="img-container">
-							{% set formattedFav_date = userPhoto.date|date("d F Y") %}
-								<a href="#" data-photo-id="{{photo.photo_id}}" data-photo-url="{{photo.link}}" data-photo-prompt="{{photo.prompt}}" data-photo-title="{{photo.title}}" data-photo-description="{{photo.description}}" data-photo-date="{{formattedFav_date}}" {% if user %} data-photo-user="{{photo.username}}" data-photo-user-id="{{photo.user_id}}" {% endif %}><img src="{{photo.link }}" alt="" class="img-fluid img-fit pop-up-image"></a>
-								{# to be displayed only if user have favorites #}
-								<form action="fav/add" method="POST">
-									<input name="addfav" type="hidden" value="{{photo.photo_id}}">
-									<button
-										type="submit" class="button-fav">
-										{# full heart button #}
-										<i title="Remove from favorite" class="bi bi-heart-fill"></i>
-									</button>
-								</form>
-								{# Follow button #}
-								{% if user.username != photo.username %}
-									{% set isFollowed = 0 %}
-									{% for followedUser in followedUsers %}
-										{% if followedUser.username == photo.username %}
-											{% set isFollowed = 1 %}
-										{% endif %}
-									{% endfor %}
-									<form method="post" action="user/follow">
-										<input type="hidden" value="{{photo.user_id}}" name="followedId">
-										<button type="submit"  class="button-follow">
-										{% if isFollowed == 1 %}
-												<i title="Unfollow this user" class="bi bi-dash-square-fill"></i>
-										{% else %}
-												<i title="Follow this user" class="bi bi-plus-square-fill"></i>
-										{% endif %}
-										</button>
-									</form>
-								{% endif %}
-								{# END OF to be displayed only if user have favorites #}
-								<div class="img-title">{{photo.title}}</div>
-							</div>
-						</div>
-					{% endfor %}
-				</div>
-			</div>
-		</div>
-		{# display popup for view only (not edit) #}
-		<div id="popup-container">
-			<div id="popup-content" class="d-flex flex-column flex-lg-row">
-				<img id="popup-image" src="" alt="" class="ms-md-5 ms-0">
-				<div id="popup-info">
-					<button class="ms-auto" title="Close this window" id="popup-close-btn">
-						<i class="bi bi-x-square-fill"></i>
-					</button>
-					<ul>
-						<li class="poptitle">Title :<p id="popup-title"></p>
-						</li>
-						<li>Prompt :</li>
-						<li>
-							<p id="popup-prompt"></p>
-						</li>
-						<li>Description :</li>
-						<li>
-							<p id="popup-description"></p>
-						</li>
-						<li>Added date :</li>
-						<li>
-							<p id="popup-date"></p>
-						</li>
-						<li class="popuser">By :
-							<p id="popup-username"></p>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-		{# display popup for edit or delete#}
-		<div id="popup-container-edit">
-			<div id="popup-content" class="d-flex flex-column flex-lg-row">
-				<img id="popup-image-edit" src="" alt="" class="ms-md-5 ms-0">
-				<div
-					id="popup-info">
-					{# close popup button #}
-					<button class="ms-auto" title="Close this window" id="popup-close-edit-btn">
-						<i class="bi bi-x-square-fill"></i>
-					</button>
-					<ul>
-						<form method="post" action="photo/edit">
-							<li class="poptitle">Title :
-							</li>
-							<p>
-								<input type="text" class="form-control " id="popup-title-edit" value="" name="title"></p>
-							<li>Prompt :</li>
-							<li>
-								<p><input type="text" class="form-control" id="popup-prompt-edit" value="" name="prompt">
-								</p>
-							</li>
-							<li>Description :</li>
-							<li>
-								<p><input type="text" class="form-control" id="popup-description-edit" name="description">
-								</p>
-							</li>
-							<li>Added date :</li>
-							<li class="d-flex justify-content-between">
-								<p id="popup-date-edit"></p>
-								<div class="d-flex align-items-center">
-									<input
-									type="hidden" value="" name="id" id="photoIdEdit">
-									{# save button #}
-									<button type="submit" title="Save photo datas" class="button-save">
-										<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="floppy-icon" viewbox="0 0 25 25">
-											<path d="M19,0H3A3,3,0,0,0,0,3V24H24V5ZM7,2H17V6H7ZM22,22H2V3A1,1,0,0,1,3,2H5V8H19V2.828l3,3Z"/>
-											<path d="M12,10a4,4,0,1,0,4,4A4,4,0,0,0,12,10Zm0,6a2,2,0,1,1,2-2A2,2,0,0,1,12,16Z"/>
-										</svg>
-									</button>
-								</form>
-								{# delete button #}
-								<form method="post" action="photo/delete">
-									<input type="hidden" value="" name="id" id="photoIdDelete">
-									<button type="submit" title="Delete this photo" class="button-delete mt-1">
-										<i class="bi bi-trash"></i>
-									</button>
-								</form>
-							</li>
-						</ul>
+	{# start tabs nav #}
+	<ul class="nav nav-tabs nav-justified mb-3" id="myTab" role="tablist">
+		<li class="nav-item" role="presentation">
+			<button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Your Pictures</button>
+		</li>
+		<li class="nav-item" role="presentation">
+			<button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Your Favorites</button>
+		</li>
+		<li class="nav-item" role="presentation">
+			<button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Followed Users</button>
+		</li>
+	</ul>
+	{# end tabs nav #}
+	<div
+		class="tab-content" id="myTabContent">
+		{# userPhotos in 1st tab #}
+		<div
+			class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+			{# photos posted by user #}
+			{% if userPhotos %}
+				<div class="container d-flex">
+					<div class="d-flex flex-column">
+						<h2 class="mt-4">Your pictures</h2>
+						<div class="line mt-1"></div>
 					</div>
 				</div>
-			</div>
-		{% else %}
-			<div class="container d-flex justify-content-start">
-				<h2>
-					No Favorite to display !
-				</h2>
-			</div>
-		{% endif %}
-		{# End of favorite photos of user #}
-		{# users followed by user #}
-		{% if followedUsers %}
-			<div class="container d-flex">
-				<div class="d-flex flex-column">
-					<h2 class="mt-4">Following User</h2>
-					<div class="line mt-1"></div>
-				</div>
-			</div>
-			<div class="container text-center mt-3">
-				<div class="col-12 col-md-6">
-					<div class="">
-						{% for followedUser in followedUsers %}
-							{# to be linked with follower photos #}
-							<div class="d-flex ">
-								<a href="#" class="btn btn-primary btn-sm me-2 mb-1">
-									<i class="bi bi-person-circle"></i>
-									{{ followedUser.username }}
-								</a>
-								{# button to stop following a user #}
-								<form method="post" action="user/follow">
-									<input type="hidden" value="{{ followedUser.user_id }}" name="followedId">
-									<div class="d-flex gap-2">
-										<button type="submit" class="btn btn-primary btn-sm">
-											<i class="bi bi-dash-square-fill"></i>
-											Stop following
-											{{ followedUser.username }}
-										</button>
+				<div class="container text-center mt-3">
+					<div class="col-md-12">
+						<div class="row row-cols-lg-5 row-cols-md-3 row-cols-2 g-0 mh-25 mw-25">
+							{% for userPhoto in userPhotos %}
+								<div class="col">
+									<div class="img-container">
+										<img
+										src="{{userPhoto.link}}" alt="" class="img-fluid img-fit">
+										{# to be displayed only if user have photos #}
+										{% set formatted_date = userPhoto.date|date("d F Y") %}
+										<a
+											href="#" data-photo-id="{{userPhoto.id}}" data-photo-url="{{userPhoto.link}}" data-photo-prompt="{{userPhoto.prompt}}" data-photo-title="{{userPhoto.title}}" data-photo-description="{{userPhoto.description}}" data-photo-date="{{formatted_date}}">
+											{# edit button #}
+											<button type="submit" title="Edit photo datas" class="edit-button">
+												<i class="bi bi-pencil-square"></i>
+											</button>
+										</a>
+										{% set isFav = 0 %}
+										{% for favId in favIds %}
+											{% if userPhoto.id == favId.id %}
+												{% set isFav = 1 %}
+											{% endif %}
+										{% endfor %}
+										<form action="fav/add" method="POST">
+											<input name="addfav" type="hidden" value="{{userPhoto.id}}">
+											<button type="submit" class="button-fav">
+												{% if isFav == 1%}
+													{# full heart button #}
+													<i title="Remove from favorite" class="bi bi-heart-fill"></i>
+												{% else %}
+													{# empty heart button #}
+													<i title="Add from favorite" class="bi bi-heart"></i>
+												{% endif %}
+											</button>
+										</form>
+										{# END OF to be displayed only if user have photos  #}
+										<div class="img-title">{{userPhoto.title}}</div>
 									</div>
-								</form>
-							</div>
-						{% endfor %}
+								</div>
+							{% endfor %}
+						</div>
 					</div>
 				</div>
+				{# display popup for edit or delete#}
+				<div id="popup-container-edit">
+					<div id="popup-content" class="d-flex flex-column flex-lg-row">
+						<img id="popup-image-edit" src="" alt="" class="ms-md-5 ms-0">
+						<div
+							id="popup-info">
+							{# close popup button #}
+							<button class="ms-auto" title="Close this window" id="popup-close-edit-btn">
+								<i class="bi bi-x-square-fill"></i>
+							</button>
+							<ul>
+								<form method="post" action="photo/edit">
+									<li class="poptitle">Title :
+									</li>
+									<p>
+										<input type="text" class="form-control " id="popup-title-edit" value="" name="title"></p>
+									<li>Prompt :</li>
+									<li>
+										<p><input type="text" class="form-control" id="popup-prompt-edit" value="" name="prompt">
+										</p>
+									</li>
+									<li>Description :</li>
+									<li>
+										<p><input type="text" class="form-control" id="popup-description-edit" name="description">
+										</p>
+									</li>
+									<li>Added date :</li>
+									<li class="d-flex justify-content-between">
+										<p id="popup-date-edit"></p>
+										<div class="d-flex align-items-center">
+											<input
+											type="hidden" value="" name="id" id="photoIdEdit">
+											{# save button #}
+											<button type="submit" title="Save photo datas" class="button-save">
+												<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="floppy-icon" viewbox="0 0 25 25">
+													<path d="M19,0H3A3,3,0,0,0,0,3V24H24V5ZM7,2H17V6H7ZM22,22H2V3A1,1,0,0,1,3,2H5V8H19V2.828l3,3Z"/>
+													<path d="M12,10a4,4,0,1,0,4,4A4,4,0,0,0,12,10Zm0,6a2,2,0,1,1,2-2A2,2,0,0,1,12,16Z"/>
+												</svg>
+											</button>
+										</form>
+										{# delete button #}
+										<form method="post" action="photo/delete">
+											<input type="hidden" value="" name="id" id="photoIdDelete">
+											<button type="submit" title="Delete this photo" class="button-delete mt-1">
+												<i class="bi bi-trash"></i>
+											</button>
+										</form>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				{% else %}
+					<div class="container d-flex justify-content-start">
+						<h2>
+							No photo to display !
+						</h2>
+					</div>
+				{% endif %}
 			</div>
-		{% else %}
-			<div class="container d-flex justify-content-start">
-				<h2>
-					You follow nobody !
-				</h2>
+			{# End of photos posted by user #}
+			{# favoritesPhotos in 2nd tab #}
+			<div
+				class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+				{# favorite photos of user #}
+				{% if photos %}
+					<div class="container d-flex">
+						<div class="d-flex flex-column">
+							<h2 class="mt-4">Your Favorites pictures</h2>
+							<div class="line mt-1"></div>
+						</div>
+					</div>
+					<div class="container text-center mt-3">
+						<div class="col-md-12">
+							<div class="row row-cols-lg-5 row-cols-md-3 row-cols-2 g-0 mh-25 mw-25">
+								{% for photo in photos %}
+									<div class="col">
+										<div class="img-container">
+											{% set formattedFav_date = userPhoto.date|date("d F Y") %}
+											<a href="#" data-photo-id="{{photo.id}}" data-photo-url="{{photo.link}}" data-photo-prompt="{{photo.prompt}}" data-photo-title="{{photo.title}}" data-photo-description="{{photo.description}}" data-photo-date="{{formattedFav_date}}" {% if user %} data-photo-user="{{photo.username}}" data-photo-user-id="{{photo.user_id}}" {% endif %}><img src="{{photo.link }}" alt="" class="img-fluid img-fit pop-up-image"></a>
+											{# to be displayed only if user have favorites #}
+											<form action="fav/add" method="POST">
+												<input name="addfav" type="hidden" value="{{photo.photo.id}}">
+												<button
+													type="submit" class="button-fav">
+													{# full heart button #}
+													<i title="Remove from favorite" class="bi bi-heart-fill"></i>
+												</button>
+											</form>
+											{# Follow button #}
+											{% if user.username != photo.username %}
+												{% set isFollowed = 0 %}
+												{% for followedUser in followedUsers %}
+													{% if followedUser.username == photo.username %}
+														{% set isFollowed = 1 %}
+													{% endif %}
+												{% endfor %}
+												<form method="post" action="user/follow">
+													<input type="hidden" value="{{photo.user_id}}" name="followedId">
+													<button type="submit"  class="button-follow">
+													{% if isFollowed == 1 %}
+															<i title="Unfollow this user" class="bi bi-dash-square-fill"></i>
+													{% else %}
+															<i title="Follow this user" class="bi bi-plus-square-fill"></i>
+													{% endif %}
+													</button>
+												</form>
+											{% endif %}
+											{# END OF to be displayed only if user have favorites #}
+											<div class="img-title">{{photo.title}}</div>
+										</div>
+									</div>
+								{% endfor %}
+							</div>
+						</div>
+					</div>
+					{# display popup for view only (not edit) #}
+					<div id="popup-container">
+						<div id="popup-content" class="d-flex flex-column flex-lg-row">
+							<img id="popup-image" src="" alt="" class="ms-md-5 ms-0">
+							<div id="popup-info">
+								<button class="ms-auto" title="Close this window" id="popup-close-btn">
+									<i class="bi bi-x-square-fill"></i>
+								</button>
+								<ul>
+									<li class="poptitle">Title :<p id="popup-title"></p>
+									</li>
+									<li>Prompt :</li>
+									<li>
+										<p id="popup-prompt"></p>
+									</li>
+									<li>Description :</li>
+									<li>
+										<p id="popup-description"></p>
+									</li>
+									<li>Added date :</li>
+									<li>
+										<p id="popup-date"></p>
+									</li>
+									<li class="popuser">By :
+										<p id="popup-username"></p>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				{% else %}
+					<div class="container d-flex justify-content-start">
+						<h2>
+							No Favorite to display !
+						</h2>
+					</div>
+				{% endif %}
 			</div>
-		{% endif %}
-		{# End of users followed by user #}
-		<div class="container d-flex justify-content-start">
-			<div class="col-12 col-md-6">
-				<a class="btn btn-primary mb-3 mt-4 btn-sm" href="/">Index</a>
+			{# followedUsers in 3rd tab #}
+			<div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">
+				{# End of favorite photos of user #}
+				{# users followed by user #}
+					{% if followedUsers %}
+						<div class="container d-flex"> <div class="d-flex flex-column">
+							<h2 class="mt-4">Followed Users</h2>
+							<div class="line mt-1"></div>
+						</div>
+					</div>
+					<div class="container text-center mt-3">
+						<div class="col-12 col-md-6">
+							<div class="">
+								{% for followedUser in followedUsers %}
+									{# to be linked with follower photos #}
+									<div class="d-flex ">
+										<a href="#" class="btn btn-primary btn-sm me-2 mb-1">
+											<i class="bi bi-person-circle"></i>
+											{{ followedUser.username }}
+										</a>
+										{# button to stop following a user #}
+										<form method="post" action="user/follow">
+											<input type="hidden" value="{{ followedUser.user_id }}" name="followedId">
+											<div class="d-flex gap-2">
+												<button type="submit" class="btn btn-primary btn-sm">
+													<i class="bi bi-dash-square-fill"></i>
+													Stop following
+													{{ followedUser.username }}
+												</button>
+											</div>
+										</form>
+									</div>
+								{% endfor %}
+							</div>
+						</div>
+					</div>
+				{% else %}
+					<div class="container d-flex justify-content-start">
+						<h2>
+							You follow nobody !
+						</h2>
+					</div>
+				{% endif %}
+				{# End of users followed by user #}
 			</div>
 		</div>
-	{% endblock %}
-	{% block javascript %}
-		<script src="assets/js/jsindex.js"></script>
-	{% endblock %}
+		{% endblock %}
+		{% block javascript %}
+			<script src="assets/js/jsprofil.js"></script>
+		{% endblock %}
