@@ -43,7 +43,7 @@ INSERT INTO `fav_photo` (`id`, `user_id`, `photo_id`) VALUES
 (52,	20,	31),
 (57,	18,	34),
 (58,	18,	33),
-(59,	18,	31);
+(60,	18,	31);
 
 DROP TABLE IF EXISTS `follower_followed`;
 CREATE TABLE `follower_followed` (
@@ -113,4 +113,15 @@ INSERT INTO `user` (`id`, `username`, `password`, `role`) VALUES
 (19,	'fred',	'$2y$10$7G3M3IsobtUNemUIyZtnH.lWDlRcvlFJhDu6KmzByBLMzwMUftPQC',	'user'),
 (20,	'user3',	'$2y$10$sbKiQoqmAuc4SsyarxH2n.aPW15VmwlROyFlDTDVV9pf7jQdDoVma',	'user');
 
--- 2023-04-30 20:04:49
+DROP TABLE IF EXISTS `vote`;
+CREATE TABLE `vote` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `vote` int NOT NULL,
+  `photo_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `photo_id` (`photo_id`),
+  CONSTRAINT `vote_ibfk_1` FOREIGN KEY (`photo_id`) REFERENCES `photo` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+-- 2023-05-03 11:00:46
