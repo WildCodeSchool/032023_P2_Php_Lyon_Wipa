@@ -8,7 +8,7 @@ class UserManager extends AbstractManager
 
     public function selectUserByName(string $username): array|false
     {
-        $statement = $this->pdo->prepare("SELECT * FROM user WHERE username = :username");
+        $statement = $this->pdo->prepare("SELECT * FROM "  . self::TABLE . " WHERE username = :username");
         $statement->bindValue(':username', $username, \PDO::PARAM_STR);
         $statement->execute();
 
@@ -28,8 +28,8 @@ class UserManager extends AbstractManager
     {
         $query = "SELECT *
                   FROM fav_photo 
-                  INNER JOIN photo 
-                  ON fav_photo.photo_id = photo.id 
+                  JOIN photo ON fav_photo.photo_id = photo.id 
+                  JOIN user ON photo.user_id = user.id
                   WHERE fav_photo.user_id = $userId";
 
         return $this->pdo->query($query)->fetchAll();

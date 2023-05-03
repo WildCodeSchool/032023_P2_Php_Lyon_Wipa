@@ -36,12 +36,18 @@ for (let i = 0; i < thumbnailImages.length; i++) {
         let photoPrompt = this.parentNode.dataset.photoPrompt;
         let photoDescription = this.parentNode.dataset.photoDescription;
         let photoDate = this.parentNode.dataset.photoDate;
+        let photoUser = this.parentNode.dataset.photoUser;
+
 
         document.getElementById('popup-image').setAttribute('src', photoUrl);
         document.getElementById('popup-title').textContent = photoTitle;
         document.getElementById('popup-prompt').textContent = photoPrompt;
         document.getElementById('popup-description').textContent = photoDescription;
         document.getElementById('popup-date').textContent = photoDate;
+        if (typeof photoUser !== 'undefined') {
+        document.getElementById('popup-username').textContent = photoUser;
+        }
+
 
         document.getElementById('popup-container').style.display = 'block';
     });
@@ -67,7 +73,6 @@ for (let i = 0; i < thumbnailEdits.length; i++) {
         let photoDate = this.parentNode.dataset.photoDate;
         let photoId = this.parentNode.dataset.photoId;
 
-
         document.getElementById('popup-image-edit').setAttribute('src', photoUrl);
         document.getElementById('popup-title-edit').value = photoTitle;
         document.getElementById('popup-prompt-edit').value = photoPrompt;
@@ -81,6 +86,10 @@ for (let i = 0; i < thumbnailEdits.length; i++) {
     document.getElementById('popup-close-btn').addEventListener('click', function () {
         document.getElementById('popup-container-edit').style.display = 'none';
     })
+    document.getElementById('popup-close-edit-btn').addEventListener('click', function () {
+        document.getElementById('popup-container-edit').style.display = 'none';
+    })
 };
+
 
 
