@@ -15,16 +15,16 @@
 		</div>
 	{% endif %}
 	<div class="container d-flex justify-content-start">
-		<div class="col-12 col-md-6 mt-3">
+		<div class="col-12 col-md-6 m-auto mt-3 mb-3">
 			{% if user %}
-				<h1>Hello
-					{{ user.username }}
-					!</h1>
+				<h1 class="text-center">
+					{{ user.username }} profil
+					</h1>
 			{% endif %}
 		</div>
 	</div>
 	{# start tabs nav #}
-	<ul class="nav nav-tabs" id="myTab" role="tablist">
+	<ul class="nav nav-tabs nav-justified mb-3" id="myTab" role="tablist">
 		<li class="nav-item" role="presentation">
 			<button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Your Pictures</button>
 		</li>
@@ -254,7 +254,7 @@
 				{# users followed by user #}
 					{% if followedUsers %}
 						<div class="container d-flex"> <div class="d-flex flex-column">
-							<h2 class="mt-4">Following User</h2>
+							<h2 class="mt-4">Followed Users</h2>
 							<div class="line mt-1"></div>
 						</div>
 					</div>
@@ -293,12 +293,7 @@
 				{% endif %}
 				{# End of users followed by user #}
 			</div>
-			</div>
-			<div class="container d-flex justify-content-start">
-				<div class="col-12 col-md-6">
-					<a class="btn btn-primary mb-3 mt-4 btn-sm" href="/">Index</a>
-				</div>
-			</div>
+		</div>
 		{% endblock %}
 		{% block javascript %}
 			<script src="assets/js/jsprofil.js"></script>
