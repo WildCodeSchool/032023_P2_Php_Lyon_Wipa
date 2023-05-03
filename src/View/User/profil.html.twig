@@ -18,8 +18,9 @@
 		<div class="col-12 col-md-6 m-auto mt-3 mb-3">
 			{% if user %}
 				<h1 class="text-center">
-					{{ user.username }} profil
-					</h1>
+					{{ user.username }}
+					profil
+				</h1>
 			{% endif %}
 		</div>
 	</div>
@@ -80,7 +81,7 @@
 													<i title="Remove from favorite" class="bi bi-heart-fill"></i>
 												{% else %}
 													{# empty heart button #}
-													<i title="Add from favorite" class="bi bi-heart"></i>
+													<i title="Add to favorite" class="bi bi-heart"></i>
 												{% endif %}
 											</button>
 										</form>
@@ -171,10 +172,10 @@
 									<div class="col">
 										<div class="img-container">
 											{% set formattedFav_date = userPhoto.date|date("d F Y") %}
-											<a href="#" data-photo-id="{{photo.id}}" data-photo-url="{{photo.link}}" data-photo-prompt="{{photo.prompt}}" data-photo-title="{{photo.title}}" data-photo-description="{{photo.description}}" data-photo-date="{{formattedFav_date}}" {% if user %} data-photo-user="{{photo.username}}" data-photo-user-id="{{photo.user_id}}" {% endif %}><img src="{{photo.link }}" alt="" class="img-fluid img-fit pop-up-image"></a>
+											<a href="#" data-photo-id="{{photo.photo_id}}" data-photo-url="{{photo.link}}" data-photo-prompt="{{photo.prompt}}" data-photo-title="{{photo.title}}" data-photo-description="{{photo.description}}" data-photo-date="{{formattedFav_date}}" {% if user %} data-photo-user="{{photo.username}}" data-photo-user-id="{{photo.user_id}}" {% endif %}><img src="{{photo.link}}" alt="" class="img-fluid img-fit pop-up-image"></a>
 											{# to be displayed only if user have favorites #}
 											<form action="fav/add" method="POST">
-												<input name="addfav" type="hidden" value="{{photo.photo.id}}">
+												<input name="addfav" type="hidden" value="{{photo.photo_id}}">
 												<button
 													type="submit" class="button-fav">
 													{# full heart button #}
@@ -191,12 +192,12 @@
 												{% endfor %}
 												<form method="post" action="user/follow">
 													<input type="hidden" value="{{photo.user_id}}" name="followedId">
-													<button type="submit"  class="button-follow">
-													{% if isFollowed == 1 %}
+													<button type="submit" class="button-follow">
+														{% if isFollowed == 1 %}
 															<i title="Unfollow this user" class="bi bi-dash-square-fill"></i>
-													{% else %}
+														{% else %}
 															<i title="Follow this user" class="bi bi-plus-square-fill"></i>
-													{% endif %}
+														{% endif %}
 													</button>
 												</form>
 											{% endif %}
@@ -292,7 +293,7 @@
 				{# End of users followed by user #}
 			</div>
 		</div>
-		{% endblock %}
-		{% block javascript %}
-			<script src="assets/js/jsprofil.js"></script>
-		{% endblock %}
+	{% endblock %}
+	{% block javascript %}
+		<script src="assets/js/jsprofil.js"></script>
+	{% endblock %}
