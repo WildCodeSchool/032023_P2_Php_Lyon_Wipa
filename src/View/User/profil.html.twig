@@ -234,14 +234,16 @@
 			</div>
 			<div class="container text-center mt-3">
 				<div class="col-12 col-md-6">
-					<div class="">
 						{% for followedUser in followedUsers %}
 							{# to be linked with follower photos #}
 							<div class="d-flex ">
-								<a href="#" class="btn btn-primary btn-sm me-2 mb-1">
+							<form method="post" action="followed/user">
+							<input type="hidden" value="{{ followedUser.user_id }}" name="followedId">
+								<button type="submit" class="btn btn-primary btn-sm me-2 mb-1">
 									<i class="bi bi-person-circle"></i>
 									{{ followedUser.username }}
-								</a>
+								</button>
+								</form>
 								{# button to stop following a user #}
 								<form method="post" action="user/follow">
 									<input type="hidden" value="{{ followedUser.user_id }}" name="followedId">
@@ -255,7 +257,6 @@
 								</form>
 							</div>
 						{% endfor %}
-					</div>
 				</div>
 			</div>
 		{% else %}

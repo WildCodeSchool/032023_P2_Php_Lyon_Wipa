@@ -1,0 +1,89 @@
+{% extends 'layout.html.twig' %}
+{% block title %}Wipa - UserFollowed
+{% endblock %}
+{% block content %}
+	<div class="container d-flex justify-content-start">
+		<div class="col-12 col-md-6 mt-3">
+			{% if user %}
+				<h1>Photos of {{ photo.user_id}}
+					</h1>
+			{% endif %}
+		</div>
+	</div>
+{% if photos is defined %}
+		<div class="container text-center mt-3">
+			<div class="col-md-12">
+				<div class="row row-cols-lg-5 row-cols-md-3 row-cols-2 g-0 mh-25 mw-25">
+					{% for photo in photos %}
+						<div class="col">
+							<div class="img-container">
+							{% set formatted_date = photo.date|date("d F Y") %}
+								<a href="#" data-photo-id="{{photo.id}}" data-photo-url="{{photo.link}}" data-photo-prompt="{{photo.prompt}}" data-photo-title="{{photo.title}}" data-photo-description="{{photo.description}}" data-photo-date="{{formatted_date}}" {% if user %} data-photo-user="{{photo.username}}" data-photo-user-id="{{photo.user_id}}" {% endif %}><img src="{{photo.link }}" alt="" class="img-fluid img-fit pop-up-image"></a>
+								{# to be displayed only if user is logged #}
+								{% if user %}
+									{% set isFav = 0 %}
+									{% for favId in favIds %}
+										{% if photo.id == favId.id %}
+											{% set isFav = 1 %}
+										{% endif %}
+									{% endfor %}
+									<form action="../fav/add" method="POST">
+										<input name="addfav" type="hidden" value="{{photo.id}}">
+										<button type="submit" class="button-fav">
+											{% if isFav == 1 %}
+												{# full heart button #}
+												<i  title="Remove from favorite"  class="bi bi-heart-fill"></i>
+											{% else %}
+												{# empty heart button #}
+												<i  title="Add from favorite" class="bi bi-heart"></i>										
+											{% endif %}
+										</button>
+									</form>
+								{% endif %}
+								{# END OF to be displayed only if user is logged #}
+								<div class="img-title">{{photo.title}}</div>
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+        {% endif %}
+		<div id="popup-container">
+			<div id="popup-content" class="d-flex flex-column flex-lg-row">
+				<img id="popup-image" src="" alt="" class="ms-md-5 ms-0">
+				<div id="popup-info">
+					<ul>
+						<li class="poptitle">Title :<p id="popup-title"></p>
+						</li>
+						<li>Prompt :</li>
+						<li></li>
+						<li>
+							<p id="popup-prompt"></p>
+						</li>
+						<li></li>
+						<li>Description :</li>
+						<li></li>
+						<li>
+							<p id="popup-description"></p>
+						</li>
+						<li></li>
+						<li>Added date :</li>
+						<li></li>
+						<li>
+							<p id="popup-date"></p>
+						</li>
+						{% if user %}
+							<li>
+								<p id="popup-username"></p>
+							</li>
+						{% endif %}
+					</ul>
+				</div>
+			</div>
+		</div>
+{% endblock %}
+{% block javascript %}
+	<script src="../assets/js/jsindex.js"></script>
+{% endblock %}
+

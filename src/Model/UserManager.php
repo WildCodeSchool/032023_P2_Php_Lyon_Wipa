@@ -15,7 +15,7 @@ class UserManager extends AbstractManager
         return $statement->fetch();
     }
 
-    public function selectUserPictures(int $userId): array
+    public function selectUserPictures(string $userId): array
     {
         $statement = $this->pdo->prepare("SELECT * FROM photo WHERE user_id = :userId");
         $statement->bindValue(':userId', $userId, \PDO::PARAM_STR);
