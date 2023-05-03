@@ -67,7 +67,7 @@ class FollowManager extends AbstractManager
         return ('User ' . $followedUsername['username'] . ' already followed.');
     }
 
-    public function selectFollowedByUser(int $userId): array
+    public function selectFollowedByUser(string $userId): array
     {
         $query = '
         SELECT follower_followed.user_id, user.username as username
