@@ -77,10 +77,10 @@
 											<button type="submit" class="button-fav">
 												{% if isFav == 1%}
 													{# full heart button #}
-													<i class="bi bi-heart-fill"></i>
+													<i title="Remove from favorite" class="bi bi-heart-fill"></i>
 												{% else %}
 													{# empty heart button #}
-													<i class="bi bi-heart"></i>
+													<i title="Add from favorite" class="bi bi-heart"></i>
 												{% endif %}
 											</button>
 										</form>
@@ -178,7 +178,7 @@
 												<button
 													type="submit" class="button-fav">
 													{# full heart button #}
-													<i class="bi bi-heart-fill"></i>
+													<i title="Remove from favorite" class="bi bi-heart-fill"></i>
 												</button>
 											</form>
 											{# Follow button #}
@@ -191,15 +191,13 @@
 												{% endfor %}
 												<form method="post" action="user/follow">
 													<input type="hidden" value="{{photo.user_id}}" name="followedId">
+													<button type="submit"  class="button-follow">
 													{% if isFollowed == 1 %}
-														<button type="submit" title="Follow this user" class="button-follow">
-															<i class="bi bi-dash-square-fill"></i>
-														</button>
+															<i title="Unfollow this user" class="bi bi-dash-square-fill"></i>
 													{% else %}
-														<button type="submit" title="Follow this user" class="button-follow">
-															<i class="bi bi-plus-square-fill"></i>
-														</button>
+															<i title="Follow this user" class="bi bi-plus-square-fill"></i>
 													{% endif %}
+													</button>
 												</form>
 											{% endif %}
 											{# END OF to be displayed only if user have favorites #}
