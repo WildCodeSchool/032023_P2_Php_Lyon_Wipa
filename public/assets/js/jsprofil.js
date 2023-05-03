@@ -1,11 +1,11 @@
 // Get all the images at the same size
 window.onload = function () {
     const images = document.querySelectorAll('.img-fit');
-    const containerWidth = document.querySelector('.container').clientWidth;
+    const containerWidth = document.querySelectorAll('.container').clientWidth;
     const numOfImages = images.length;
-    const totalWidth = numOfImages * 256;
     const imageWidth = 256;
     const imageHeight = 256;
+    const totalWidth = numOfImages * imageWidth;
     if (totalWidth <= containerWidth) {
         // If the total width of all images is less than or equal to the container width, we can center the images.
         const marginLeft = Math.floor((containerWidth - totalWidth) / 2);
