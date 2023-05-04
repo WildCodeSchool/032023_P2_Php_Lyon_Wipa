@@ -29,7 +29,7 @@
 											{% set isFav = 1 %}
 										{% endif %}
 									{% endfor %}
-									<form action="../fav/add" method="post">
+									<form action="/fav/add" method="post">
 										<input name="addfav" type="hidden" value="{{photo.id}}">
 										<button type="submit" class="button-fav">
 											{% if isFav == 1 %}
