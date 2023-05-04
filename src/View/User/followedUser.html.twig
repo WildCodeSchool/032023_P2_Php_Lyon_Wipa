@@ -5,8 +5,8 @@
 	<div class="container d-flex justify-content-start">
 		<div class="col-12 col-md-6 mt-3">
 			{% if user %}
-				<h1>Photos of
-					{{ userFollowed[0]['username'] }}
+				<h1>Pictures of
+					{{ userFollowed.username }}
 				</h1>
 				<div class="line mt-1"></div>
 			{% endif %}
@@ -29,7 +29,7 @@
 											{% set isFav = 1 %}
 										{% endif %}
 									{% endfor %}
-									<form action="../fav/add" method="POST">
+									<form action="../fav/add" method="post">
 										<input name="addfav" type="hidden" value="{{photo.id}}">
 										<button type="submit" class="button-fav">
 											{% if isFav == 1 %}
