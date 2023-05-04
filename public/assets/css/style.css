@@ -284,6 +284,6 @@ h1 span {
     width: 0;
   }
   100% {
-    width: calc(90%); 
+    width: calc(110%); 
   }
 }
