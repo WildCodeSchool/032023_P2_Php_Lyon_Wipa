@@ -54,11 +54,32 @@ class PhotoManager extends AbstractManager
     public function selectFavPhotos(int $userId): array
     {
         $query = 'SELECT f.photo_id, (COUNT(f.id) > 0) AS is_fav
-                  FROM photo p
+                  FROM ' . self::TABLE . ' p
                   LEFT JOIN fav_photo f ON p.id = f.photo_id AND f.user_id = :id
                   GROUP BY p.id';
         $statement = $this->pdo->prepare($query);
         $statement->execute(['id' => $userId]);
         return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+    /**
+     * select ALL photos from ALL users and add username => to be used to follow somebody
+     */
+    public function selectAllWithUsername(string $orderBy = '', string $direction = 'DESC'): array
+    {
+        $query = 'SELECT 
+        photo.id, 
+        photo.title, 
+        photo.link, 
+        photo.prompt, 
+        photo.description, 
+        photo.date, 
+        photo.user_id, 
+        user.username as username
+        FROM ' . self::TABLE . ' 
+        JOIN user ON photo.user_id = user.id';
+        if ($orderBy) {
+            $query .= ' ORDER BY ' . $orderBy . ' ' . $direction;
+        }
+        return $this->pdo->query($query)->fetchAll();
     }
 }

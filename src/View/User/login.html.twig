@@ -2,10 +2,10 @@
 {% block title %}Wipa - Login
 {% endblock %}
 {% block content %}
-	{% if messages is defined %}
-		{% for message in messages %}
+	{% if errors %}
+		{% for error in errors %}
 			<div class="alert alert-danger" role="alert">
-				{{ message|join(', ') }}
+				{{ error }}
 			</div>
 		{% endfor %}
 	{% endif %}
@@ -21,7 +21,7 @@
 					<label for="password" class="form-label d-none d-md-block">Password</label>
 					<input type="password" class="form-control" id="password" name="password" placeholder="Insert your password" required>
 				</div>
-				<button type="submit" class="btn btn-primary" id="submit" value="LOGIN">Login</button>
+				<button type="submit" class="btn btn-primary" id="submit">Login</button>
 			</form>
 		</div>
 	</div>
