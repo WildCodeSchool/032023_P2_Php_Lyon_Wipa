@@ -1,5 +1,4 @@
-const buttonsTab = document.querySelector('#myTab');
-const buttons = buttonsTab.querySelectorAll('button[data-bs-toggle="tab"]');
+const buttons = document.querySelectorAll('button[data-bs-toggle="tab"]');
 
 buttons.forEach(button => {
     button.addEventListener('shown.bs.tab', (event) => {
