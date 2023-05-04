@@ -26,13 +26,13 @@
 	{# start tabs nav #}
 	<ul class="nav nav-tabs nav-justified mt-4 mb-3" id="myTab" role="tablist">
 		<li class="nav-item" role="presentation">
-			<button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Your Pictures</button>
+			<button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#tab-pane-picture" type="button" role="tab" aria-controls="tab-pane-picture" aria-selected="true">Your Pictures</button>
 		</li>
 		<li class="nav-item" role="presentation">
-			<button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Your Favorites</button>
+			<button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#tab-pane-favorite" type="button" role="tab" aria-controls="tab-pane-favorite" aria-selected="false">Your Favorites</button>
 		</li>
 		<li class="nav-item" role="presentation">
-			<button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Followed Users</button>
+			<button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#tab-pane-follows" type="button" role="tab" aria-controls="tab-pane-follows" aria-selected="false">Followed Users</button>
 		</li>
 	</ul>
 	{# end tabs nav #}
@@ -40,7 +40,7 @@
 		class="tab-content" id="myTabContent">
 		{# userPhotos in 1st tab #}
 		<div
-			class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+			class="tab-pane fade show active" id="tab-pane-picture" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
 			{# photos posted by user #}
 			{% if userPhotos %}
 				<div class="container d-flex">
@@ -155,7 +155,7 @@
 			{# End of photos posted by user #}
 			{# favoritesPhotos in 2nd tab #}
 			<div
-				class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+				class="tab-pane fade" id="tab-pane-favorite" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
 				{# favorite photos of user #}
 				{% if photos %}
 					<div class="container d-flex">
@@ -247,7 +247,7 @@
 				{% endif %}
 			</div>
 			{# followedUsers in 3rd tab #}
-			<div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">
+			<div class="tab-pane fade" id="tab-pane-follows" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">
 				{# End of favorite photos of user #}
 {# users followed by user #}
 		{% if followedUsers %}
@@ -296,5 +296,6 @@
 		</div>
 	{% endblock %}
 	{% block javascript %}
+		<script src="assets/js/jsactivetab.js"></script>
 		<script src="assets/js/jsprofil.js"></script>
 	{% endblock %}
