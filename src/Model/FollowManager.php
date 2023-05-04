@@ -77,13 +77,4 @@ class FollowManager extends AbstractManager
 
         return $this->pdo->query($query)->fetchAll();
     }
-
-    public function selectUsernameFollowedByUser(string $userId): array
-    {
-        $query = "SELECT *
-                  FROM user 
-                  WHERE user.id = $userId";
-
-        return $this->pdo->query($query)->fetchAll();
-    }
 }
