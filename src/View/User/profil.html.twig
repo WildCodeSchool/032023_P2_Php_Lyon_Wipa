@@ -15,17 +15,16 @@
 		</div>
 	{% endif %}
 	<div class="container d-flex justify-content-start">
-		<div class="col-12 col-md-6 m-auto mt-3">
+		<div class="col-12 col-md-6 m-auto mt-4">
 			{% if user %}
-				<h1 class="text-center">
-					<span class="lineTitle">{{ user.username }}
-					profil</span>
+				<h1 class="text-center">{{ user.username }}	profil
 				</h1>
+				<div class="lineTitle"></div>
 			{% endif %}
 		</div>
 	</div>
 	{# start tabs nav #}
-	<ul class="nav nav-tabs nav-justified mb-3" id="myTab" role="tablist">
+	<ul class="nav nav-tabs nav-justified mt-4 mb-3" id="myTab" role="tablist">
 		<li class="nav-item" role="presentation">
 			<button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Your Pictures</button>
 		</li>

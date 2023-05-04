@@ -13,7 +13,7 @@
 /* General Design */
 
 .line {
-  animation-duration: 5s;
+  animation-duration: 4s;
   animation-name: sliding;
   animation-iteration-count: reverse;
   width: 25vw;
@@ -270,7 +270,7 @@ body {
   height: 2px;
   background-color: black;
   animation-name: stretch-line; 
-  animation-duration: 1.5s; 
+  animation-duration: 3s; 
   animation-timing-function: ease-out; 
   animation-fill-mode: forwards; 
 }
@@ -284,6 +284,6 @@ h1 span {
     width: 0;
   }
   100% {
-    width: calc(110%); 
+    width: calc(70%); 
   }
 }
