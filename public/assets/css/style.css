@@ -169,6 +169,10 @@ ul {
   object-fit: cover;
 }
 
+.sizeinput {
+  width: 22vw;
+}
+
 /* Pop-Up Index */
 #popup-container,
 #popup-container-edit {
