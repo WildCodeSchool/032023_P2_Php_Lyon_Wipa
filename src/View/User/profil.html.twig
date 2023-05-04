@@ -17,7 +17,8 @@
 	<div class="container d-flex justify-content-start">
 		<div class="col-12 col-md-6 m-auto mt-4">
 			{% if user %}
-				<h1 class="text-center">{{ user.username }}	profil
+				<h1 class="text-center">{{ user.username }}
+					profil
 				</h1>
 				<div class="lineTitle"></div>
 			{% endif %}
@@ -170,7 +171,7 @@
 								{% for photo in photos %}
 									<div class="col">
 										<div class="img-container">
-											{% set formattedFav_date = userPhoto.date|date("d F Y") %}
+											{% set formattedFav_date = photo.date|date("d F Y") %}
 											<a href="#" data-photo-id="{{photo.photo_id}}" data-photo-url="{{photo.link}}" data-photo-prompt="{{photo.prompt}}" data-photo-title="{{photo.title}}" data-photo-description="{{photo.description}}" data-photo-date="{{formattedFav_date}}" {% if user %} data-photo-user="{{photo.username}}" data-photo-user-id="{{photo.user_id}}" {% endif %}><img src="{{photo.link}}" alt="" class="img-fluid img-fit pop-up-image"></a>
 											{# to be displayed only if user have favorites #}
 											<form action="fav/add" method="POST">
@@ -249,49 +250,48 @@
 			{# followedUsers in 3rd tab #}
 			<div class="tab-pane fade" id="tab-pane-follows" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">
 				{# End of favorite photos of user #}
-{# users followed by user #}
-		{% if followedUsers %}
-			<div class="container d-flex">
-				<div class="d-flex flex-column">
-					<h2 class="mt-4">Following User</h2>
-					<div class="line mt-1"></div>
-				</div>
-			</div>
-			<div class="container text-center mt-3">
-				<div class="col-12 col-md-6">
-						{% for followedUser in followedUsers %}
-							{# to be linked with follower photos #}
-							<div class="d-flex ">
-							<form method="get" action="followed/user">
-							<input type="hidden" value="{{ followedUser.user_id }}" name="followedId">
-								<button type="submit" class="btn btn-primary btn-sm me-2 mb-1">
-									<i class="bi bi-person-circle"></i>
-									{{ followedUser.username }}
-								</button>
-								</form>
-								{# button to stop following a user #}
-								<form method="post" action="user/follow">
-									<input type="hidden" value="{{ followedUser.user_id }}" name="followedId">
-									<div class="d-flex gap-2">
-										<button type="submit" class="btn btn-primary btn-sm">
-											<i class="bi bi-dash-square-fill"></i>
-											Stop following
+				{# users followed by user #}
+					{% if followedUsers %}
+						<div class="container d-flex"> <div class="d-flex flex-column">
+							<h2 class="mt-4">Following User</h2>
+							<div class="line mt-1"></div>
+						</div>
+					</div>
+					<div class="container text-center mt-3">
+						<div class="col-12 col-md-6">
+							{% for followedUser in followedUsers %}
+								{# to be linked with follower photos #}
+								<div class="d-flex ">
+									<form method="get" action="followed/user">
+										<input type="hidden" value="{{ followedUser.user_id }}" name="followedId">
+										<button type="submit" class="btn btn-primary btn-sm me-2 mb-1">
+											<i class="bi bi-person-circle"></i>
 											{{ followedUser.username }}
 										</button>
-									</div>
-								</form>
-							</div>
-						{% endfor %}
-				</div>
-			</div>
-		{% else %}
-			<div class="container d-flex justify-content-start">
-				<h2>
-					You follow nobody !
-				</h2>
-			</div>
-		{% endif %}
-		{# End of users followed by user #}
+									</form>
+									{# button to stop following a user #}
+									<form method="post" action="user/follow">
+										<input type="hidden" value="{{ followedUser.user_id }}" name="followedId">
+										<div class="d-flex gap-2">
+											<button type="submit" class="btn btn-primary btn-sm">
+												<i class="bi bi-dash-square-fill"></i>
+												Stop following
+												{{ followedUser.username }}
+											</button>
+										</div>
+									</form>
+								</div>
+							{% endfor %}
+						</div>
+					</div>
+				{% else %}
+					<div class="container d-flex justify-content-start">
+						<h2>
+							You follow nobody !
+						</h2>
+					</div>
+				{% endif %}
+				{# End of users followed by user #}
 			</div>
 		</div>
 	{% endblock %}
