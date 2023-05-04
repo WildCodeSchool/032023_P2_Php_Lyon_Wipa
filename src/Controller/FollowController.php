@@ -43,8 +43,8 @@ class FollowController extends AbstractController
     {
 
         if ($this->user) {
-            if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                $data = array_map('trim', $_POST);
+            if ($_SERVER["REQUEST_METHOD"] == "GET") {
+                $data = array_map('trim', $_GET);
                 // is there a userfollowed id ?
                 if (isset($data['followedId']) && !empty($data['followedId'])) {
                     $userManager = new UserManager();
