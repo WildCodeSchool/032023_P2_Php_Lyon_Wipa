@@ -2,46 +2,46 @@
 {% block title %}Wipa - Register
 {% endblock %}
 {% block content %}
-	{% if errors is defined %}
+	{% if errors %}
 		{% for error in errors %}
 			<div class="alert alert-danger" role="alert">
 				{{ error }}
 			</div>
 		{% endfor %}
 	{% endif %}
-	{% if success is defined %}
-		{% for message in success %}
+	{% if successes %}
+		{% for success in successes %}
 			<div class="alert alert-success" role="alert">
-				{{ message }}
+				{{ success }}
 			</div>
-				<div class="container d-flex justify-content-center">
-			<a class="btn btn-primary mb-3 mt-3" href="/login">Go to Login Page</a>
-	</div>
+			<div class="container d-flex justify-content-center">
+				<a class="btn btn-primary mb-3 mt-3" href="/login">Go to Login Page</a>
+			</div>
 		{% endfor %}
 	{% endif %}
-	{% if success is empty %}
-	<div class="container d-flex justify-content-center">
-		<div class="col-12 col-md-6">
-			<h1 class="mt-4">Register</h1>
-			<form method="post">
-				<div class="mb-3">
-					<label for="username" class="form-label d-none d-md-block">Choose a username</label>
-					<input type="text" class="form-control" id="username" name="username" placeholder="Username" required>
-				</div>
-				<div class="mb-3">
-					<label for="password1" class="form-label d-none d-md-block">Enter a password</label>
-					<input type="password" class="form-control" id="password1" name="password1" placeholder="Enter a password" required>
-				</div>
-				<div class="mb-3">
-					<label for="password2" class="form-label d-none d-md-block">Retype your password</label>
-					<input type="password" class="form-control" id="password2" name="password2" placeholder="Retype your password" required>
-				</div>
+	{% if successes is empty %}
+		<div class="container d-flex justify-content-center">
+			<div class="col-12 col-md-6">
+				<h1 class="mt-4">Register</h1>
+				<form method="post">
+					<div class="mb-3">
+						<label for="username" class="form-label d-none d-md-block">Choose a username</label>
+						<input type="text" class="form-control" id="username" name="username" placeholder="Username" required>
+					</div>
+					<div class="mb-3">
+						<label for="password1" class="form-label d-none d-md-block">Enter a password</label>
+						<input type="password" class="form-control" id="password1" name="password1" placeholder="Enter a password" required>
+					</div>
+					<div class="mb-3">
+						<label for="password2" class="form-label d-none d-md-block">Retype your password</label>
+						<input type="password" class="form-control" id="password2" name="password2" placeholder="Retype your password" required>
+					</div>
 
-				<button type="submit" class="btn btn-primary" id="submit" value="register">Register</button>
+					<button type="submit" class="btn btn-primary" id="submit" value="register">Register</button>
 
-			</form>
+				</form>
+			</div>
 		</div>
-	</div>
 	{% endif %}
 {% endblock %}
 {% block javascript %}

@@ -13,11 +13,11 @@ return [
     'photo/edit' => ['PhotoController', 'edit', ['id']],
     'photo/delete' => ['PhotoController', 'delete',],
 
-    'photos/show' => ['PhotoController', 'show', ['id']],
-
     'register' => ['RegisterController', 'register',],
     'login'  => ['UserController', 'login',],
     'logout'  => ['UserController', 'logout',],
     'user'  => ['UserController', 'profil',],
-    'fav/add' => ['FavController', 'addFav',],
+    'user/follow'  => ['FollowController', 'toggleFollow',],
+    'fav/add' => ['FavController', 'toggleFav',],
+    'vote' => ['VoteController', 'vote',]
 ];
