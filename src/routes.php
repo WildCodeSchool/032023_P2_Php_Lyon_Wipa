@@ -19,4 +19,5 @@ return [
     'user'  => ['UserController', 'profil',],
     'user/follow'  => ['FollowController', 'toggleFollow',],
     'fav/add' => ['FavController', 'toggleFav',],
+    'followed/user' => ['FollowController', 'userFollowed'],
 ];

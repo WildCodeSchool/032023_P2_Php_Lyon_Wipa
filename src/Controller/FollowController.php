@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Model\FollowManager;
+use App\Model\FavManager;
+use App\Model\UserManager;
 
 class FollowController extends AbstractController
 {
@@ -35,5 +37,30 @@ class FollowController extends AbstractController
             }
         }
         header("Location: " . $_SERVER['HTTP_REFERER']);
+    }
+
+    public function userFollowed(): string
+    {
+
+        if ($this->user) {
+            if ($_SERVER["REQUEST_METHOD"] == "GET") {
+                $data = array_map('trim', $_GET);
+                // is there a userfollowed id ?
+                if (isset($data['followedId']) && !empty($data['followedId'])) {
+                    $userManager = new UserManager();
+                    $photos = $userManager->selectUserPictures($data['followedId']);
+                    $favManager = new FavManager();
+                    $favIds = $favManager->selectUserFavs($this->user['id']);
+                    $userFollowed = $userManager->selectOneById((int)$data['followedId']);
+                    return $this->twig->render('User/followedUser.html.twig', [
+                    'photos' => $photos,
+                    'favIds' => $favIds,
+                    'userFollowed' => $userFollowed,
+                    ]);
+                }
+            }
+        }
+        header('location : /');
+        die();
     }
 }
