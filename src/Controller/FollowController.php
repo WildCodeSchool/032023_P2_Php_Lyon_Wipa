@@ -52,11 +52,11 @@ class FollowController extends AbstractController
                     $favManager = new FavManager();
                     $favIds = $favManager->selectUserFavs($this->user['id']);
                     $followManager = new FollowManager();
-                    $userFollowed = $followManager->selectFollowedByUser($data['followedId']);
+                    $userFollowed = $followManager->selectUsernameFollowedByUser($data['followedId']);
                     return $this->twig->render('User/followedUser.html.twig', [
                     'photos' => $photos,
                     'favIds' => $favIds,
-                    'userFollowed' => $userFollowed
+                    'userFollowed' => $userFollowed,
                     ]);
                 }
             }
