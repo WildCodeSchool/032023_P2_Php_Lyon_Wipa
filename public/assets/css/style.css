@@ -13,7 +13,7 @@
 /* General Design */
 
 .line {
-  animation-duration: 5s;
+  animation-duration: 4s;
   animation-name: sliding;
   animation-iteration-count: reverse;
   width: 25vw;
@@ -173,6 +173,10 @@ ul {
   object-fit: cover;
 }
 
+.sizeinput {
+  width: 22vw;
+}
+
 /* Pop-Up Index */
 #popup-container,
 #popup-container-edit {
@@ -256,4 +260,38 @@ body {
 .btn:hover {
   background-color: var(--accent-color);
   opacity: 0.9;
+}
+
+/* Profil Page */
+.lineTitle {
+  position: relative; 
+  text-align: center; 
+}
+
+.lineTitle::before {
+  content: ""; 
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%); 
+  width: 0; 
+  height: 2px;
+  background-color: black;
+  animation-name: stretch-line; 
+  animation-duration: 3s; 
+  animation-timing-function: ease-out; 
+  animation-fill-mode: forwards; 
+}
+
+h1 span {
+  display: inline-block;
+}
+
+@keyframes stretch-line {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: calc(70%); 
+  }
 }
