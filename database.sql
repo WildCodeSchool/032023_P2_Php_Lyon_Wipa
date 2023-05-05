@@ -42,13 +42,7 @@ INSERT INTO `fav_photo` (`id`, `user_id`, `photo_id`) VALUES
 (51,	20,	29),
 (52,	20,	31),
 (58,	18,	33),
-(60,	18,	16),
-(61,	18,	25),
-(62,	18,	31),
-(63,	18,	32),
-(64,	18,	5),
-(65,	21,	33),
-(66,	21,	34);
+(59,	18,	31);
 
 DROP TABLE IF EXISTS `follower_followed`;
 CREATE TABLE `follower_followed` (
@@ -132,24 +126,6 @@ CREATE TABLE `vote` (
   CONSTRAINT `vote_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-INSERT INTO `vote` (`id`, `photo_id`, `user_id`) VALUES
-(1,	34,	18),
-(2,	32,	18),
-(3,	33,	18),
-(4,	29,	18),
-(5,	27,	18),
-(6,	28,	18),
-(7,	31,	18),
-(8,	19,	18),
-(9,	7,	18),
-(10,	1,	18),
-(11,	1,	21),
-(12,	19,	21),
-(13,	28,	21),
-(14,	33,	21),
-(15,	32,	21),
-(16,	29,	21),
-(17,	5,	21),
-(18,	27,	21);
+-- 2023-04-30 20:04:49
 
 -- 2023-05-04 09:59:21
