@@ -241,6 +241,10 @@ h2 {
   width: 50vw;
 }
 
+.username-link {
+  color : var(--accent-color);
+}
+
 /* Font */
 
 body {
