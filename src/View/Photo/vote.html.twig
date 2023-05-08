@@ -16,11 +16,79 @@
 			</div>
 		{% endfor %}
 	{% endif %}
+	{# a title and a presentation of the contest page #}
+	<div class="container mt-5">
+		<h1 class="text-center">AI-Generated Images Contest: The Art of Intelligence</h1>
+		<p class="lead mt-4 text-center">
+			Welcome to our AI-Generated Images Contest "The Art of Intelligence"! You are now registered and can participate in this contest by submitting your AI-generated image creations and compete for amazing prizes. Share your works with our community and vote for your favorite images. The images with the most votes will be rewarded.
+		</p>
+		<p class="text-center">
+			<strong>Here are the voting rules:</strong>
+		</p>
+		<ul class="list-unstyled text-left">
+			<li>&#8226; Each registered member can vote for as many images as they want, but only once for each image.</li>
+			<li>&#8226; Votes are anonymous and cannot be changed once submitted.</li>
+			<li>&#8226; The contest ends on [<span class="text-danger">end date</span>], and the winners will be announced the following day.</li>
+		</ul>
+		<p class="mt-4 text-center">
+			<strong>So, what are you waiting for? Share your AI-generated images and vote for your favorites! Good luck to all participants, and may the best images win!</strong>
+		</p>
+	</div>
+	{# end of the presentation of the contest page #}
 	{% if photos is defined %}
 		<div class="container text-center mt-3">
 			<div class="col-md-12">
-				<div class="row row-cols-lg-5 row-cols-md-3 row-cols-2 g-0 mh-25 mw-25">
-					{% for photo in photos %}
+				{# Display the top 3 photos #}
+				<div class="row row-cols-lg-3 row-cols-md-3 row-cols-1 g-4 custom-margin">
+					{% for photo in photos|slice(0, 3) %}
+						{# Start of the photo container #}
+						{% set photo_position = loop.index %}
+						<div class="col">
+							<div class="d-flex align-items-center">
+								{# Display the rank for the top 3 photos #}
+                                <div class="h1 mb-2 me-3 display-1" >{{ photo_position }}</div>
+								<div class="img-container">
+									{# Display the photo thumbnail with a link to open the full image #}
+									<a href="#" data-photo-id="{{photo.id}}" data-photo-url="{{photo.link}}" data-photo-prompt="{{photo.prompt}}" data-photo-title="{{photo.title}}" data-photo-description="{{photo.description}}" data-photo-date="{{formatted_date}}" {% if user %} data-photo-user="{{photo.username}}" data-photo-user-id="{{photo.user_id}}" {% endif %}><img src="{{photo.link }}" alt="" class="img-fluid img-fit pop-up-image"></a>
+									{# Display the vote count if it's not zero #}
+									{% if votesByPhoto[photo.id] != 0 %}
+										<div class="vote-count position-absolute top-0 start-0 text-black bg-light rounded px-2 py-1 m-2">{{ votesByPhoto[photo.id] }}</div>
+									{% endif %}
+									{% if photo.id not in votedPhotosIds %}
+										<form action="vote" method="POST">
+											<input name="addVote" type="hidden" value="{{photo.id}}">
+											<button type="submit" title="Votes here" class="button-vote" name="addVote" value="{{ photo.id }}">
+												{# SVG code for the vote icon #}
+												<svg width="24px" height="24px" viewbox="0 0 18 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+													<title>how_to_vote</title>
+													<desc>Created with Sketch.</desc>
+													<g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+														<g id="Rounded" transform="translate(-205.000000, -1484.000000)">
+															<g id="Content" transform="translate(100.000000, 1428.000000)">
+																<g id="-Round-/-Content-/-how_to_vote" transform="translate(102.000000, 54.000000)">
+																	<g>
+																		<polygon id="Path" points="0 0 24 0 24 24 0 24"></polygon>
+																		<path d="M11.34,15.02 C11.73,15.41 12.36,15.41 12.75,15.02 L19.11,8.66 C19.5,8.27 19.5,7.64 19.11,7.25 L14.16,2.3 C13.78,1.9 13.15,1.9 12.76,2.29 L6.39,8.66 C6,9.05 6,9.68 6.39,10.07 L11.34,15.02 Z M13.46,4.41 L17,7.95 L12.05,12.9 L8.51,9.36 L13.46,4.41 Z M20.41,15.41 L18.29,13.29 C18.11,13.11 17.85,13 17.59,13 L17.32,13 L15.32,15 L17.23,15 L19,17 L5,17 L6.78,15 L8.83,15 L6.83,13 L6.41,13 C6.14,13 5.89,13.11 5.7,13.29 L3.58,15.41 C3.21,15.79 3,16.3 3,16.83 L3,20 C3,21.1 3.9,22 5,22 L19,22 C20.1,22 21,21.11 21,20 L21,16.83 C21,16.3 20.79,15.79 20.41,15.41 Z" id="🔹Icon-Color" fill="currentColor"></path>
+																	</g>
+																</g>
+															</g>
+														</g>
+													</g>
+												</svg>
+											</button>
+										</form>
+									{% endif %}
+								</div>
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+				{# Start of the photo grid for the rest of the photos #}
+				<div
+					class="row row-cols-lg-5 row-cols-md-3 row-cols-2 g-0 mh-25 mw-25">
+					{# Loop through the rest of the photos #}
+					{% for photo in photos|slice(3) %}
+						{# Start of the photo container #}
 						<div class="col">
 							<div class="img-container">
 								{% set formatted_date = photo.date|date("d F Y") %}
@@ -33,8 +101,7 @@
 								{% if photo.id not in votedPhotosIds %}
 									<form action="vote" method="POST">
 										<input name="addVote" type="hidden" value="{{photo.id}}">
-										<button
-											type="submit" title="Votez pour cette photo" class="button-vote" name="addVote" value="{{ photo.id }}">
+										<button type="submit" title="Votes here" class="button-vote" name="addVote" value="{{ photo.id }}">
 											{# SVG code for the vote icon #}
 											<svg width="24px" height="24px" viewbox="0 0 18 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 												<title>how_to_vote</title>
@@ -60,8 +127,10 @@
 						</div>
 					{% endfor %}
 				</div>
+				{# End of the photo grid for the rest of the photos #}
 			</div>
 		</div>
+		{# End of the main container for the photo gallery #}
 		<div id="popup-container">
 			<div id="popup-content" class="d-flex flex-column flex-lg-row">
 				<img id="popup-image" src="" alt="" class="ms-md-5 ms-0">

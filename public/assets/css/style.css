@@ -287,6 +287,16 @@ h1 span {
   display: inline-block;
 }
 
+.custom-margin {
+  margin-bottom: 200px; 
+}
+
+.h1 {
+  font-size: 150px;
+  color: gold;
+}
+
+
 @keyframes stretch-line {
   0% {
     width: 0;
