@@ -1,5 +1,12 @@
 const followForms = document.querySelectorAll(".bi-dash-square-fill, .bi-plus-square-fill");
 
+const refreshFollowing = document.getElementById("contact-tab");
+refreshFollowing.addEventListener('click', function (event1) {
+    window.location.reload();
+});
+
+
+
 for (let i = 0; i < followForms.length; i++) {
     let followForm = followForms[i]
 
@@ -38,3 +45,4 @@ for (let i = 0; i < followForms.length; i++) {
             });
     });
 }
+
