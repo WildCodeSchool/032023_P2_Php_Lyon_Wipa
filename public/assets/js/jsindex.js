@@ -48,18 +48,23 @@ for (let i = 0; i < thumbnailImages.length; i++) {
             document.getElementById('popup-username').textContent = photoUser;
         }
 
-        // Update userPhoto input value with photoUserId
-        document.querySelector('#popup-info input[name="userPhoto"]').value = photoUserId;
+        let userPhotoInput = document.querySelector('#popup-info input[name="userPhoto"]');
+        if (userPhotoInput) {
+            userPhotoInput.value = photoUserId;
+        }
 
         document.getElementById('popup-container').style.display = 'block';
     });
     document.getElementById('popup-container').addEventListener('click', function () {
         this.style.display = 'none';
-    })
+    });
 };
 
-document.getElementById('popup-username-link').onclick = function() {
-    document.querySelector('#popup-info form').submit();
+let popupUsernameLink = document.getElementById('popup-username-link');
+if (popupUsernameLink) {
+    popupUsernameLink.onclick = function () {
+        document.querySelector('#popup-info form').submit();
+    }
 }
 
 
