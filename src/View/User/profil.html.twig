@@ -194,9 +194,9 @@
 													<input type="hidden" value="{{photo.user_id}}" name="followedId">
 													<button type="submit" class="button-follow">
 														{% if isFollowed == 1 %}
-															<i title="Unfollow this user" class="bi bi-dash-square-fill"></i>
+															<i title="Unfollow user {{ photo.username }}" data-photo-user="{{photo.username}}" class="bi bi-dash-square-fill"></i>
 														{% else %}
-															<i title="Follow this user" class="bi bi-plus-square-fill"></i>
+															<i title="Follow user {{ photo.username }}" data-photo-user="{{photo.username}}" class="bi bi-plus-square-fill"></i>
 														{% endif %}
 													</button>
 												</form>
@@ -298,4 +298,5 @@
 	{% block javascript %}
 		<script src="assets/js/jsactivetab.js"></script>
 		<script src="assets/js/jsprofil.js"></script>
+		<script src="assets/js/jsfollownotif.js"></script>
 	{% endblock %}
