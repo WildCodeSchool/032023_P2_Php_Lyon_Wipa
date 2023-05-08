@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Model\PhotoManager;
 use App\Model\FavManager;
 use App\Model\FollowManager;
+use App\Model\UserManager;
 
 class PhotoController extends AbstractController
 {
@@ -150,5 +151,29 @@ class PhotoController extends AbstractController
 
             header('Location: /user');
         }
+    }
+
+    public function userPhotos(): string
+    {
+
+        if ($this->user) {
+            if ($_SERVER["REQUEST_METHOD"] == "GET") {
+                $data = array_map('trim', $_GET);
+                if (isset($data['userPhoto']) && !empty($data['userPhoto'])) {
+                    $userManager = new UserManager();
+                    $photos = $userManager->selectUserPictures($data['userPhoto']);
+                    $favManager = new FavManager();
+                    $favIds = $favManager->selectUserFavs($this->user['id']);
+                    $username = $userManager->selectOneById((int)$data['userPhoto']);
+                    return $this->twig->render('User/photos.html.twig', [
+                    'photos' => $photos,
+                    'favIds' => $favIds,
+                    'username' => $username,
+                    ]);
+                }
+            }
+        }
+        header('location : /');
+        die();
     }
 }
