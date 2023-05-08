@@ -1,9 +1,11 @@
 const followForms = document.querySelectorAll(".bi-dash-square-fill, .bi-plus-square-fill");
 
 const refreshFollowing = document.getElementById("contact-tab");
-refreshFollowing.addEventListener('click', function (event1) {
-    window.location.reload();
-});
+if (typeof refreshFollowing !== 'undefined') {
+    refreshFollowing.addEventListener('click', function (event1) {
+        window.location.reload();
+    });
+}
 
 
 
