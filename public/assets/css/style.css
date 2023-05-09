@@ -95,7 +95,7 @@ ul {
   transition: opacity 0.2s ease-in-out;
 }
 
-.button-fav {
+.button-fav, .button-vote{
   position: absolute;
   top: 0;
   right: 0;
@@ -146,12 +146,16 @@ ul {
   background: none;
   transition: opacity 0.2s ease-in-out;
 }
+
 .img-container:hover .button-follow {
   opacity: 0.8;
 }
 
 
 .img-container:hover .button-fav {
+  opacity: 0.8;
+}
+.img-container:hover .button-vote {
   opacity: 0.8;
 }
 
@@ -237,7 +241,7 @@ h2 {
   font-style: italic;
 }
 
-.form-control {
+.input-edit {
   width: 50vw;
 }
 
