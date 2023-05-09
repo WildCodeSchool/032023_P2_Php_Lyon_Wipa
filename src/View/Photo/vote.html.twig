@@ -101,7 +101,8 @@
 								{% if photo.id not in votedPhotosIds %}
 									<form action="vote" method="POST">
 										<input name="addVote" type="hidden" value="{{photo.id}}">
-										<button type="submit" title="Votes here" class="button-vote" name="addVote" value="{{ photo.id }}">
+										<button
+											type="submit" title="Vote here" class="button-vote" name="addVote" value="{{ photo.id }}">
 											{# SVG code for the vote icon #}
 											<svg width="24px" height="24px" viewbox="0 0 18 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 												<title>how_to_vote</title>
