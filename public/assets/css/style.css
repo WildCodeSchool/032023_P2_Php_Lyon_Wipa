@@ -291,9 +291,10 @@ h1 span {
   margin-bottom: 200px; 
 }
 
-.h1 {
+.numbertop {
   font-size: 150px;
-  color: gold;
+  color: black;
+  font-family:  var(--content-font);
 }
 
 

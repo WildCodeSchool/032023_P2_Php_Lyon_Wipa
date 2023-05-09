@@ -43,10 +43,10 @@
 					{% for photo in photos|slice(0, 3) %}
 						{# Start of the photo container #}
 						{% set photo_position = loop.index %}
-						<div class="col">
-							<div class="d-flex align-items-center">
+						<div class="col d-flex justify-content-center">
+							<div class="d-flex align-items-center ">
 								{# Display the rank for the top 3 photos #}
-                                <div class="h1 mb-2 me-3 display-1" >{{ photo_position }}</div>
+                                <div class="numbertop mb-2 me-3 " >{{ photo_position }}</div>
 								<div class="img-container">
 									{# Display the photo thumbnail with a link to open the full image #}
 									<a href="#" data-photo-id="{{photo.id}}" data-photo-url="{{photo.link}}" data-photo-prompt="{{photo.prompt}}" data-photo-title="{{photo.title}}" data-photo-description="{{photo.description}}" data-photo-date="{{formatted_date}}" {% if user %} data-photo-user="{{photo.username}}" data-photo-user-id="{{photo.user_id}}" {% endif %}><img src="{{photo.link }}" alt="" class="img-fluid img-fit pop-up-image"></a>
