@@ -30,7 +30,7 @@ for (let i = 0; i < thumbnailImages.length; i++) {
         let photoDescription = this.parentNode.dataset.photoDescription;
         let photoDate = this.parentNode.dataset.photoDate;
         let photoUser = this.parentNode.dataset.photoUser;
-
+        let photoUserId = this.parentNode.dataset.photoUserId;
 
         document.getElementById('popup-image').setAttribute('src', photoUrl);
         document.getElementById('popup-title').textContent = photoTitle;
@@ -38,15 +38,19 @@ for (let i = 0; i < thumbnailImages.length; i++) {
         document.getElementById('popup-description').textContent = photoDescription;
         document.getElementById('popup-date').textContent = photoDate;
         if (typeof photoUser !== 'undefined') {
-        document.getElementById('popup-username').textContent = photoUser;
+            document.getElementById('popup-username').textContent = photoUser;
         }
 
+        let userPhotoInput = document.querySelector('#popup-info input[name="userPhoto"]');
+        if (userPhotoInput) {
+            userPhotoInput.value = photoUserId;
+        }
 
         document.getElementById('popup-container').style.display = 'block';
     });
     document.getElementById('popup-container').addEventListener('click', function () {
         this.style.display = 'none';
-    })
+    });
 };
 
 // Get a pop-up on click on the edit button with all informations
