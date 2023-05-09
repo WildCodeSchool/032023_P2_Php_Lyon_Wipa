@@ -21,7 +21,7 @@ for (let i = 0; i < followForms.length; i++) {
                 };
                 let notification = document.createElement('div');
                 notification.classList.add('follow-notification');
-                notification.textContent = `You are following ${photoUser}.`;
+                notification.textContent = `You are following ${photoUser}`;
                 followButton.parentNode.insertBefore(notification, followButton);
                 followButton.style.display = 'none';
                 setTimeout(() => {
@@ -37,7 +37,7 @@ for (let i = 0; i < followForms.length; i++) {
                 };
                 let notification = document.createElement('div');
                 notification.classList.add('follow-notification');
-                notification.textContent = `You stopped following ${photoUser}.`;
+                notification.textContent = `You stopped following ${photoUser}`;
                 followButton.parentNode.insertBefore(notification, followButton);
                 followButton.style.display = 'none';
                 setTimeout(() => {
