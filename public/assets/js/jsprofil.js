@@ -79,7 +79,4 @@ for (let i = 0; i < thumbnailEdits.length; i++) {
     document.getElementById('popup-close-btn').addEventListener('click', function () {
         document.getElementById('popup-container-edit').style.display = 'none';
     })
-    document.getElementById('popup-close-edit-btn').addEventListener('click', function () {
-        document.getElementById('popup-container-edit').style.display = 'none';
-    })
 };
