@@ -175,9 +175,12 @@ ul {
   object-fit: cover;
 }
 
-.sizeinput {
-  width: 22vw;
+.winner-img-fit {
+  max-width: 90%;
+  max-height: 90%;
+  object-fit: cover;
 }
+
 
 /* Pop-Up Index */
 #popup-container,
@@ -249,7 +252,7 @@ h2 {
 }
 
 .username-link {
-  color : var(--accent-color);
+  color: var(--accent-color);
 }
 
 /* Font */
@@ -288,7 +291,7 @@ body {
   transform: translateX(-50%);
   width: 0;
   height: 2px;
-  background-color: black;
+  background-color: var(--dark-color);
   animation-name: stretch-line;
   animation-duration: 3s;
   animation-timing-function: ease-out;
@@ -300,13 +303,13 @@ h1 span {
 }
 
 .custom-margin {
-  margin-bottom: 200px; 
+  margin-bottom: 200px;
 }
 
 .numbertop {
-  font-size: 9rem;
-  color: black;
-  font-family:  var(--content-font);
+  font-size: 3rem;
+  color: var(--dark-color);
+  font-family: var(--content-font);
 }
 
 
