@@ -265,6 +265,11 @@ body {
   opacity: 0.9;
 }
 
+.follow-notification {
+  font-size: 0.8em;
+}
+
+
 /* Profil Page */
 .lineTitle {
   position: relative;
@@ -297,17 +302,5 @@ h1 span {
 
   100% {
     width: calc(70%);
-  }
-}
-
-.alert {
-  animation: autoHide 0s ease-in 2s forwards;
-}
-
-@keyframes autoHide {
-  to {
-    width: 0;
-    height: 0;
-    overflow: hidden;
   }
 }
