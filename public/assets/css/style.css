@@ -175,13 +175,6 @@ ul {
   object-fit: cover;
 }
 
-.winner-img-fit {
-  max-width: 90%;
-  max-height: 90%;
-  object-fit: cover;
-}
-
-
 /* Pop-Up Index */
 #popup-container,
 #popup-container-edit {
