@@ -51,6 +51,16 @@ class PhotoController extends AbstractController
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $photo = array_map('trim', $_POST);
+
+                    // Retrieve the photo from the database
+                    $photoManager = new PhotoManager();
+                    $dbPhoto = $photoManager->selectOneById(intval($photo['id']));
+
+        // Check if the photo belongs to the current user
+            if ($dbPhoto['user_id'] !== $this->user['id']) {
+                header('Location: /user');
+                exit();
+            }
             // is there a title text ?
             $this->validateTitle($photo);
             // is there a prompt text ?
