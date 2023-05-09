@@ -61,11 +61,11 @@ for (let i = 0; i < thumbnailImages.length; i++) {
 };
 
 let popupUsernameLink = document.getElementById('popup-username-link');
-if (popupUsernameLink) {
-    popupUsernameLink.onclick = function () {
-        document.querySelector('#popup-info form').submit();
-    }
-}
+popupUsernameLink.addEventListener('click',function (event) {
+    this.parentNode.submit();
+});
+
+
 
 
 // Get a pop-up on click on the edit button with all informations
