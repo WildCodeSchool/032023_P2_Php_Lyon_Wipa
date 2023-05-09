@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Model\VoteManager;
 use App\Model\PhotoManager;
-use App\Model\FavManager;
 
 class VoteController extends AbstractController
 {
