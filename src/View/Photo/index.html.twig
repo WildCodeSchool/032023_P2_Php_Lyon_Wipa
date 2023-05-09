@@ -23,7 +23,7 @@
 					{% for photo in photos %}
 						<div class="col">
 							<div class="img-container">
-							{% set formatted_date = photo.date|date("d F Y") %}
+								{% set formatted_date = photo.date|date("d F Y") %}
 								<a href="#" data-photo-id="{{photo.id}}" data-photo-url="{{photo.link}}" data-photo-prompt="{{photo.prompt}}" data-photo-title="{{photo.title}}" data-photo-description="{{photo.description}}" data-photo-date="{{formatted_date}}" {% if user %} data-photo-user="{{photo.username}}" data-photo-user-id="{{photo.user_id}}" {% endif %}><img src="{{photo.link }}" alt="" class="img-fluid img-fit pop-up-image"></a>
 								{# to be displayed only if user is logged #}
 								{% if user %}
@@ -38,10 +38,10 @@
 										<button type="submit" class="button-fav">
 											{% if isFav == 1 %}
 												{# full heart button #}
-												<i  title="Remove from favorite"  class="bi bi-heart-fill"></i>
+												<i title="Remove from favorite" class="bi bi-heart-fill"></i>
 											{% else %}
 												{# empty heart button #}
-												<i  title="Add from favorite" class="bi bi-heart"></i>										
+												<i title="Add to favorite" class="bi bi-heart"></i>
 											{% endif %}
 										</button>
 									</form>
@@ -53,16 +53,16 @@
 												{% set isFollowed = 1 %}
 											{% endif %}
 										{% endfor %}
-										<form method="post" action="user/follow">
-											<input type="hidden" value="{{photo.user_id}}" name="followedId">
-											<button type="submit" class="button-follow">
-											{% if isFollowed == 1 %}												
-													<i title="Unfollow this user" class="bi bi-dash-square-fill"></i>
+
+										<button type="submit" class="button-follow">
+											{% if isFollowed == 1 %}
+												<i title="Unfollow user {{photo.username}}" data-photo-user="{{photo.username}}" data-photo-user-id="{{photo.user_id}}" class="bi bi-dash-square-fill"></i>
 											{% else %}
-													<i title="Follow this user" class="bi bi-plus-square-fill"></i>
+												<i title="Follow user {{photo.username}}" data-photo-user="{{photo.username}}" data-photo-user-id="{{photo.user_id}}" class="bi bi-plus-square-fill"></i>
 											{% endif %}
-											</button>
-										</form>
+										</button>
+
+
 									{% endif %}
 								{% endif %}
 								{# END OF to be displayed only if user is logged #}
@@ -113,4 +113,5 @@
 
 {% block javascript %}
 	<script src="assets/js/jsindex.js"></script>
+	<script src="assets/js/jsfollowindex.js"></script>
 {% endblock %}

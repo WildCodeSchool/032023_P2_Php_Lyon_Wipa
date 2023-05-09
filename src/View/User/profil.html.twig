@@ -190,16 +190,15 @@
 														{% set isFollowed = 1 %}
 													{% endif %}
 												{% endfor %}
-												<form method="post" action="user/follow">
-													<input type="hidden" value="{{photo.user_id}}" name="followedId">
-													<button type="submit" class="button-follow">
-														{% if isFollowed == 1 %}
-															<i title="Unfollow this user" class="bi bi-dash-square-fill"></i>
-														{% else %}
-															<i title="Follow this user" class="bi bi-plus-square-fill"></i>
-														{% endif %}
-													</button>
-												</form>
+
+												<button type="submit" class="button-follow">
+													{% if isFollowed == 1 %}
+														<i title="Unfollow user {{photo.username}}" data-photo-user="{{photo.username}}" data-photo-user-id="{{photo.user_id}}" class="bi bi-dash-square-fill"></i>
+													{% else %}
+														<i title="Follow user {{photo.username}}" data-photo-user="{{photo.username}}" data-photo-user-id="{{photo.user_id}}" class="bi bi-plus-square-fill"></i>
+													{% endif %}
+												</button>
+
 											{% endif %}
 											{# END OF to be displayed only if user have favorites #}
 											<div class="img-title">{{photo.title}}</div>
@@ -259,29 +258,33 @@
 					</div>
 					<div class="container text-center mt-3">
 						<div class="col-12 col-md-6">
-							{% for followedUser in followedUsers %}
-								{# to be linked with follower photos #}
-								<div class="d-flex ">
-									<form method="get" action="followed/user">
-										<input type="hidden" value="{{ followedUser.user_id }}" name="followedId">
-										<button type="submit" class="btn btn-primary btn-sm me-2 mb-1">
-											<i class="bi bi-person-circle"></i>
-											{{ followedUser.username }}
-										</button>
-									</form>
-									{# button to stop following a user #}
-									<form method="post" action="user/follow">
-										<input type="hidden" value="{{ followedUser.user_id }}" name="followedId">
-										<div class="d-flex gap-2">
-											<button type="submit" class="btn btn-primary btn-sm">
-												<i class="bi bi-dash-square-fill"></i>
-												Stop following
+							<div id="followedUsers">
+								{% for followedUser in followedUsers %}
+
+									{# to be linked with follower photos #}
+									<div class="d-flex">
+										<form method="get" action="followed/user">
+											<input type="hidden" value="{{ followedUser.user_id }}" name="followedId">
+											<button type="submit" class="btn btn-primary btn-sm me-2 mb-1">
+												<i class="bi bi-person-circle"></i>
 												{{ followedUser.username }}
 											</button>
-										</div>
-									</form>
-								</div>
-							{% endfor %}
+										</form>
+										{# button to stop following a user #}
+										<form method="post" action="user/follow">
+											<input type="hidden" value="{{ followedUser.user_id }}" name="followedId">
+											<div class="d-flex gap-2">
+												<button type="submit" class="btn btn-primary btn-sm">
+													<i class="bi bi-dash-square-fill"></i>
+													Stop following
+													{{ followedUser.username }}
+												</button>
+											</div>
+										</form>
+									</div>
+
+								{% endfor %}
+							</div>
 						</div>
 					</div>
 				{% else %}
@@ -298,4 +301,5 @@
 	{% block javascript %}
 		<script src="assets/js/jsactivetab.js"></script>
 		<script src="assets/js/jsprofil.js"></script>
+		<script src="assets/js/jsfollowprofil.js"></script>
 	{% endblock %}
