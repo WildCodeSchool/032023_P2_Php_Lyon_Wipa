@@ -53,6 +53,12 @@ for (let i = 0; i < thumbnailImages.length; i++) {
     });
 };
 
+let popupUsernameLink = document.getElementById('popup-username-link');
+popupUsernameLink.addEventListener('click',function (event) {
+    this.parentNode.submit();
+});
+
+
 // Get a pop-up on click on the edit button with all informations
 
 let thumbnailEdits = document.querySelectorAll('.edit-button');

@@ -52,6 +52,11 @@ for (let i = 0; i < thumbnailImages.length; i++) {
         this.style.display = 'none';
     })
 };
+let popupUsernameLink = document.getElementById('popup-username-link');
+popupUsernameLink.addEventListener('click',function (event) {
+    this.parentNode.submit();
+});
+
 
 
 
