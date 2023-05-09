@@ -52,8 +52,7 @@ class VoteManager extends AbstractManager
 
     public function getTotalVotesByPhoto(): array
     {
-        $stmt = $this->pdo->prepare('
-        SELECT
+        $query = 'SELECT
         vote.photo_id AS photo_id,
         photo.user_id AS user_id,
         user.username AS username,
@@ -62,10 +61,8 @@ class VoteManager extends AbstractManager
         JOIN photo ON photo.id = vote.photo_id
         JOIN user ON user.id = photo.user_id
         GROUP BY photo_id
-        ORDER BY total_votes DESC');
-        $stmt->execute();
-
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        ORDER BY total_votes DESC';
+        return $this->pdo->query($query)->fetchAll();
     }
 
     //Selects all photos with the total number of votes, in descending order of number of votes
