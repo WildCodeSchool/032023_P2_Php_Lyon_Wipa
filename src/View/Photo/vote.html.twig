@@ -39,7 +39,7 @@
 		<div class="container text-center mt-3">
 			<div class="col-md-12">
 				{# Display the top 3 photos #}
-				<div class="row row-cols-lg-3 row-cols-md-3 row-cols-1 g-4 custom-margin">
+				<div class="row row-cols-lg-3 row-cols-md-1 row-cols-1 g-4 custom-margin">
 					{% for photo in photos|slice(0, 3) %}
 						{# Start of the photo container #}
 						{% set photo_position = loop.index %}

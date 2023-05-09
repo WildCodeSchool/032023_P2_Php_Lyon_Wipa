@@ -53,7 +53,6 @@
 												{% set isFollowed = 1 %}
 											{% endif %}
 										{% endfor %}
-
 										<button type="submit" class="button-follow">
 											{% if isFollowed == 1 %}
 												<i title="Unfollow user {{photo.username}}" data-photo-user="{{photo.username}}" data-photo-user-id="{{photo.user_id}}" class="bi bi-dash-square-fill"></i>
@@ -61,8 +60,6 @@
 												<i title="Follow user {{photo.username}}" data-photo-user="{{photo.username}}" data-photo-user-id="{{photo.user_id}}" class="bi bi-plus-square-fill"></i>
 											{% endif %}
 										</button>
-
-
 									{% endif %}
 								{% endif %}
 								{# END OF to be displayed only if user is logged #}
