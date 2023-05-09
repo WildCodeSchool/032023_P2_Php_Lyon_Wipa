@@ -9,47 +9,51 @@ if (typeof refreshFollowing !== 'undefined') {
 }
 
 for (let i = 0; i < followForms.length; i++) {
-    let followForm = followForms[i]
+    let followForm = followForms[i];
 
     followForm.addEventListener('click', function (event) {
         let photoUser = this.dataset.photoUser;
         let photoUserId = this.dataset.photoUserId;
+        let followButton = event.target;
 
-        fetch("user/follow",
-            {
-                method: "POST",
-                //datas posted with a key-value pair
-                body: "followedId=" + photoUserId,
-                headers:
-                    { "Content-Type": "application/x-www-form-urlencoded" }
+        fetch("user/follow", {
+            method: "POST",
+            body: "followedId=" + photoUserId,
+            headers: { "Content-Type": "application/x-www-form-urlencoded" }
+        }).then((response) => {
+            if (followForm.className.match(/plus/g)) {
+                for (form of followForms) {
+                    if (form.dataset.photoUserId == photoUserId) {
+                        form.className = "bi bi-dash-square-fill";
+                    }
+                };
+                let notification = document.createElement('div');
+                notification.classList.add('follow-notification');
+                notification.textContent = `You are following ${photoUser}.`;
+                followButton.parentNode.insertBefore(notification, followButton);
+                followButton.style.display = 'none';
+                setTimeout(() => {
+                    notification.remove();
+                    followButton.style.display = 'block';
+                }, 1000); // remove the notification after 2 seconds
 
-            }).then((response) => {
-                //start following this user
-                if (followForm.className.match(/plus/g)) {
-                    for (form of followForms) {
-                        if (form.dataset.photoUserId == photoUserId) {
-                            console.log(form.dataset.photoUserId + ' ' + photoUserId);
-                            form.className = "bi bi-dash-square-fill";
-                        }
-                    };
-                    notification.innerHTML = `<div class="alert"><div class="w3-panel w3-green">
-                    <h3>Success!</h3>
-                    <p>You are following ${photoUser}.</p>
-                  </div></div>`;
-                }
-                //stop following this user
-                else if (followForm.className.match(/dash/g)) {
-                    for (form of followForms) {
-                        if (form.dataset.photoUserId == photoUserId) {
-                            form.className = "bi bi-plus-square-fill";
-                        }
-                    };
-                    notification.innerHTML = `<div class="alert"><div class="w3-panel w3-green">
-                    <h3>Success!</h3>
-                    <p>You stopped following ${photoUser}.</p>
-                  </div></div>`;
-                }
-            });
+            } else if (followForm.className.match(/dash/g)) {
+                for (form of followForms) {
+                    if (form.dataset.photoUserId == photoUserId) {
+                        form.className = "bi bi-plus-square-fill";
+                    }
+                };
+                let notification = document.createElement('div');
+                notification.classList.add('follow-notification');
+                notification.textContent = `You stopped following ${photoUser}.`;
+                followButton.parentNode.insertBefore(notification, followButton);
+                followButton.style.display = 'none';
+                setTimeout(() => {
+                    notification.remove();
+                    followButton.style.display = 'block';
+                }, 1000); // remove the notification after 2 seconds
+            }
+        });
     });
 }
 
