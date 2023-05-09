@@ -130,6 +130,8 @@ class PhotoController extends AbstractController
     {
         if (!isset($photo['title']) || empty($photo['title'])) {
             $this->errors[] = 'You must write a title';
+        } elseif (mb_strlen($photo['title']) > 255) {
+            $this->errors[] = 'The title is too long';
         }
     }
 
