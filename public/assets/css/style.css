@@ -248,6 +248,10 @@ h2 {
   width: 50vw;
 }
 
+.username-link {
+  color : var(--accent-color);
+}
+
 /* Font */
 
 body {
@@ -300,7 +304,7 @@ h1 span {
 }
 
 .numbertop {
-  font-size: 150px;
+  font-size: 9rem;
   color: black;
   font-family:  var(--content-font);
 }

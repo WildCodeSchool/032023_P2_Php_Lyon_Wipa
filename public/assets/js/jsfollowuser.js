@@ -2,7 +2,7 @@ const followForms = document.querySelectorAll(".bi-dash-square-fill, .bi-plus-sq
 const notification = document.getElementById("notification");
 
 const refreshFollowing = document.getElementById("contact-tab");
-if (typeof refreshFollowing !== 'undefined') {
+if (refreshFollowing !== null) {
     refreshFollowing.addEventListener('click', function (event1) {
         window.location.reload();
     });
@@ -16,7 +16,7 @@ for (let i = 0; i < followForms.length; i++) {
         let photoUserId = this.dataset.photoUserId;
         let followButton = event.target;
 
-        fetch("user/follow", {
+        fetch("follow", { // Updated URL
             method: "POST",
             body: "followedId=" + photoUserId,
             headers: { "Content-Type": "application/x-www-form-urlencoded" }
@@ -29,7 +29,7 @@ for (let i = 0; i < followForms.length; i++) {
                 };
                 let notification = document.createElement('div');
                 notification.classList.add('follow-notification');
-                notification.textContent = `You are following ${photoUser}`;
+                notification.textContent = `You are following this user`;
                 followButton.parentNode.insertBefore(notification, followButton);
                 followButton.style.display = 'none';
                 setTimeout(() => {
@@ -45,7 +45,7 @@ for (let i = 0; i < followForms.length; i++) {
                 };
                 let notification = document.createElement('div');
                 notification.classList.add('follow-notification');
-                notification.textContent = `You stopped following ${photoUser}`;
+                notification.textContent = `You stopped following this`;
                 followButton.parentNode.insertBefore(notification, followButton);
                 followButton.style.display = 'none';
                 setTimeout(() => {
@@ -56,4 +56,3 @@ for (let i = 0; i < followForms.length; i++) {
         });
     });
 }
-
