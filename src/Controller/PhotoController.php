@@ -126,15 +126,33 @@ class PhotoController extends AbstractController
 
     public function validateURL(array $photo): void
     {
-        // is there a photo ?
+    // is there a photo ?
         if (!isset($photo['picture']) || empty($photo['picture'])) {
             $this->errors[] = 'You must enter an URL';
-        }
-        // is the URL well formated ?
-        if (!filter_var($photo['picture'], FILTER_VALIDATE_URL)) {
-            $this->errors[] = 'Wrong URL format';
+        } else {
+            // is the URL well formatted ?
+            if (!filter_var($photo['picture'], FILTER_VALIDATE_URL)) {
+                $this->errors[] = 'Wrong URL format';
+            } else {
+                // is the URL a valid image?
+                try {
+                    $imageInfo = getimagesize($photo['picture']);
+                    if (!$imageInfo || !in_array($imageInfo[2], [IMAGETYPE_GIF, IMAGETYPE_JPEG, IMAGETYPE_PNG])) {
+                        $this->errors[] = 'Invalid image URL';
+                    } else {
+                        // check if the image size is at least 256px x 256px
+                        if ($imageInfo[0] < 256 || $imageInfo[1] < 256) {
+                            $this->errors[] = 'Image dimensions must be at least 256px x 256px';
+                        }
+                    }
+                } catch (\Exception $e) {
+                    $this->errors[] = 'An error occurred while validating the image: ' . $e->getMessage();
+                }
+            }
         }
     }
+
+
 
     public function validateTitle(array $photo): void
     {
