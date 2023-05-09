@@ -36,8 +36,6 @@ for (let i = 0; i < thumbnailImages.length; i++) {
         let photoPrompt = this.parentNode.dataset.photoPrompt;
         let photoDescription = this.parentNode.dataset.photoDescription;
         let photoDate = this.parentNode.dataset.photoDate;
-        let photoUser = this.parentNode.dataset.photoUser;
-        let photoUserId = this.parentNode.dataset.photoUserId;
 
         document.getElementById('popup-image').setAttribute('src', photoUrl);
         document.getElementById('popup-title').textContent = photoTitle;
@@ -48,18 +46,12 @@ for (let i = 0; i < thumbnailImages.length; i++) {
             document.getElementById('popup-username').textContent = photoUser;
         }
 
-        let userPhotoInput = document.querySelector('#popup-info input[name="userPhoto"]');
-        if (userPhotoInput) {
-            userPhotoInput.value = photoUserId;
-        }
-
         document.getElementById('popup-container').style.display = 'block';
     });
     document.getElementById('popup-container').addEventListener('click', function () {
         this.style.display = 'none';
-    });
+    })
 };
-
 let popupUsernameLink = document.getElementById('popup-username-link');
 popupUsernameLink.addEventListener('click',function (event) {
     this.parentNode.submit();
@@ -68,41 +60,6 @@ popupUsernameLink.addEventListener('click',function (event) {
 
 
 
-// Get a pop-up on click on the edit button with all informations
-
-// Get a pop-up on click on the edit button with all informations
-let thumbnailEdits = document.querySelectorAll('.edit-button');
-
-for (let i = 0; i < thumbnailEdits.length; i++) {
-    let thumbnailEdit = thumbnailEdits[i];
-
-    thumbnailEdit.addEventListener('click', function (event) {
-        event.preventDefault();
-
-        let photoUrl = this.parentNode.dataset.photoUrl;
-        let photoTitle = this.parentNode.dataset.photoTitle;
-        let photoPrompt = this.parentNode.dataset.photoPrompt;
-        let photoDescription = this.parentNode.dataset.photoDescription;
-        let photoDate = this.parentNode.dataset.photoDate;
-        let photoId = this.parentNode.dataset.photoId;
-
-        document.getElementById('popup-image-edit').setAttribute('src', photoUrl);
-        document.getElementById('popup-title-edit').value = photoTitle;
-        document.getElementById('popup-prompt-edit').value = photoPrompt;
-        document.getElementById('popup-description-edit').value = photoDescription;
-        document.getElementById('popup-date-edit').textContent = photoDate; 
-        document.getElementById('photoIdEdit').setAttribute('value', photoId);
-        document.getElementById('photoIdDelete').setAttribute('value', photoId);
-
-        document.getElementById('popup-container-edit').style.display = 'block';
-    });
-    document.getElementById('popup-close-btn').addEventListener('click', function () {
-        document.getElementById('popup-container-edit').style.display = 'none';
-    })
-    document.getElementById('popup-close-edit-btn').addEventListener('click', function () {
-        document.getElementById('popup-container-edit').style.display = 'none';
-    })
-};
 
 
 

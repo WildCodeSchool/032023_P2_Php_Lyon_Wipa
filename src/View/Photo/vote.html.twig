@@ -39,14 +39,14 @@
 		<div class="container text-center mt-3">
 			<div class="col-md-12">
 				{# Display the top 3 photos #}
-				<div class="row row-cols-lg-3 row-cols-md-3 row-cols-1 g-4 custom-margin">
+				<div class="row row-cols-lg-3 row-cols-md-3 row-cols-1 g-4 mt-2 custom-margin">
 					{% for photo in photos|slice(0, 3) %}
 						{# Start of the photo container #}
 						{% set photo_position = loop.index %}
 						<div class="col d-flex justify-content-center">
 							<div class="d-flex align-items-center ">
 								{# Display the rank for the top 3 photos #}
-                                <div class="numbertop mb-2 me-3 " >{{ photo_position }}</div>
+                                <div class="numbertop mb-2 me-4 " >{{ photo_position }}</div>
 								<div class="img-container">
 									{# Display the photo thumbnail with a link to open the full image #}
 									<a href="#" data-photo-id="{{photo.id}}" data-photo-url="{{photo.link}}" data-photo-prompt="{{photo.prompt}}" data-photo-title="{{photo.title}}" data-photo-description="{{photo.description}}" data-photo-date="{{formatted_date}}" {% if user %} data-photo-user="{{photo.username}}" data-photo-user-id="{{photo.user_id}}" {% endif %}><img src="{{photo.link }}" alt="" class="img-fluid img-fit pop-up-image"></a>
@@ -156,10 +156,15 @@
 						<li>
 							<p id="popup-date"></p>
 						</li>
-						{% if user %}
-							<li class="popuser">By :
-								<p id="popup-username"></p>
-							</li>
+												{% if user %}
+<li class="popuser">By :
+    <form method="get" action="user/photos">
+        <input type="hidden" value="{{ photo.user_id }}" name="userPhoto">
+        <a href="#" id="popup-username-link" class="username-link text-decoration-underline">
+            <p id="popup-username"></p>
+        </a>
+    </form>
+</li>
 						{% endif %}
 					</ul>
 				</div>
