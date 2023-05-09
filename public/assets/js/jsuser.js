@@ -42,6 +42,9 @@ for (let i = 0; i < thumbnailImages.length; i++) {
         document.getElementById('popup-prompt').textContent = photoPrompt;
         document.getElementById('popup-description').textContent = photoDescription;
         document.getElementById('popup-date').textContent = photoDate;
+        if (typeof photoUser !== 'undefined') {
+            document.getElementById('popup-username').textContent = photoUser;
+        }
 
         document.getElementById('popup-container').style.display = 'block';
     });

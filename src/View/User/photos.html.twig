@@ -41,6 +41,25 @@
 											{% endif %}
 										</button>
 									</form>
+																				{# Follow button #}
+											{% if user.username != photo.username %}
+												{% set isFollowed = 0 %}
+												{% for followedUser in followedUsers %}
+													{% if followedUser.username == photo.username %}
+														{% set isFollowed = 1 %}
+													{% endif %}
+												{% endfor %}
+
+												<button type="submit" class="button-follow">
+													{% if isFollowed == 1 %}
+														<i title="Unfollow user {{photo.username}}" data-photo-user="{{photo.username}}" data-photo-user-id="{{photo.user_id}}" class="bi bi-dash-square-fill"></i>
+													{% else %}
+														<i title="Follow user {{photo.username}}" data-photo-user="{{photo.username}}" data-photo-user-id="{{photo.user_id}}" class="bi bi-plus-square-fill"></i>
+													{% endif %}
+												</button>
+
+											{% endif %}
+											{# END OF to be displayed only if user have favorites #}
 								{% endif %}
 								{# END OF to be displayed only if user is logged #}
 								<div class="img-title">{{photo.title}}</div>
@@ -82,4 +101,5 @@
 {% endblock %}
 {% block javascript %}
 	<script src="/assets/js/jsuser.js"></script>
+	<script src="/assets/js/jsfollowuser.js"></script>
 {% endblock %}
