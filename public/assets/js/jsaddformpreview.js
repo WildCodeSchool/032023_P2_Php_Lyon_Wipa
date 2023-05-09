@@ -1,25 +1,24 @@
-function previewImage() {
+async function previewImage() {
     var url = document.getElementById("url").value;
     var img = document.createElement("img");
     img.style.width = "100px";
     img.style.height = "100px";
-    img.style.margin = "5px" ;
+    img.style.margin = "5px";
     var div = document.getElementById("photo");
     div.innerHTML = "";
-    var xhr = new XMLHttpRequest();
-    xhr.open('HEAD', url);
-    xhr.onreadystatechange = function() {
-        if (this.readyState === this.DONE) {
-            if (this.status === 200) {
-                var contentType = xhr.getResponseHeader('Content-Type');
-                if (contentType && contentType.startsWith('image/')) {
-                    img.src = url;
-                    div.appendChild(img);
-                }
+
+    try {
+        const response = await fetch(url, { method: 'HEAD' });
+        if (response.ok) {
+            const contentType = response.headers.get('Content-Type');
+            if (contentType && contentType.startsWith('image/')) {
+                img.src = url;
+                div.appendChild(img);
             }
         }
-    };
-    xhr.send();
+    } catch (error) {
+        console.error('Erreur lors de la récupération de l\'image:', error);
+    }
 }
 
 let input = document.getElementById("url");

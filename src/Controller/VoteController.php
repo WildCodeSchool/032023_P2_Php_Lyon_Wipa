@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Model\VoteManager;
 use App\Model\PhotoManager;
-use App\Model\FavManager;
 
 class VoteController extends AbstractController
 {
@@ -32,7 +31,7 @@ class VoteController extends AbstractController
                 // Retrieves the identifiers of the photos for which the user has voted
                 $votedPhotosIds = $voteManager->getVotedPhotosByUser($this->user['id']);
                 // Retrieves all photos with their total number of votes
-                $photos = $voteManager->selectAllWithVotes();
+                $photos = $voteManager->selectAllPhotosWithVotes();
 
                 // Create an associative table to store the votes by photo
                 $votesByPhoto = [];
