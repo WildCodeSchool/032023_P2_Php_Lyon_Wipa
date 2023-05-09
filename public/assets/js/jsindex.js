@@ -61,14 +61,9 @@ for (let i = 0; i < thumbnailImages.length; i++) {
 };
 
 let popupUsernameLink = document.getElementById('popup-username-link');
-popupUsernameLink.addEventListener('click',function (event) {
+popupUsernameLink.addEventListener('click', function (event) {
     this.parentNode.submit();
 });
-
-
-
-
-// Get a pop-up on click on the edit button with all informations
 
 // Get a pop-up on click on the edit button with all informations
 let thumbnailEdits = document.querySelectorAll('.edit-button');
@@ -90,7 +85,7 @@ for (let i = 0; i < thumbnailEdits.length; i++) {
         document.getElementById('popup-title-edit').value = photoTitle;
         document.getElementById('popup-prompt-edit').value = photoPrompt;
         document.getElementById('popup-description-edit').value = photoDescription;
-        document.getElementById('popup-date-edit').textContent = photoDate; 
+        document.getElementById('popup-date-edit').textContent = photoDate;
         document.getElementById('photoIdEdit').setAttribute('value', photoId);
         document.getElementById('photoIdDelete').setAttribute('value', photoId);
 
