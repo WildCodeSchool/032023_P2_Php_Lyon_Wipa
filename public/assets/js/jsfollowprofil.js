@@ -35,7 +35,7 @@ for (let i = 0; i < followForms.length; i++) {
                 setTimeout(() => {
                     notification.remove();
                     followButton.style.display = 'block';
-                }, 1000); // remove the notification after 2 seconds
+                }, 1000); // remove the notification after 1 seconds
 
             } else if (followForm.className.match(/dash/g)) {
                 for (form of followForms) {
@@ -51,7 +51,7 @@ for (let i = 0; i < followForms.length; i++) {
                 setTimeout(() => {
                     notification.remove();
                     followButton.style.display = 'block';
-                }, 1000); // remove the notification after 2 seconds
+                }, 1000); // remove the notification after 1 seconds
             }
         });
     });
