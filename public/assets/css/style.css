@@ -295,6 +295,17 @@ h1 span {
   display: inline-block;
 }
 
+.custom-margin {
+  margin-bottom: 200px; 
+}
+
+.numbertop {
+  font-size: 150px;
+  color: black;
+  font-family:  var(--content-font);
+}
+
+
 @keyframes stretch-line {
   0% {
     width: 0;
