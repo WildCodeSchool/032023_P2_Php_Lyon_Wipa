@@ -70,7 +70,7 @@ class VoteManager extends AbstractManager
 
     //Selects all photos with the total number of votes, in descending order of number of votes
 
-    public function selectAllWithVotes()
+    public function selectAllPhotosWithVotes()
     {
         $query = 'SELECT p.*,u.username, COUNT(v.photo_id) as total_votes
               FROM photo p
