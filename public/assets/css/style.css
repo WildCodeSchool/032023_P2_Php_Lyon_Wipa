@@ -95,11 +95,12 @@ ul {
   transition: opacity 0.2s ease-in-out;
 }
 
-.button-fav {
+.button-fav,
+.button-vote {
   position: absolute;
   top: 0;
   right: 0;
-  font-size:1.25rem;
+  font-size: 1.25rem;
   padding: 10px;
   color: var(--light-color);
   opacity: 0;
@@ -111,7 +112,7 @@ ul {
 
 .edit-button {
   position: absolute;
-  font-size:1.25rem;
+  font-size: 1.25rem;
   top: 0;
   left: 0;
   padding: 10px;
@@ -124,17 +125,17 @@ ul {
 }
 
 .button-delete,
-.button-save{
+.button-save {
   color: var(--light-color);
   max-width: 100%;
-  font-size:1.25rem;
+  font-size: 1.25rem;
   border: none;
   background: none;
 }
 
 .button-follow {
   position: absolute;
-  font-size:1.25rem;
+  font-size: 1.25rem;
   top: 0;
   left: 0;
   padding: 10px;
@@ -146,12 +147,17 @@ ul {
   background: none;
   transition: opacity 0.2s ease-in-out;
 }
+
 .img-container:hover .button-follow {
   opacity: 0.8;
 }
 
 
 .img-container:hover .button-fav {
+  opacity: 0.8;
+}
+
+.img-container:hover .button-vote {
   opacity: 0.8;
 }
 
@@ -216,7 +222,8 @@ ul {
   background-color: rgba(175, 176, 176, 0.9);
 }
 
-.poptitle, .popuser {
+.poptitle,
+.popuser {
   display: flex;
   align-items: baseline;
   gap: 10px;
@@ -237,7 +244,7 @@ h2 {
   font-style: italic;
 }
 
-.form-control {
+.input-edit {
   width: 50vw;
 }
 
@@ -262,36 +269,53 @@ body {
   opacity: 0.9;
 }
 
+.follow-notification {
+  font-size: 0.8em;
+}
+
+
 /* Profil Page */
 .lineTitle {
-  position: relative; 
-  text-align: center; 
+  position: relative;
+  text-align: center;
 }
 
 .lineTitle::before {
-  content: ""; 
+  content: "";
   position: absolute;
   bottom: 0;
   left: 50%;
-  transform: translateX(-50%); 
-  width: 0; 
+  transform: translateX(-50%);
+  width: 0;
   height: 2px;
   background-color: black;
-  animation-name: stretch-line; 
-  animation-duration: 3s; 
-  animation-timing-function: ease-out; 
-  animation-fill-mode: forwards; 
+  animation-name: stretch-line;
+  animation-duration: 3s;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
 }
 
 h1 span {
   display: inline-block;
 }
 
+.custom-margin {
+  margin-bottom: 200px; 
+}
+
+.numbertop {
+  font-size: 150px;
+  color: black;
+  font-family:  var(--content-font);
+}
+
+
 @keyframes stretch-line {
   0% {
     width: 0;
   }
+
   100% {
-    width: calc(70%); 
+    width: calc(70%);
   }
 }

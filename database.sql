@@ -1,4 +1,4 @@
--- Adminer 4.8.1 MySQL 8.0.32 dump
+-- Adminer 4.8.1 MySQL 8.0.32-0ubuntu0.22.04.2 dump
 
 SET NAMES utf8;
 SET time_zone = '+00:00';
@@ -72,7 +72,8 @@ INSERT INTO `follower_followed` (`id`, `follower_id`, `user_id`) VALUES
 (16,	23,	24),
 (17,	23,	22),
 (18,	25,	23),
-(19,	25,	22);
+(19,	25,	22),
+(20,	21,	25);
 
 DROP TABLE IF EXISTS `photo`;
 CREATE TABLE `photo` (
@@ -89,7 +90,7 @@ CREATE TABLE `photo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 INSERT INTO `photo` (`id`, `title`, `link`, `prompt`, `description`, `date`, `user_id`) VALUES
-(1,	'mini dark vador',	'https://image.lexica.art/full_jpg/a164f6cf-9e0e-4f5d-bd60-a1e99b307c12',	'darth vader dj com fone de ouvido, tocando em festa',	'dark vador is the DJ',	'2023-04-18 23:42:18',	21),
+(1,	'mini dark vador2',	'https://image.lexica.art/full_jpg/a164f6cf-9e0e-4f5d-bd60-a1e99b307c12',	'darth vader dj com fone de ouvido, tocando em festa',	'dark vador is the DJ',	'2023-04-18 23:42:18',	21),
 (2,	'comic book character',	'https://image.lexica.art/full_jpg/e863d213-0a7c-43a1-b84e-fe297522719b',	'epic comic book cover',	'comic book character',	'2023-04-18 23:42:18',	21),
 (3,	'Goth woman',	'https://mpost.io/wp-content/uploads/image-46-38.jpg',	'a vibrant professional studio portrait photography of a young, pale, goth, attractive, friendly, casual, delightful, intricate, gorgeous, female, piercing green eyes, wears a gold ankh necklace, femme fatale, nouveau, curated collection, annie leibovitz, nikon, award winning, breathtaking, groundbreaking, superb, outstanding, lensculture portrait awards, photoshopped, dramatic lighting, 8 k, hi res –testp –ar 3:4 –upbeta',	'A portrait of woman',	'2023-04-18 23:42:18',	21),
 (5,	'Greek temple ruines',	'https://mpost.io/wp-content/uploads/image-46-48.jpg',	'temple in ruines, forest, stairs, columns, cinematic, detailed, atmospheric, epic, concept art, Matte painting, background, mist, photo-realistic, concept art, volumetric light, cinematic epic + rule of thirds octane render, 8k, corona render, movie concept art, octane render, cinematic, trending on artstation, movie concept art, cinematic composition , ultra-detailed, realistic , hyper-realistic , volumetric lighting, 8k –ar 2:3 –test –uplight',	'Greek old temple',	'2023-04-18 23:42:18',	22),
@@ -144,12 +145,18 @@ INSERT INTO `user` (`id`, `username`, `password`, `role`) VALUES
 DROP TABLE IF EXISTS `vote`;
 CREATE TABLE `vote` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `vote` int NOT NULL,
+  `user_id` int NOT NULL,
   `photo_id` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `photo_id` (`photo_id`),
-  CONSTRAINT `vote_ibfk_1` FOREIGN KEY (`photo_id`) REFERENCES `photo` (`id`) ON DELETE CASCADE
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `vote_ibfk_1` FOREIGN KEY (`photo_id`) REFERENCES `photo` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `vote_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `vote_ibfk_3` FOREIGN KEY (`photo_id`) REFERENCES `photo` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+INSERT INTO `vote` (`id`, `user_id`, `photo_id`) VALUES
+(1,	21,	31),
+(2,	21,	34);
 
--- 2023-05-09 09:51:52
+-- 2023-05-09 10:34:44
