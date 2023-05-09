@@ -1,4 +1,4 @@
--- Adminer 4.8.1 MySQL 8.0.32-0ubuntu0.22.04.2 dump
+-- Adminer 4.8.1 MySQL 8.0.32 dump
 
 SET NAMES utf8;
 SET time_zone = '+00:00';
@@ -41,9 +41,8 @@ INSERT INTO `fav_photo` (`id`, `user_id`, `photo_id`) VALUES
 (50,	20,	12),
 (51,	20,	29),
 (52,	20,	31),
-(57,	18,	34),
 (58,	18,	33),
-(60,	18,	31);
+(59,	18,	31);
 
 DROP TABLE IF EXISTS `follower_followed`;
 CREATE TABLE `follower_followed` (
@@ -56,7 +55,8 @@ CREATE TABLE `follower_followed` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 INSERT INTO `follower_followed` (`id`, `follower_id`, `user_id`) VALUES
-(1,	20,	16);
+(1,	20,	16),
+(2,	18,	16);
 
 DROP TABLE IF EXISTS `photo`;
 CREATE TABLE `photo` (
@@ -111,17 +111,21 @@ INSERT INTO `user` (`id`, `username`, `password`, `role`) VALUES
 (16,	'user2',	'$2y$10$R1Ejw/ERinvjQ3rCkg/73eIDTHtwicbshPdeKfRGco//arP6WYtXi',	'user'),
 (18,	'user',	'$2y$10$9eQWWXRGG9sP0Dv8CM6fEeMMCsfDqUyjA0TDwZBdP6Y5g6BLu8Jd.',	'user'),
 (19,	'fred',	'$2y$10$7G3M3IsobtUNemUIyZtnH.lWDlRcvlFJhDu6KmzByBLMzwMUftPQC',	'user'),
-(20,	'user3',	'$2y$10$sbKiQoqmAuc4SsyarxH2n.aPW15VmwlROyFlDTDVV9pf7jQdDoVma',	'user');
+(20,	'user3',	'$2y$10$sbKiQoqmAuc4SsyarxH2n.aPW15VmwlROyFlDTDVV9pf7jQdDoVma',	'user'),
+(21,	'zack',	'$2y$10$WLn6JgRqpq88CcYpLratWeOWgusw2cLY47kUTL/iwSfJJyO/K7Zhy',	'user');
 
 DROP TABLE IF EXISTS `vote`;
 CREATE TABLE `vote` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `vote` int NOT NULL,
   `photo_id` int NOT NULL,
+  `user_id` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `photo_id` (`photo_id`),
-  CONSTRAINT `vote_ibfk_1` FOREIGN KEY (`photo_id`) REFERENCES `photo` (`id`) ON DELETE CASCADE
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `vote_ibfk_1` FOREIGN KEY (`photo_id`) REFERENCES `photo` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `vote_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+-- 2023-04-30 20:04:49
 
--- 2023-05-03 11:00:46
+-- 2023-05-04 09:59:21

@@ -38,7 +38,6 @@ for (let i = 0; i < thumbnailImages.length; i++) {
         let photoDate = this.parentNode.dataset.photoDate;
         let photoUser = this.parentNode.dataset.photoUser;
 
-
         document.getElementById('popup-image').setAttribute('src', photoUrl);
         document.getElementById('popup-title').textContent = photoTitle;
         document.getElementById('popup-prompt').textContent = photoPrompt;
@@ -56,8 +55,8 @@ for (let i = 0; i < thumbnailImages.length; i++) {
     })
 };
 
-// Get a pop-up on click on the edit button with all informations
 
+// Get a pop-up on click on the edit button with all informations
 let thumbnailEdits = document.querySelectorAll('.edit-button');
 
 for (let i = 0; i < thumbnailEdits.length; i++) {
@@ -77,7 +76,7 @@ for (let i = 0; i < thumbnailEdits.length; i++) {
         document.getElementById('popup-title-edit').value = photoTitle;
         document.getElementById('popup-prompt-edit').value = photoPrompt;
         document.getElementById('popup-description-edit').value = photoDescription;
-        document.getElementById('popup-date-edit').textContent = photoDate;
+        document.getElementById('popup-date-edit').textContent = photoDate; 
         document.getElementById('photoIdEdit').setAttribute('value', photoId);
         document.getElementById('photoIdDelete').setAttribute('value', photoId);
 
