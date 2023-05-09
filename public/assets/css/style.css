@@ -290,7 +290,6 @@ h1 span {
   display: inline-block;
 }
 
-
 @keyframes stretch-line {
   0% {
     width: 0;
@@ -298,5 +297,17 @@ h1 span {
 
   100% {
     width: calc(70%);
+  }
+}
+
+.alert {
+  animation: autoHide 0s ease-in 2s forwards;
+}
+
+@keyframes autoHide {
+  to {
+    width: 0;
+    height: 0;
+    overflow: hidden;
   }
 }

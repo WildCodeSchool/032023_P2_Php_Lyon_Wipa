@@ -1,4 +1,5 @@
 const followForms = document.querySelectorAll(".bi-dash-square-fill, .bi-plus-square-fill");
+const notification = document.getElementById("notification");
 
 for (let i = 0; i < followForms.length; i++) {
     let followForm = followForms[i]
@@ -20,11 +21,15 @@ for (let i = 0; i < followForms.length; i++) {
                 if (followForm.className.match(/plus/g)) {
                     for (form of followForms) {
                         if (form.dataset.photoUserId == photoUserId) {
-                            console.log(form.dataset.photoUserId + ' ' + photoUserId);
                             form.className = "bi bi-dash-square-fill";
                         }
                     };
-                    alert("You are following " + photoUser);
+                    notification.innerHTML = `<div class="alert"><div class="w3-panel w3-green">
+                    <h3>Success!</h3>
+                    <p>You are following ${photoUser}.</p>
+                  </div></div>`;
+
+                    //alert("You are following " + photoUser);
                 }
                 //stop following this user
                 else if (followForm.className.match(/dash/g)) {
@@ -33,7 +38,10 @@ for (let i = 0; i < followForms.length; i++) {
                             form.className = "bi bi-plus-square-fill";
                         }
                     };
-                    alert("You stopped following " + photoUser);
+                    notification.innerHTML = `<div class="alert"><div class="w3-panel w3-green">
+                    <h3>Success!</h3>
+                    <p>You stopped following ${photoUser}.</p>
+                  </div></div>`;
                 }
             });
     });
