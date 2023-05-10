@@ -21,4 +21,5 @@ return [
     'fav/add' => ['FavController', 'toggleFav',],
     'vote' => ['VoteController', 'vote',],
     'followed/user' => ['FollowController', 'userFollowed'],
+    'user/photos' => ['PhotoController', 'userPhotos'],
 ];
