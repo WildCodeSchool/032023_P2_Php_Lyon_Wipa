@@ -1,0 +1,105 @@
+{% extends 'layout.html.twig' %}
+{% block title %}Wipa - Photos of User
+{% endblock %}
+{% block content %}
+	<div class="container d-flex justify-content-start">
+		<div class="col-12 col-md-6 mt-3">
+			{% if user %}
+				<h1>Pictures of
+					{{ username['username'] }}
+				</h1>
+				<div class="line mt-1"></div>
+			{% endif %}
+		</div>
+	</div>
+	{% if photos is defined %}
+		<div class="container text-center mt-3">
+			<div class="col-md-12">
+				<div class="row row-cols-lg-5 row-cols-md-3 row-cols-2 g-0 mh-25 mw-25">
+					{% for photo in photos %}
+						<div class="col">
+							<div class="img-container">
+								{% set formatted_date = photo.date|date("d F Y") %}
+								<a href="#" data-photo-id="{{photo.id}}" data-photo-url="{{photo.link}}" data-photo-prompt="{{photo.prompt}}" data-photo-title="{{photo.title}}" data-photo-description="{{photo.description}}" data-photo-date="{{formatted_date}}" {% if user %} data-photo-user="{{photo.username}}" data-photo-user-id="{{photo.user_id}}" {% endif %}><img src="{{photo.link }}" alt="" class="img-fluid img-fit pop-up-image"></a>
+								{# to be displayed only if user is logged #}
+								{% if user %}
+									{% set isFav = 0 %}
+									{% for favId in favIds %}
+										{% if photo.id == favId.id %}
+											{% set isFav = 1 %}
+										{% endif %}
+									{% endfor %}
+									<form action="/fav/add" method="post">
+										<input name="addfav" type="hidden" value="{{photo.id}}">
+										<button type="submit" class="button-fav">
+											{% if isFav == 1 %}
+												{# full heart button #}
+												<i title="Remove from favorite" class="bi bi-heart-fill"></i>
+											{% else %}
+												{# empty heart button #}
+												<i title="Add from favorite" class="bi bi-heart"></i>
+											{% endif %}
+										</button>
+									</form>
+																				{# Follow button #}
+											{% if user.username != photo.username %}
+												{% set isFollowed = 0 %}
+												{% for followedUser in followedUsers %}
+													{% if followedUser.username == photo.username %}
+														{% set isFollowed = 1 %}
+													{% endif %}
+												{% endfor %}
+
+												<button type="submit" class="button-follow">
+													{% if isFollowed == 1 %}
+														<i title="Unfollow user {{photo.username}}" data-photo-user="{{photo.username}}" data-photo-user-id="{{photo.user_id}}" class="bi bi-dash-square-fill"></i>
+													{% else %}
+														<i title="Follow user {{photo.username}}" data-photo-user="{{photo.username}}" data-photo-user-id="{{photo.user_id}}" class="bi bi-plus-square-fill"></i>
+													{% endif %}
+												</button>
+
+											{% endif %}
+											{# END OF to be displayed only if user have favorites #}
+								{% endif %}
+								{# END OF to be displayed only if user is logged #}
+								<div class="img-title">{{photo.title}}</div>
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	{% endif %}
+	<div id="popup-container">
+		<div id="popup-content" class="d-flex flex-column flex-lg-row">
+			<img id="popup-image" src="" alt="" class="ms-md-5 ms-0">
+			<div id="popup-info">
+				<ul>
+					<li class="poptitle">Title :<p id="popup-title"></p>
+					</li>
+					<li>Prompt :</li>
+					<li></li>
+					<li>
+						<p id="popup-prompt"></p>
+					</li>
+					<li></li>
+					<li>Description :</li>
+					<li></li>
+					<li>
+						<p id="popup-description"></p>
+					</li>
+					<li></li>
+					<li>Added date :</li>
+					<li></li>
+					<li>
+						<p id="popup-date"></p>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+{% block javascript %}
+	<script src="/assets/js/jsuser.js"></script>
+	<script src="/assets/js/jsfollowuser.js"></script>
+{% endblock %}

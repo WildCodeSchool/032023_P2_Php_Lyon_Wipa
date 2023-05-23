@@ -1,0 +1,127 @@
+{% extends 'layout.html.twig' %}
+{% block preload %}
+    {% for photo in photos %}
+      <link rel="preload" as="image" href="{{ photo.link }}">
+    {% endfor %}
+{% endblock %}
+{% block title %}Wipa - Home
+{% endblock %}
+{% block content %}
+	{% if errors %}
+		{% for error in errors %}
+			<div class="alert alert-danger" role="alert">
+				{{ error }}
+			</div>
+		{% endfor %}
+	{% endif %}
+	{% if successes %}
+		{% for success in successes %}
+			<div class="alert alert-success" role="alert">
+				{{ success }}
+			</div>
+		{% endfor %}
+	{% endif %}
+	{% if photos is defined %}
+		<div class="container text-center mt-3">
+			<div class="col-md-12">
+				<div class="row row-cols-lg-5 row-cols-md-3 row-cols-2 g-0 mh-25 mw-25">
+					{% for photo in photos %}
+						<div class="col">
+							<div class="img-container">
+							{% set formatted_date = photo.date|date("d F Y") %}
+								<a href="#" data-photo-id="{{photo.id}}" data-photo-url="{{photo.link}}" data-photo-prompt="{{photo.prompt}}" data-photo-title="{{photo.title}}" data-photo-description="{{photo.description}}" data-photo-date="{{formatted_date}}" {% if user %} data-photo-user="{{photo.username}}" {% endif %} data-photo-user-id="{{photo.user_id}}" ><img src="{{photo.link }}" alt="" class="img-fluid img-fit pop-up-image"></a>
+								{# to be displayed only if user is logged #}
+								{% if user %}
+									{% set isFav = 0 %}
+									{% for favId in favIds %}
+										{% if photo.id == favId.id %}
+											{% set isFav = 1 %}
+										{% endif %}
+									{% endfor %}
+									<form action="fav/add" method="POST">
+										<input name="addfav" type="hidden" value="{{photo.id}}">
+										<button type="submit" class="button-fav">
+											{% if isFav == 1 %}
+												{# full heart button #}
+												<i title="Remove from favorite" class="bi bi-heart-fill"></i>
+											{% else %}
+												{# empty heart button #}
+												<i title="Add to favorite" class="bi bi-heart"></i>
+											{% endif %}
+										</button>
+									</form>
+									{# Follow button #}
+									{% if user.username != photo.username %}
+										{% set isFollowed = 0 %}
+										{% for followedUser in followedUsers %}
+											{% if followedUser.username == photo.username %}
+												{% set isFollowed = 1 %}
+											{% endif %}
+										{% endfor %}
+
+										<button type="submit" class="button-follow">
+											{% if isFollowed == 1 %}
+												<i title="Unfollow user {{photo.username}}" data-photo-user="{{photo.username}}" data-photo-user-id="{{photo.user_id}}" class="bi bi-dash-square-fill"></i>
+											{% else %}
+												<i title="Follow user {{photo.username}}" data-photo-user="{{photo.username}}" data-photo-user-id="{{photo.user_id}}" class="bi bi-plus-square-fill"></i>
+											{% endif %}
+										</button>
+
+
+									{% endif %}
+								{% endif %}
+								{# END OF to be displayed only if user is logged #}
+								<div class="img-title">{{photo.title}}</div>
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+		<div id="popup-container">
+			<div id="popup-content" class="d-flex flex-column flex-lg-row">
+				<img id="popup-image" src="" alt="" class="ms-md-5 ms-0">
+				<div id="popup-info">
+					<ul>
+						<li class="poptitle">Title :<p id="popup-title"></p>
+						</li>
+						<li>Prompt :</li>
+						<li></li>
+						<li>
+							<p id="popup-prompt"></p>
+						</li>
+						<li></li>
+						<li>Description :</li>
+						<li></li>
+						<li>
+							<p id="popup-description"></p>
+						</li>
+						<li></li>
+						<li>Added date :</li>
+						<li></li>
+						<li>
+							<p id="popup-date"></p>
+						</li>
+						{% if user %}
+<li class="popuser">By :
+    <form method="get" action="user/photos">
+        <input type="hidden" value="{{ photo.user_id }}" name="userPhoto">
+        <a href="#" id="popup-username-link" class="username-link text-decoration-underline">
+            <p id="popup-username"></p>
+        </a>
+    </form>
+</li>
+						{% endif %}
+					</ul>
+				</div>
+			</div>
+		</div>
+	{% else %}
+		<li>Nothing to display</li>
+	{% endif %}
+{% endblock %}
+
+{% block javascript %}
+	<script src="assets/js/jsindex.js"></script>
+	<script src="assets/js/jsfollowindex.js"></script>
+{% endblock %}

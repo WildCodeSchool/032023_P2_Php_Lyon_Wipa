@@ -5,12 +5,21 @@
 // values : 1. controller name
 //          2. method name
 //          3. (optional) array of query string keys to send as parameter to the method
-// e.g route '/item/edit?id=1' will execute $itemController->edit(1)
+// e.g route '/item/edit?id=1' will execute $PhotoController->edit(1)
 return [
-    '' => ['HomeController', 'index',],
-    'items' => ['ItemController', 'index',],
-    'items/edit' => ['ItemController', 'edit', ['id']],
-    'items/show' => ['ItemController', 'show', ['id']],
-    'items/add' => ['ItemController', 'add',],
-    'items/delete' => ['ItemController', 'delete',],
+    '' => ['PhotoController', 'index',],
+    'photos/add' => ['PhotoController', 'add',],
+    'photos' => ['PhotoController', 'index',],
+    'photo/edit' => ['PhotoController', 'edit', ['id']],
+    'photo/delete' => ['PhotoController', 'delete',],
+
+    'register' => ['RegisterController', 'register',],
+    'login'  => ['UserController', 'login',],
+    'logout'  => ['UserController', 'logout',],
+    'user'  => ['UserController', 'profil',],
+    'user/follow'  => ['FollowController', 'toggleFollow',],
+    'fav/add' => ['FavController', 'toggleFav',],
+    'vote' => ['VoteController', 'vote',],
+    'followed/user' => ['FollowController', 'userFollowed'],
+    'user/photos' => ['PhotoController', 'userPhotos'],
 ];

@@ -1,0 +1,32 @@
+{# TODO : manage errors display #}
+
+<form class="mt-3" method="POST">
+	<div class="mb-3">
+		<label for="title" class="form-label d-none d-md-block">Title</label>
+		<input type="text" class="form-control" id="title" name="title" placeholder="Title">
+	</div>
+	<div class="mb-3">
+            <label for="picture" class="form-label d-none d-md-block">Picture://URL</label>
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <input type="url" class="form-control" id="url" aria-describedby="url" name="picture" placeholder="Picture://URL">
+                </div>
+                <div class="col-12 col-md-6 mt-3 mt-md-0">
+                    <div id="photo"></div>
+                </div>
+            </div>
+        </div>	
+	<div class="mb-3">
+		<label for="prompt" class="form-label d-none d-md-block">Prompt</label>
+		<input type="text" class="form-control" id="prompt" name="prompt" placeholder="Prompt">
+	</div>
+	<div class="mb-3">
+		<label for="description" class="form-label d-none d-md-block">Comment</label>
+		<input type="text" class="form-control" id="description" name="description" placeholder="Comment">
+	</div>
+	<div class="d-flex flex-row mb-3 justify-content-between ">
+		<div class="mt-1">
+			<button type="submit" class="btn btn-primary">Add pic</button>
+		</div>
+	</div>
+</form>
