@@ -8,7 +8,7 @@ class VoteManager extends AbstractManager
 {
     public const TABLE = 'vote';
 
-    //Checks if a user has already voted for a specific photo
+    //Checks if a user has already voted for a specific photos
 
     public function hasUserVotedForPhoto(int $userId, string $photoId): bool
     {
